@@ -62,7 +62,8 @@ public class Registro {
     }
 
     /** Elimina el elemetno del registro
-     *
+     * @param entidad elemento a eliminar
+     * @return boolean retorna true si se elimino y false sino;
      * **/
     protected boolean delete(Entidad entidad){
         entidades.remove(entidad);
