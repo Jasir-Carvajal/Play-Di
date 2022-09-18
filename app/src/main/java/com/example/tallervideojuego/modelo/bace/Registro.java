@@ -8,6 +8,10 @@ public class Registro {
     /**Registro de elementos**/
     protected ArrayList<Entidad> entidades;
 
+    public Registro() {
+        this.entidades = new ArrayList<Entidad>();
+    }
+
     /**
      * @param target id de la entidad a bsucar
      * @return Entidad|null retorna el elemento encontado o null en caso de no encontrar nada
