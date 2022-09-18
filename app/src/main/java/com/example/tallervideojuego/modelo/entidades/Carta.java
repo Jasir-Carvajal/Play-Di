@@ -1,4 +1,6 @@
 package com.example.tallervideojuego.modelo.entidades;
 
-public class Carta {
+import com.example.tallervideojuego.modelo.bace.Entidad;
+
+public class Carta extends Entidad {
 }
