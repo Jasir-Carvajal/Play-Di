@@ -1,6 +1,6 @@
-package com.example.tallervideojuego.modelo.bace;
+package com.example.tallervideojuego.modelo.base;
 
-import com.example.tallervideojuego.controlador.bace.ErrorManager;
+import com.example.tallervideojuego.controlador.base.ErrorManager;
 
 import java.util.ArrayList;
 
@@ -12,8 +12,10 @@ public class Registro {
         this.entidades = new ArrayList<Entidad>();
     }
 
+
+
     /**
-     * @param target id de la entidad a bsucar
+     * @param target id de la entidad a buscar
      * @return Entidad|null retorna el elemento encontado o null en caso de no encontrar nada
      * **/
     protected Entidad search(int target){
@@ -40,7 +42,7 @@ public class Registro {
      *  si no exite ya un elemento igual;
      *
      * @param entidad entidad a ser guardada
-     * @return bolean si fue exitoso o no;
+     * @return boolean si fue exitoso o no;
      * **/
     protected boolean add(Entidad entidad){
         if (entidades.contains(entidad)){
@@ -54,7 +56,7 @@ public class Registro {
     }
 
     /** Modifica un elemento del Registro
-     * @param entidad enrtidad editada a ser registrada
+     * @param entidad entidad editada a ser registrada
      * @return boolean retorna true si se modifico y false sino;
      * **/
     protected boolean modify(Entidad entidad){
@@ -65,7 +67,7 @@ public class Registro {
        return false;
     }
 
-    /** Elimina el elemetno del registro
+    /** Elimina el elemento del registro
      * @param entidad elemento a eliminar
      * @return boolean retorna true si se elimino y false sino;
      * **/
@@ -76,7 +78,15 @@ public class Registro {
         return false;
     }
 
+    /**Getter del ArrayList**/
+    public ArrayList<Entidad> getEntidades() {
+        return entidades;
+    }
 
+    /**Setter del ArrayList**/
+    public void setEntidades(ArrayList<Entidad> entidades) {
+        this.entidades = entidades;
+    }
 
     protected static Registro instancia;
 

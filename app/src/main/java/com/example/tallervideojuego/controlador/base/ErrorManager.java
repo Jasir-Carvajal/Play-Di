@@ -1,4 +1,4 @@
-package com.example.tallervideojuego.controlador.bace;
+package com.example.tallervideojuego.controlador.base;
 
 public final class ErrorManager {
 
@@ -6,8 +6,8 @@ public final class ErrorManager {
     * 1 = Elemento ya Guardado
     * 2 = No se logro Guardar
     * 3 = Elemento no encontrado
-    * 4 = No se ah logrado modificar
-    * 5 = No se ah logrado eliminar
+    * 4 = No se ha logrado modificar
+    * 5 = No se ha logrado eliminar
     * 6 =
     * 7 =
     * 8 =

@@ -4,11 +4,11 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tallervideojuego.R;
 import android.os.Bundle;
 
-public class EditarCateggoria_act extends AppCompatActivity {
+public class EditarCategoria_act extends AppCompatActivity {
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_editar_categgoria);
+        setContentView(R.layout.activity_editar_categoria);
     }
 }
