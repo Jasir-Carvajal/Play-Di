@@ -14,13 +14,33 @@
         android:theme="@style/Theme.TallerVideojuego"
         tools:targetApi="31">
         <activity
-            android:name=".vista.MainActivity"
+            android:name=".vista.Menu_act"
             android:exported="true">
             <intent-filter>
                 <action android:name="android.intent.action.MAIN" />
 
                 <category android:name="android.intent.category.LAUNCHER" />
             </intent-filter>
+        </activity>
+        <activity
+            android:name=".vista.AddJugadores_act"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".vista.BancoPreguntas_act"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".vista.EditarCarta_act"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".vista.EditarCategoria_act"
+            android:exported="false">
+        </activity>
+        <activity
+            android:name=".vista.Jugar_act"
+            android:exported="false">
         </activity>
     </application>
 

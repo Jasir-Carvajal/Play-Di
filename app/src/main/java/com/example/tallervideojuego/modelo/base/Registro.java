@@ -18,7 +18,7 @@ public class Registro {
      * @param target id de la entidad a buscar
      * @return Entidad|null retorna el elemento encontado o null en caso de no encontrar nada
      * **/
-    protected Entidad search(int target){
+    public Entidad search(int target){
         for (Entidad entidad:entidades) {
             if (entidad.id== target){
                 return entidad;
@@ -31,7 +31,7 @@ public class Registro {
     /**retorna la posicion del index
      * @param id id de la entidad de la que se busca la posicion
      * **/
-    protected int getIndex(int id){
+    public int getIndex(int id){
         Entidad entidad_ = search(id);
         if (entidades.contains(entidad_)) return entidades.indexOf(entidad_);
         ErrorManager.error(3);
@@ -44,7 +44,7 @@ public class Registro {
      * @param entidad entidad a ser guardada
      * @return boolean si fue exitoso o no;
      * **/
-    protected boolean add(Entidad entidad){
+    public boolean add(Entidad entidad){
         if (entidades.contains(entidad)){
             return ErrorManager.error(1);
         }
@@ -59,7 +59,7 @@ public class Registro {
      * @param entidad entidad editada a ser registrada
      * @return boolean retorna true si se modifico y false sino;
      * **/
-    protected boolean modify(Entidad entidad){
+    public boolean modify(Entidad entidad){
        int index = getIndex(entidad.id);
        entidades.set(index,entidad);
        if (entidades.get(index).equals(entidad)) return true;
@@ -71,7 +71,7 @@ public class Registro {
      * @param entidad elemento a eliminar
      * @return boolean retorna true si se elimino y false sino;
      * **/
-    protected boolean delete(Entidad entidad){
+    public boolean delete(Entidad entidad){
         entidades.remove(entidad);
         if (!entidades.contains(entidad))return true;
         ErrorManager.error(5);
@@ -90,11 +90,5 @@ public class Registro {
 
     protected static Registro instancia;
 
-    protected static Registro getInstance(){
-        if (instancia==null){
-            instancia = new Registro();
-        }
-        return instancia;
-    }
 
 }

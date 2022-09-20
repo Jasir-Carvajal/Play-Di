@@ -1,0 +1,15 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+    <style name="btn_cat"  >
+         <item name="android:layout_width">0dp</item>
+         <item name="android:layout_height">match_parent</item>
+         <item name="android:layout_weight">.65</item>
+         <item name="android:backgroundTint">#414141</item>
+        <item name="android:stateListAnimator">@null</item>
+
+        <item name="android:textAlignment">viewStart</item>
+        <item name="cornerRadius">0dp</item>
+        <item name="android:radius">0dp</item>
+        <item name="android:textColor">#fff</item>
+    </style>
+</resources>

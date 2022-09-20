@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+    <style name="lyt_personalizados"  >
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">match_parent</item>
+        <item name="android:layout_marginLeft">30dp</item>
+        <item name="android:layout_marginTop">10dp</item>
+        <item name="android:layout_marginRight">30dp</item>
+        <item name="android:background">#414141</item>
+        <item name="android:backgroundTint">#414141</item>
+        <item name="android:orientation">horizontal</item>
+    </style>
+</resources>
