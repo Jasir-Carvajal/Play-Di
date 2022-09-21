@@ -37,17 +37,8 @@ public final class MenuControler extends Controlador {
         add = menu.findViewById(R.id.add);
         regresar = menu.findViewById(R.id.regresar);
         bancoPreguntas = menu.findViewById(R.id.bancoPreguntas);
-        add.setOnClickListener(new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-
-                registro.add(new Categoria(0,"Prueba1"));
-                registro.add(new Categoria(1,"Prueba2"));
-                registro.add(new Categoria(2,"Prueba3"));
-                addButtons();
-            }
-        });
-       // setFunctions();
+        addButtons();
+        setFunctions();
     }
 
     private void addButtons() {
@@ -55,33 +46,42 @@ public final class MenuControler extends Controlador {
 
         personalizados = new LinearLayout[lista.size()];
 
+
         LinearLayout.LayoutParams params_lyt = (LinearLayout.LayoutParams) menu.findViewById(R.id.lyt_personalizado).getLayoutParams();
         LinearLayout.LayoutParams params_btn_cat = (LinearLayout.LayoutParams) menu.findViewById(R.id.btn_personalizado).getLayoutParams();
         LinearLayout.LayoutParams params_btn_edit = (LinearLayout.LayoutParams) menu.findViewById(R.id.btnd_edit_personalizado).getLayoutParams();
+
+
 
         ContextThemeWrapper contextCat = new ContextThemeWrapper(menu, R.style.btn_cat);
         ContextThemeWrapper contextEdit = new ContextThemeWrapper(menu, R.style.edit_btn);
         ContextThemeWrapper contextLyt = new ContextThemeWrapper(menu, R.style.lyt_personalizados);
 
         for (Entidad entidad:lista) {
+            //obtiene los parametros de layaout de los botones ya definodos
             Categoria cat = (Categoria)entidad;
             personalizados[lista.indexOf(entidad)] = new LinearLayout(contextLyt);
             Button btn_cat = new Button(contextCat);
             Button btn_editar = new Button(contextEdit);
 
+            btn_editar.setBackgroundResource(R.drawable.btns);
+            //aplica parametros de layaout anteriormente obtenidos
             btn_cat.setLayoutParams(params_btn_cat);
             btn_editar.setLayoutParams(params_btn_edit);
             personalizados[lista.indexOf(entidad)] .setLayoutParams(params_lyt);
 
+            //quita sombra
             btn_cat.setStateListAnimator(null);
             btn_editar.setStateListAnimator(null);
-
+            //coloca titulos
             btn_cat.setText(cat.getTitulo());
             btn_editar.setText("Editar");
 
+            btn_editar.setOnClickListener(onEdit(cat.getId()));
+
+            //añade a la vista
             personalizados[lista.indexOf(entidad)] .addView(btn_cat,0);
             personalizados[lista.indexOf(entidad)] .addView(btn_editar,1);
-
             container.addView(personalizados[lista.indexOf(entidad)] );
         }
 
@@ -92,6 +92,16 @@ public final class MenuControler extends Controlador {
         add.setOnClickListener(onAdd());
         regresar.setOnClickListener(onRegresa());
         bancoPreguntas.setOnClickListener(onBancoPreguntas());
+
+    }
+
+    private View.OnClickListener onEdit(int id) {
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Toast.makeText(menu, "editar "+((Categoria)registro.search(id)).getTitulo(), Toast.LENGTH_SHORT).show();
+            }
+        };
     }
 
     private View.OnClickListener onBancoPreguntas() {

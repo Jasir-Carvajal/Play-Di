@@ -5,9 +5,10 @@
       <map>
         <entry key="..\:/Users/jpcdl/StudioProjects/TallerVideojuego/app/src/main/res/drawable/btn_candado.xml" value="0.2805" />
         <entry key="..\:/Users/jpcdl/StudioProjects/TallerVideojuego/app/src/main/res/drawable/btn_editar.xml" value="0.2795" />
+        <entry key="..\:/Users/jpcdl/StudioProjects/TallerVideojuego/app/src/main/res/drawable/btns.xml" value="0.3665" />
         <entry key="..\:/Users/jpcdl/StudioProjects/TallerVideojuego/app/src/main/res/drawable/button_drawable.xml" value="0.2985" />
         <entry key="..\:/Users/jpcdl/StudioProjects/TallerVideojuego/app/src/main/res/layout/activity_main.xml" value="0.18802083333333333" />
-        <entry key="..\:/Users/jpcdl/StudioProjects/TallerVideojuego/app/src/main/res/layout/activity_menu.xml" value="0.5924713584288053" />
+        <entry key="..\:/Users/jpcdl/StudioProjects/TallerVideojuego/app/src/main/res/layout/activity_menu.xml" value="0.67" />
       </map>
     </option>
   </component>
@@ -20,7 +21,7 @@
   <component name="VisualizationToolProject">
     <option name="state">
       <ProjectState>
-        <option name="scale" value="0.33" />
+        <option name="scale" value="0.1" />
       </ProjectState>
     </option>
   </component>

@@ -44,30 +44,25 @@
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="50dp"
                         android:layout_marginRight="30dp"
+                        android:background="#414141"
+                        android:backgroundTint="#414141"
                         android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/random"
-                            android:layout_width="0dp"
-                            android:layout_height="match_parent"
-                            android:layout_weight=".8"
-                            android:backgroundTint="#414141"
-                            android:text="Random"
-                            android:textAlignment="viewStart"
-                            app:cornerRadius="0dp" />
+                            style="@style/btn_cat"
+                            android:text="Random" />
 
                         <Button
                             android:id="@+id/button2"
-                            android:layout_width="0dp"
-                            android:layout_height="wrap_content"
-                            android:layout_weight=".2"
+                            style="@style/edit_btn"
+
+                            android:layout_gravity="center"
                             android:backgroundTint="#414141"
-                            android:drawableLeft="@drawable/btn_candado"
-                            android:paddingTop="14dp"
-                            android:paddingBottom="14dp"
-                            android:textAlignment="viewStart"
-                            app:cornerRadius="0dp"
-                            app:iconTintMode="src_in" />
+                            android:foreground="@drawable/btn_candado"
+                            android:foregroundGravity="center"
+                            android:gravity="center"
+                             />
                     </LinearLayout>
 
                     <LinearLayout
@@ -83,6 +78,8 @@
                             android:id="@+id/btnd_edit_personalizado"
                             style="@style/edit_btn"
                             android:text="Editar" />
+
+
                     </LinearLayout>
 
 
@@ -101,15 +98,17 @@
 
                 <Button
                     android:id="@+id/add"
+                    android:background="@drawable/btns"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="30dp"
                     android:backgroundTint="#008F39"
-                    android:stateListAnimator="@null"
                     android:text="Añadir nuevo"
-                    app:cornerRadius="0dp" />
+                    app:cornerRadius="0dp"
+                    android:stateListAnimator="@null"
+                    />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -121,18 +120,20 @@
 
 
                     <Button
-                        app:cornerRadius="0dp"
-                        android:backgroundTint="#414141"
-                        android:stateListAnimator="@null"
                         android:id="@+id/regresar"
+                        android:background="@drawable/btns"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="10dp"
                         android:layout_weight="0.5 "
-                        android:text="Regresar" />
+                        android:backgroundTint="#414141"
+                        android:stateListAnimator="@null"
+                        android:text="Regresar"
+                        app:cornerRadius="0dp" />
 
                     <Button
                         android:id="@+id/bancoPreguntas"
+                        android:background="@drawable/btns"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
