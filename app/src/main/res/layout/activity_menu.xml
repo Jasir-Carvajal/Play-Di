@@ -15,14 +15,15 @@
         <RelativeLayout
             android:layout_width="wrap_content"
             android:layout_height="wrap_content"
-            android:layout_marginBottom="10dp">
+            android:layout_marginBottom="20dp">
+
 
             <ImageView
                 android:id="@+id/imageView"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
                 app:srcCompat="@drawable/logo" />
-
 
             <ScrollView
                 android:layout_width="match_parent"
@@ -51,7 +52,9 @@
                         <Button
                             android:id="@+id/random"
                             style="@style/btn_cat"
-                            android:text="Random" />
+                            android:fontFamily="@font/fira_sans_bold"
+                            android:text="Random"
+                            android:textSize="20sp" />
 
                         <Button
                             android:id="@+id/button2"
@@ -61,10 +64,8 @@
                             android:backgroundTint="#414141"
                             android:foreground="@drawable/btn_candado"
                             android:foregroundGravity="center"
-                            android:gravity="center"
-                             />
+                            android:gravity="center" />
                     </LinearLayout>
-
 
 
                 </LinearLayout>
@@ -82,17 +83,18 @@
 
                 <Button
                     android:id="@+id/add"
-                    android:background="@drawable/btns"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="30dp"
+                    android:background="@drawable/btns"
                     android:backgroundTint="#008F39"
-                    android:text="Añadir nuevo"
-                    app:cornerRadius="0dp"
+                    android:fontFamily="@font/fira_sans_bold"
                     android:stateListAnimator="@null"
-                    />
+                    android:text="Añadir nuevo"
+                    android:textSize="20sp"
+                    app:cornerRadius="0dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -105,26 +107,30 @@
 
                     <Button
                         android:id="@+id/regresar"
-                        android:background="@drawable/btns"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginRight="10dp"
                         android:layout_weight="0.5 "
+                        android:background="@drawable/btns"
                         android:backgroundTint="#414141"
+                        android:fontFamily="@font/fira_sans_bold"
                         android:stateListAnimator="@null"
                         android:text="Regresar"
+                        android:textSize="20sp"
                         app:cornerRadius="0dp" />
 
                     <Button
                         android:id="@+id/bancoPreguntas"
-                        android:background="@drawable/btns"
                         android:layout_width="0dp"
                         android:layout_height="match_parent"
                         android:layout_marginLeft="10dp"
                         android:layout_weight="0.5"
+                        android:background="@drawable/btns"
                         android:backgroundTint="#F4A020"
+                        android:fontFamily="@font/fira_sans_bold"
                         android:stateListAnimator="@null"
                         android:text="Banco Preguntas"
+                        android:textSize="20sp"
                         app:cornerRadius="0dp" />
                 </LinearLayout>
             </LinearLayout>
