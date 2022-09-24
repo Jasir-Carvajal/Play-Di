@@ -11,26 +11,25 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
-import com.example.tallervideojuego.vista.AddJugadores_act;
-import com.example.tallervideojuego.vista.EditarCarta_act;
+import com.example.tallervideojuego.vista.BancoPreguntas_act;
 import com.example.tallervideojuego.vista.Menu_act;
 
-public class BancoPreguntasControler extends Controlador {
+public class EditarCartaControler extends Controlador {
 
     private AppCompatActivity act;
-    private Button btnGuardar, btnEditar, btnEditar2;
+
+    private Button btnGuardar, btnCancelar;
 
     private Spinner spinner;
-
     ArrayAdapter<CharSequence> adapter;
 
-    public BancoPreguntasControler(AppCompatActivity act) {
+    public EditarCartaControler(AppCompatActivity act) {
         super(act);
         this.act = act;
 
-        btnGuardar = this.act.findViewById(R.id.btnGuardar);
-        btnEditar = this.act.findViewById(R.id.btnEditar);
-        btnEditar2 = this.act.findViewById(R.id.btnEditar2);
+        btnGuardar = act.findViewById(R.id.btnGuardar);
+        btnCancelar = act.findViewById(R.id.btnCancelar);
+
 
         spinner = act.findViewById(R.id.spinner);
 
@@ -43,30 +42,29 @@ public class BancoPreguntasControler extends Controlador {
     }
 
     public void setFunctions(){
-        btnGuardar.setOnClickListener(onSave());
-        btnEditar.setOnClickListener(onEdit());
-        btnEditar2.setOnClickListener(onEdit());
+        btnGuardar.setOnClickListener(save());
+        btnCancelar.setOnClickListener(cancel());
     }
 
-    public View.OnClickListener onEdit(){
+    public View.OnClickListener save(){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(act, EditarCarta_act.class);
+                Intent intent = new Intent(act, BancoPreguntas_act.class);
 
                 act.startActivity(intent);
+                Toast.makeText(act, "Se guardaron los cambios correctamente ", Toast.LENGTH_SHORT).show();
             }
         };
     }
 
-    public View.OnClickListener onSave(){
+    public View.OnClickListener cancel(){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(act, Menu_act.class);
+                Intent intent = new Intent(act, BancoPreguntas_act.class);
 
                 act.startActivity(intent);
-                Toast.makeText(act, "Se guardaron los cambios correctamente ", Toast.LENGTH_SHORT).show();
             }
         };
     }
