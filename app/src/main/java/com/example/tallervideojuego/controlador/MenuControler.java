@@ -1,6 +1,8 @@
 package com.example.tallervideojuego.controlador;
 
 
+import android.content.Intent;
+import android.graphics.Typeface;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,6 +18,9 @@ import com.example.tallervideojuego.controlador.bace.Controlador;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCategorias;
+import com.example.tallervideojuego.vista.AddJugadores_act;
+import com.example.tallervideojuego.vista.BancoPreguntas_act;
+import com.example.tallervideojuego.vista.EditarCategoria_act;
 import com.example.tallervideojuego.vista.Menu_act;
 
 import java.util.ArrayList;
@@ -23,15 +28,18 @@ import java.util.ArrayList;
 public final class MenuControler extends Controlador {
     private LinearLayout container;
     private LinearLayout[] personalizados;
-    private Button add, bancoPreguntas, regresar;
+    private Button add, bancoPreguntas, regresar, random;
     private RegistroCategorias registro;
+    private AppCompatActivity act;
 
     public MenuControler(AppCompatActivity act) {
         super(act);
+        this.act = act;
         registro = RegistroCategorias.getInstance();
         container = this.act.findViewById(R.id.cat_container);
         add = this.act.findViewById(R.id.add);
         regresar = this.act.findViewById(R.id.regresar);
+        random = this.act.findViewById(R.id.random);
         bancoPreguntas = this.act.findViewById(R.id.bancoPreguntas);
         //____________________________________________________________
         //____________________________________________________________
@@ -40,6 +48,8 @@ public final class MenuControler extends Controlador {
         //____________________________________________________________
         //____________________________________________________________
         //____________________________________________________________
+
+
 
         addButtons();
         setFunctions();
@@ -99,6 +109,7 @@ public final class MenuControler extends Controlador {
             btn_cat.setText(cat.getTitulo());
             btn_editar.setText("Editar");
 
+            btn_cat.setOnClickListener(onPlay(cat.getId()));
             btn_editar.setOnClickListener(onEdit(cat.getId()));
 
             //añade a la vista
@@ -114,6 +125,7 @@ public final class MenuControler extends Controlador {
         add.setOnClickListener(onAdd());
        // regresar.setOnClickListener(onRegresa());
         bancoPreguntas.setOnClickListener(onBancoPreguntas());
+        random.setOnClickListener(random());
 
     }
 
@@ -121,7 +133,23 @@ public final class MenuControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(act, "editar "+((Categoria)registro.search(id)).getTitulo(), Toast.LENGTH_SHORT).show();
+                //Toast.makeText(act, "editar "+((Categoria)registro.search(id)).getTitulo(), Toast.LENGTH_SHORT).show();
+                Intent intent = new Intent(act, EditarCategoria_act.class);
+
+                intent.putExtra("id",id);
+
+                act.startActivity(intent);
+            }
+        };
+    }
+
+    public View.OnClickListener onPlay(int id){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(act, AddJugadores_act.class);
+
+                act.startActivity(intent);
             }
         };
     }
@@ -130,7 +158,11 @@ public final class MenuControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(act, "editar ", Toast.LENGTH_SHORT).show();
+                //Toast.makeText(act, "editar ", Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(act, BancoPreguntas_act.class);
+
+                act.startActivity(intent);
             }
         };
     }
@@ -158,7 +190,9 @@ public final class MenuControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                Intent intent = new Intent(act, AddJugadores_act.class);
 
+                act.startActivity(intent);
             }
         };
     }

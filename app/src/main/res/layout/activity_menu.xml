@@ -52,7 +52,7 @@
                         <Button
                             android:id="@+id/random"
                             style="@style/btn_cat"
-                            android:fontFamily="@font/fira_sans_bold"
+                            android:fontFamily="@font/fira_bold"
                             android:text="Random"
                             android:textSize="20sp" />
 
@@ -90,7 +90,7 @@
                     android:layout_marginRight="30dp"
                     android:background="@drawable/btns"
                     android:backgroundTint="#008F39"
-                    android:fontFamily="@font/fira_sans_bold"
+                    android:fontFamily="@font/fira_bold"
                     android:stateListAnimator="@null"
                     android:text="Añadir nuevo"
                     android:textSize="20sp"
@@ -113,7 +113,7 @@
                         android:layout_weight="0.5 "
                         android:background="@drawable/btns"
                         android:backgroundTint="#414141"
-                        android:fontFamily="@font/fira_sans_bold"
+                        android:fontFamily="@font/fira_bold"
                         android:stateListAnimator="@null"
                         android:text="Regresar"
                         android:textSize="20sp"
@@ -127,7 +127,7 @@
                         android:layout_weight="0.5"
                         android:background="@drawable/btns"
                         android:backgroundTint="#F4A020"
-                        android:fontFamily="@font/fira_sans_bold"
+                        android:fontFamily="@font/fira_bold"
                         android:stateListAnimator="@null"
                         android:text="Banco Preguntas"
                         android:textSize="20sp"
