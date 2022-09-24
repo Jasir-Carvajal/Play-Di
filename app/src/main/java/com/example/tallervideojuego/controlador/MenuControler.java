@@ -44,12 +44,12 @@ public final class MenuControler extends Controlador {
         //____________________________________________________________
         //____________________________________________________________
         //____________________________________________________________
-        registro.add(new Categoria(0,"Prueba1"));
+        //registro.add(new Categoria(0,"Prueba1"));
         //____________________________________________________________
         //____________________________________________________________
         //____________________________________________________________
 
-
+        //Toast.makeText(act, ""+registro.getEntidades().size(), Toast.LENGTH_SHORT).show();
 
         addButtons();
         setFunctions();
@@ -118,7 +118,7 @@ public final class MenuControler extends Controlador {
             container.addView(personalizados[lista.indexOf(entidad)] );
         }
 
-        Toast.makeText(act, "Prueba btns", Toast.LENGTH_SHORT).show();
+        //Toast.makeText(act, "Prueba btns", Toast.LENGTH_SHORT).show();
     }
 
     private void setFunctions(){
@@ -180,7 +180,19 @@ public final class MenuControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Toast.makeText(act, "editar ", Toast.LENGTH_SHORT).show();
+
+
+                registro.add(new Categoria(registro.getEntidades().size()+1,"Personalizado"));
+
+                int id = registro.getEntidades().size();
+
+                Toast.makeText(act, ""+id, Toast.LENGTH_SHORT).show();
+
+                Intent intent = new Intent(act, EditarCategoria_act.class);
+
+                intent.putExtra("id",id);
+
+                act.startActivity(intent);
             }
         };
     }
