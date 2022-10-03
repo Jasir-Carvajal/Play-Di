@@ -1,6 +1,5 @@
 package com.example.tallervideojuego.controlador;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
@@ -10,8 +9,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
-import com.example.tallervideojuego.vista.Jugar_act;
-import com.example.tallervideojuego.vista.Menu_act;
 
 public class JuegoControler extends Controlador {
     private AppCompatActivity act;

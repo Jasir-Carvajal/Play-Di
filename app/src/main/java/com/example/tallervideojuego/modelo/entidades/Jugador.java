@@ -2,14 +2,14 @@ package com.example.tallervideojuego.modelo.entidades;
 
 import com.example.tallervideojuego.modelo.base.Entidad;
 
-public class Jugador extends Entidad {
+public class Jugador  {
 
     private String nombre;
     private String correo;
     private String clave; //Contraseña
 
-    public Jugador(int id, String nombre, String correo, String clave) {
-        super(id);
+    public Jugador( String nombre, String correo, String clave) {
+
         this.nombre = nombre;
         this.correo = correo;
         this.clave = clave;
@@ -42,7 +42,6 @@ public class Jugador extends Entidad {
     @Override
     public String toString() {
         return "Jugador{" +
-                "id=" + id +
                 ", nombre='" + nombre + '\'' +
                 ", correo='" + correo + '\'' +
                 ", clave='" + clave + '\'' +

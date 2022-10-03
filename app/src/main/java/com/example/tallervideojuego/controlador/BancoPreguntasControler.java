@@ -11,11 +11,10 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
-import com.example.tallervideojuego.vista.AddJugadores_act;
 import com.example.tallervideojuego.vista.EditarCarta_act;
 import com.example.tallervideojuego.vista.Menu_act;
 
-public class BancoPreguntasControler extends Controlador {
+public class BancoPreguntasControler extends Controlador{
 
     private AppCompatActivity act;
     private Button btnGuardar, btnEditar, btnEditar2;

@@ -1,67 +1,80 @@
 package com.example.tallervideojuego.modelo.entidades;
 
 import com.example.tallervideojuego.modelo.base.Entidad;
+import com.example.tallervideojuego.modelo.base.Registro;
+import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 
 import java.util.Arrays;
 
 public class Carta extends Entidad {
-    private String titulo;
-    private String reto;
-    private String castigo;
-    private int idCategorias[]; //Los id se las categorías a las que esta asociada esta carta
 
-    public Carta(int id) {
-        super(id);
+    public static String Tabla = "Cartas";
+
+    public Carta(String titulo, String reto, String castigo, int[] idCategorias) {
+        super();
+        setTitulo(titulo);
+        setReto(reto);
+        setCastigo(castigo);
+        setIdCategorias(idCategorias);
+    }
+    public Carta(){
+        super();
     }
 
     public Carta(int id, String titulo, String reto, String castigo, int[] idCategorias) {
         super(id);
-        this.titulo = titulo;
-        this.reto = reto;
-        this.castigo = castigo;
-        this.idCategorias = idCategorias;
+        setTitulo(titulo);
+        setReto(reto);
+        setCastigo(castigo);
+        setIdCategorias(idCategorias);
     }
 
     public String getTitulo() {
-        return titulo;
+        return contenido.getAsString("titulo");
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        contenido.put("titulo", titulo);
     }
 
     public String getReto() {
-        return reto;
+        return contenido.getAsString("reto");
     }
 
     public void setReto(String reto) {
-        this.reto = reto;
+        contenido.put("castigo", reto);
     }
 
     public String getCastigo() {
-        return castigo;
+        return contenido.getAsString("castigo");
     }
 
     public void setCastigo(String castigo) {
-        this.castigo = castigo;
+        contenido.put("castigo", castigo);
     }
 
     public int[] getIdCategorias() {
-        return idCategorias;
+
+
+        RegistroCat_Car registro = new RegistroCat_Car();
+        return (int[]) contenido.get("idCategorias");
+
     }
 
     public void setIdCategorias(int[] idCategorias) {
-        this.idCategorias = idCategorias;
+
+        contenido.put("idCategorias", String.valueOf(idCategorias));
+
     }
 
     @Override
     public String toString() {
         return "Carta{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
-                ", reto='" + reto + '\'' +
-                ", castigo='" + castigo + '\'' +
-                ", idCategorias=" + Arrays.toString(idCategorias) +
+                "id=" + getId() +
+                ", titulo='" + getTitulo() + '\'' +
+                ", reto='" + getReto() + '\'' +
+                ", castigo='" + getCastigo() + '\'' +
+                ", idCategorias=" + Arrays.toString(getIdCategorias()) +
                 '}';
     }
 }

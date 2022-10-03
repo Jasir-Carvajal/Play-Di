@@ -12,7 +12,6 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
 import com.example.tallervideojuego.vista.BancoPreguntas_act;
-import com.example.tallervideojuego.vista.Menu_act;
 
 public class EditarCartaControler extends Controlador {
 

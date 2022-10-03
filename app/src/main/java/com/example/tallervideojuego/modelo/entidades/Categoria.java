@@ -4,26 +4,35 @@ import com.example.tallervideojuego.modelo.base.Entidad;
 
 public class Categoria extends Entidad {
 
-    private String titulo;
+
+    public static String Tabla = "Categorias";
 
     public Categoria(int id, String titulo) {
         super(id);
-        this.titulo = titulo;
+        setTitulo(titulo);
+    }
+    public Categoria( String titulo) {
+        super();
+        setTitulo(titulo);
+    }
+
+    public Categoria(){
+        super();
     }
 
     public String getTitulo() {
-        return titulo;
+        return contenido.getAsString("titulo");
     }
 
     public void setTitulo(String titulo) {
-        this.titulo = titulo;
+        contenido.put("titulo",titulo);
     }
 
     @Override
     public String toString() {
         return "Categoria{" +
-                "id=" + id +
-                ", titulo='" + titulo + '\'' +
+                "id=" + getId() +
+                ", titulo='" + getTitulo() + '\'' +
                 '}';
     }
 }

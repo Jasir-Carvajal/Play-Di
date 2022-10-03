@@ -2,7 +2,6 @@ package com.example.tallervideojuego.controlador;
 
 
 import android.content.Intent;
-import android.graphics.Typeface;
 import android.view.ContextThemeWrapper;
 import android.view.View;
 import android.view.ViewGroup;
@@ -16,28 +15,28 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
 import com.example.tallervideojuego.modelo.base.Entidad;
+import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
-import com.example.tallervideojuego.modelo.registro.RegistroCategorias;
 import com.example.tallervideojuego.vista.AddJugadores_act;
 import com.example.tallervideojuego.vista.BancoPreguntas_act;
 import com.example.tallervideojuego.vista.EditarCategoria_act;
-import com.example.tallervideojuego.vista.Menu_act;
+
 
 import java.util.ArrayList;
 
-public final class MenuControler extends Controlador {
+public final class MenuControler extends Controlador{
     private LinearLayout container;
     private LinearLayout[] personalizados;
     private Button add, bancoPreguntas, regresar, random;
-    private RegistroCategorias registro;
-    private AppCompatActivity act;
+    private Registro registroCategorias;
 
     public MenuControler(AppCompatActivity act) {
         super(act);
-        this.act = act;
-        registro = RegistroCategorias.getInstance();
-        container = this.act.findViewById(R.id.cat_container);
+
+        registroCategorias = new Registro(Categoria.class);
+
         add = this.act.findViewById(R.id.add);
+        container = this.act.findViewById(R.id.cat_container);
         regresar = this.act.findViewById(R.id.regresar);
         random = this.act.findViewById(R.id.random);
         bancoPreguntas = this.act.findViewById(R.id.bancoPreguntas);
@@ -54,11 +53,17 @@ public final class MenuControler extends Controlador {
         addButtons();
         setFunctions();
     }
+    private void setFunctions(){
+        add.setOnClickListener(onAdd());
+        // regresar.setOnClickListener(onRegresa());
+        bancoPreguntas.setOnClickListener(onBancoPreguntas());
+        random.setOnClickListener(random());
+
+    }
 
     private void addButtons() {
 
-        ArrayList<Entidad> lista = registro.getEntidades();
-
+        ArrayList<Entidad> lista = registroCategorias.getEntidades();
         System.out.println(lista.size());
 
         personalizados = new LinearLayout[lista.size()];
@@ -121,13 +126,7 @@ public final class MenuControler extends Controlador {
         //Toast.makeText(act, "Prueba btns", Toast.LENGTH_SHORT).show();
     }
 
-    private void setFunctions(){
-        add.setOnClickListener(onAdd());
-       // regresar.setOnClickListener(onRegresa());
-        bancoPreguntas.setOnClickListener(onBancoPreguntas());
-        random.setOnClickListener(random());
 
-    }
 
     private View.OnClickListener onEdit(int id) {
         return new View.OnClickListener() {
@@ -180,18 +179,11 @@ public final class MenuControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-
-                registro.add(new Categoria(registro.getEntidades().size()+1,"Personalizado"));
-
-                int id = registro.getEntidades().size();
-
-                Toast.makeText(act, ""+id, Toast.LENGTH_SHORT).show();
+                boolean b = registroCategorias.add(new Categoria("Personalizado"));
+                int id = (registroCategorias.search("titulo","Personalizado")).getId();
 
                 Intent intent = new Intent(act, EditarCategoria_act.class);
-
                 intent.putExtra("id",id);
-
                 act.startActivity(intent);
             }
         };

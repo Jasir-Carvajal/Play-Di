@@ -1,4 +1,4 @@
-package com.example.tallervideojuego.controlador.base;
+package com.example.tallervideojuego.controlador.bace;
 
 public final class ErrorManager {
 

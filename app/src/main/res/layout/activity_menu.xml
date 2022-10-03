@@ -45,13 +45,14 @@
                         android:layout_marginLeft="30dp"
                         android:layout_marginTop="50dp"
                         android:layout_marginRight="30dp"
-                        android:background="#414141"
+                        android:background="@drawable/btns"
                         android:backgroundTint="#414141"
                         android:orientation="horizontal">
 
                         <Button
                             android:id="@+id/random"
                             style="@style/btn_cat"
+                            android:layout_marginLeft="8dp"
                             android:fontFamily="@font/fira_bold"
                             android:text="Random"
                             android:textSize="20sp" />
@@ -131,7 +132,7 @@
                         android:stateListAnimator="@null"
                         android:text="Banco Preguntas"
                         android:textSize="20sp"
-                        app:cornerRadius="0dp" />
+                         />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>
