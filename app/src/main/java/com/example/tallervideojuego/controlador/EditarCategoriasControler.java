@@ -42,7 +42,7 @@ public class EditarCategoriasControler extends Controlador {
     }
 
     private void fill() {
-        txtTitulo.setText(cat.getTitulo());
+        txtTitulo.setHint(cat.getTitulo());
     }
 
     public void setFunctions(){

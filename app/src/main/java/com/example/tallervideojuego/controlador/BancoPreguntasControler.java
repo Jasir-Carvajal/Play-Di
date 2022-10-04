@@ -27,7 +27,7 @@ public class BancoPreguntasControler extends Controlador{
         super(act);
         this.act = act;
 
-        btnGuardar = this.act.findViewById(R.id.btnGuardar);
+        btnGuardar = this.act.findViewById(R.id.p);
         btnEditar = this.act.findViewById(R.id.btnEditar);
         btnEditar2 = this.act.findViewById(R.id.btnEditar2);
 
