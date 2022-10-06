@@ -175,11 +175,7 @@ public final class MenuControler extends Controlador{
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                boolean b = registroCategorias.add(new Categoria("Personalizado"));
-                int id = (registroCategorias.search("titulo","Personalizado")).getId();
-
                 Intent intent = new Intent(act, EditarCategoria_act.class);
-                intent.putExtra("id",id);
                 act.startActivity(intent);
             }
         };

@@ -19,6 +19,7 @@ public  class Entidad {
     public  Entidad() {
         contenido = new ContentValues();
     }
+
     public Entidad(int id) {
         this.id = id;
         contenido = new ContentValues();

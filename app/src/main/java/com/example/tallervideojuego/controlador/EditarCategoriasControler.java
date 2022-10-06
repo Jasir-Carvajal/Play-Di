@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
+import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.vista.Menu_act;
@@ -20,14 +21,13 @@ public class EditarCategoriasControler extends Controlador {
     private Button btnRegresar, btnGuardar,btnEliminar;
     private Registro registro;
     private Categoria cat;
+    private boolean isNew;
     public EditarCategoriasControler(AppCompatActivity act) {
         super(act);
 
         registro = new Registro(Categoria.class);
 
-        int id = act.getIntent().getIntExtra("id",0);
-        cat = (Categoria) registro.search(id);
-
+        int id = act.getIntent().getIntExtra("id",-1);
 
         txtTitulo = this.act.findViewById(R.id.txtTitulo);
 
@@ -37,7 +37,15 @@ public class EditarCategoriasControler extends Controlador {
 
 
         setFunctions();
-        fill();
+        if(id!=-1){
+            cat = (Categoria) registro.search(id);
+            fill();
+            isNew =false;
+        }else{
+            cat = new Categoria();
+            txtTitulo.setHint("Personalizado");
+            isNew = true;
+        }
 
     }
 
@@ -56,10 +64,6 @@ public class EditarCategoriasControler extends Controlador {
             @Override
             public void onClick(View view) {
 
-                if(txtTitulo.getText().toString().isEmpty() && cat.getTitulo().equalsIgnoreCase("Personalizado")){
-                    registro.delete(cat);
-                }
-
                 Intent intent = new Intent(act, Menu_act.class);
                 act.startActivity(intent);
             }
@@ -74,11 +78,22 @@ public class EditarCategoriasControler extends Controlador {
                 if(txtTitulo.getText().toString().isEmpty()){
                     message("Debe de rellenar el campo de texto");
                 } else {
-                    cat.setTitulo(txtTitulo.getText().toString().trim());
-                    registro.update(cat);
 
-                    Intent intent = new Intent(act, Menu_act.class);
-                    act.startActivity(intent);
+                    if (!isNew){
+                        cat.setTitulo(txtTitulo.getText().toString().trim());
+                        registro.update(cat);
+                    }else {
+                        cat.setTitulo(txtTitulo.getText().toString().trim());
+                        Entidad old = registro.search("titulo",cat.getTitulo());
+                        if (old == null){
+                            registro.add(cat);
+                            Intent intent = new Intent(act, Menu_act.class);
+                            act.startActivity(intent);
+                        }else Toast.makeText(act, "Este nombre ya existe", Toast.LENGTH_SHORT).show();
+
+                    }
+
+
 
                 }
             }
