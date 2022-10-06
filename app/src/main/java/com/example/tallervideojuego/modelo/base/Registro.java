@@ -180,6 +180,7 @@ public class Registro {
         cursor.close();
     }
 
-
-
+    public ArrayList<Entidad> getListaEntidades() {
+        return listaEntidades;
+    }
 }

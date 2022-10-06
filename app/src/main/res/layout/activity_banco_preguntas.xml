@@ -10,132 +10,25 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondo1"
+        android:background="@drawable/fondo2"
         android:orientation="vertical">
 
         <ImageView
             android:id="@+id/imageView4"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginTop="20dp"
             app:srcCompat="@drawable/logo" />
 
-        <LinearLayout
+        <androidx.core.widget.NestedScrollView
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="30dp"
-            android:layout_marginRight="30dp"
-            android:orientation="horizontal">
-
-            <EditText
-                android:id="@+id/editTextTextPersonName3"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:background="@color/white"
-                android:ems="10"
-                android:fontFamily="@font/fira_bold"
-                android:inputType="textPersonName"
-                android:text="Name"
-                android:textColor="@color/cardview_dark_background" />
-
-            <Spinner
-                android:id="@+id/spinner"
-                android:layout_width="wrap_content"
-                android:layout_height="match_parent"
-                android:layout_weight="1" />
-
-            <Button
-                android:id="@+id/button4"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/fira_bold"
-                android:text="Buscar" />
-        </LinearLayout>
-
-        <ScrollView
-            android:layout_width="match_parent"
-            android:layout_height="350dp">
+            android:layout_height="match_parent"
+            android:fillViewport="true">
 
             <LinearLayout
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:orientation="vertical">
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="30dp"
-                    android:background="@color/cardview_dark_background"
-                    android:orientation="vertical"
-                    android:padding="10dp">
-
-                    <EditText
-                        android:id="@+id/editTextTextPersonName4"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@color/white"
-                        android:ems="10"
-                        android:fontFamily="@font/fira_bold"
-                        android:inputType="textPersonName"
-                        android:minHeight="48dp"
-                        android:text="Titulo"
-                        android:textAlignment="center"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textSize="20sp" />
-
-                    <EditText
-                        android:id="@+id/editTextTextPersonName5"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@color/white"
-                        android:ems="10"
-                        android:fontFamily="@font/fira_bold"
-                        android:inputType="textPersonName"
-                        android:minHeight="48dp"
-                        android:text="Reto"
-                        android:textAlignment="center"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textSize="20sp" />
-
-                    <EditText
-                        android:id="@+id/editTextTextPersonName6"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@color/white"
-                        android:ems="10"
-                        android:fontFamily="@font/fira_bold"
-                        android:inputType="textPersonName"
-                        android:minHeight="48dp"
-                        android:text="Castigo"
-                        android:textAlignment="center"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textSize="20sp" />
-
-                    <Button
-                        android:id="@+id/btnEditar"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@drawable/btns"
-                        android:fontFamily="@font/fira_bold"
-                        android:text="editar"
-                        android:textSize="20sp" />
-                </LinearLayout>
+                android:orientation="vertical" >
 
                 <LinearLayout
                     android:layout_width="match_parent"
@@ -143,101 +36,533 @@
                     android:layout_marginLeft="30dp"
                     android:layout_marginTop="20dp"
                     android:layout_marginRight="30dp"
-                    android:background="@color/cardview_dark_background"
-                    android:orientation="vertical"
-                    android:padding="10dp">
+                    android:background="@drawable/btns"
+                    android:backgroundTint="@color/purple_200"
+                    android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/editTextTextPersonName42"
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:layout_margin="25dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/fira_bold"
+                            android:text="SELECCIONE LA CATEGORIA"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+
+                        <Spinner
+                            android:id="@+id/spinnerCat"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:background="@drawable/style_spinner"
+                            android:dropDownVerticalOffset="50dp" />
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/fira_bold"
+                            android:text="ESCRIBA EL  TÍTULO DEL RETO"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="25dp"
+                            android:background="@drawable/btns"
+                            android:backgroundTint="@color/white"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/txtBuscar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/white"
+                                android:ems="10"
+                                android:fontFamily="@font/fira_bold"
+                                android:inputType="textPersonName"
+                                android:paddingLeft="10dp"
+                                android:text="Name"
+                                android:textColor="@color/light_grey"
+                                android:textSize="20sp" />
+
+                            <ImageButton
+                                android:id="@+id/btnBuscar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/white"
+                                app:srcCompat="@drawable/search2" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnAplicar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:background="@drawable/btns"
+                            android:fontFamily="@font/fira_bold"
+                            android:text="aplicar"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:id="@+id/imageView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            app:srcCompat="@drawable/horizontal_line" />
+
+                        <Button
+                            android:id="@+id/btnAgregar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/btns"
+                            android:backgroundTint="@color/orange"
+                            android:fontFamily="@font/fira_bold"
+                            android:text="agregar reto"
+                            android:textSize="20sp" />
+                    </LinearLayout>
+                </LinearLayout>
+
+                <androidx.core.widget.NestedScrollView
+                    android:layout_width="match_parent"
+                    android:layout_height="400dp"
+                    android:fillViewport="true">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@color/white"
-                        android:ems="10"
-                        android:fontFamily="@font/fira_bold"
-                        android:inputType="textPersonName"
-                        android:minHeight="48dp"
-                        android:text="Titulo"
-                        android:textAlignment="center"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textSize="20sp" />
+                        android:orientation="vertical" >
 
-                    <EditText
-                        android:id="@+id/editTextTextPersonName52"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@color/white"
-                        android:ems="10"
-                        android:fontFamily="@font/fira_bold"
-                        android:inputType="textPersonName"
-                        android:minHeight="48dp"
-                        android:text="Reto"
-                        android:textAlignment="center"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textSize="20sp" />
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="30dp"
+                            android:background="@drawable/btns"
+                            android:backgroundTint="@color/purple_200"
+                            android:orientation="vertical">
 
-                    <EditText
-                        android:id="@+id/editTextTextPersonName62"
-                        android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@color/white"
-                        android:ems="10"
-                        android:fontFamily="@font/fira_bold"
-                        android:inputType="textPersonName"
-                        android:minHeight="48dp"
-                        android:text="Castigo"
-                        android:textAlignment="center"
-                        android:textColor="@color/cardview_dark_background"
-                        android:textSize="20sp" />
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="25dp"
+                                android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btnEditar2"
+                                <TextView
+                                    android:id="@+id/textView6"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="15dp"
+                                    android:fontFamily="@font/fira_bold"
+                                    android:text="SELECCIONE LA CATEGORIA"
+                                    android:textColor="@color/white"
+                                    android:textSize="20sp" />
+
+                                <Spinner
+                                    android:id="@+id/spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:background="@drawable/style_spinner"
+                                    android:dropDownVerticalOffset="50dp" />
+
+                                <TextView
+                                    android:id="@+id/textView7"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="15dp"
+                                    android:fontFamily="@font/fira_bold"
+                                    android:text="ESCRIBA EL  TÍTULO DEL RETO"
+                                    android:textColor="@color/white"
+                                    android:textSize="20dp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="25dp"
+                                    android:background="@drawable/btns"
+                                    android:backgroundTint="@color/white"
+                                    android:orientation="horizontal">
+
+                                    <EditText
+                                        android:id="@+id/txtBuscar"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:backgroundTint="@color/white"
+                                        android:ems="10"
+                                        android:fontFamily="@font/fira_bold"
+                                        android:inputType="textPersonName"
+                                        android:paddingLeft="10dp"
+                                        android:text="Name"
+                                        android:textColor="@color/light_grey"
+                                        android:textSize="20sp" />
+
+                                    <ImageButton
+                                        android:id="@+id/btnBuscar"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:backgroundTint="@color/white"
+                                        app:srcCompat="@drawable/search2" />
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/btnAplicar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:background="@drawable/btns"
+                                    android:fontFamily="@font/fira_bold"
+                                    android:text="aplicar"
+                                    android:textSize="20sp" />
+
+                                <ImageView
+                                    android:id="@+id/imageView6"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    app:srcCompat="@drawable/horizontal_line" />
+
+                                <Button
+                                    android:id="@+id/btnAgregar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/btns"
+                                    android:backgroundTint="@color/orange"
+                                    android:fontFamily="@font/fira_bold"
+                                    android:text="agregar reto"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="30dp"
+                            android:background="@drawable/btns"
+                            android:backgroundTint="@color/purple_200"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="25dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView6"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="15dp"
+                                    android:fontFamily="@font/fira_bold"
+                                    android:text="SELECCIONE LA CATEGORIA"
+                                    android:textColor="@color/white"
+                                    android:textSize="20sp" />
+
+                                <Spinner
+                                    android:id="@+id/spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:background="@drawable/style_spinner"
+                                    android:dropDownVerticalOffset="50dp" />
+
+                                <TextView
+                                    android:id="@+id/textView7"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="15dp"
+                                    android:fontFamily="@font/fira_bold"
+                                    android:text="ESCRIBA EL  TÍTULO DEL RETO"
+                                    android:textColor="@color/white"
+                                    android:textSize="20dp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="25dp"
+                                    android:background="@drawable/btns"
+                                    android:backgroundTint="@color/white"
+                                    android:orientation="horizontal">
+
+                                    <EditText
+                                        android:id="@+id/txtBuscar"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:backgroundTint="@color/white"
+                                        android:ems="10"
+                                        android:fontFamily="@font/fira_bold"
+                                        android:inputType="textPersonName"
+                                        android:paddingLeft="10dp"
+                                        android:text="Name"
+                                        android:textColor="@color/light_grey"
+                                        android:textSize="20sp" />
+
+                                    <ImageButton
+                                        android:id="@+id/btnBuscar"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:backgroundTint="@color/white"
+                                        app:srcCompat="@drawable/search2" />
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/btnAplicar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:background="@drawable/btns"
+                                    android:fontFamily="@font/fira_bold"
+                                    android:text="aplicar"
+                                    android:textSize="20sp" />
+
+                                <ImageView
+                                    android:id="@+id/imageView6"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    app:srcCompat="@drawable/horizontal_line" />
+
+                                <Button
+                                    android:id="@+id/btnAgregar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/btns"
+                                    android:backgroundTint="@color/orange"
+                                    android:fontFamily="@font/fira_bold"
+                                    android:text="agregar reto"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginLeft="30dp"
+                            android:layout_marginTop="20dp"
+                            android:layout_marginRight="30dp"
+                            android:background="@drawable/btns"
+                            android:backgroundTint="@color/purple_200"
+                            android:orientation="vertical">
+
+                            <LinearLayout
+                                android:layout_width="match_parent"
+                                android:layout_height="match_parent"
+                                android:layout_margin="25dp"
+                                android:orientation="vertical">
+
+                                <TextView
+                                    android:id="@+id/textView6"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="15dp"
+                                    android:fontFamily="@font/fira_bold"
+                                    android:text="SELECCIONE LA CATEGORIA"
+                                    android:textColor="@color/white"
+                                    android:textSize="20sp" />
+
+                                <Spinner
+                                    android:id="@+id/spinner"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:background="@drawable/style_spinner"
+                                    android:dropDownVerticalOffset="50dp" />
+
+                                <TextView
+                                    android:id="@+id/textView7"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="15dp"
+                                    android:fontFamily="@font/fira_bold"
+                                    android:text="ESCRIBA EL  TÍTULO DEL RETO"
+                                    android:textColor="@color/white"
+                                    android:textSize="20dp" />
+
+                                <LinearLayout
+                                    android:layout_width="match_parent"
+                                    android:layout_height="match_parent"
+                                    android:layout_marginBottom="25dp"
+                                    android:background="@drawable/btns"
+                                    android:backgroundTint="@color/white"
+                                    android:orientation="horizontal">
+
+                                    <EditText
+                                        android:id="@+id/txtBuscar"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="wrap_content"
+                                        android:layout_weight="1"
+                                        android:backgroundTint="@color/white"
+                                        android:ems="10"
+                                        android:fontFamily="@font/fira_bold"
+                                        android:inputType="textPersonName"
+                                        android:paddingLeft="10dp"
+                                        android:text="Name"
+                                        android:textColor="@color/light_grey"
+                                        android:textSize="20sp" />
+
+                                    <ImageButton
+                                        android:id="@+id/btnBuscar"
+                                        android:layout_width="wrap_content"
+                                        android:layout_height="match_parent"
+                                        android:layout_weight="1"
+                                        android:backgroundTint="@color/white"
+                                        app:srcCompat="@drawable/search2" />
+                                </LinearLayout>
+
+                                <Button
+                                    android:id="@+id/btnAplicar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    android:background="@drawable/btns"
+                                    android:fontFamily="@font/fira_bold"
+                                    android:text="aplicar"
+                                    android:textSize="20sp" />
+
+                                <ImageView
+                                    android:id="@+id/imageView6"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:layout_marginBottom="20dp"
+                                    app:srcCompat="@drawable/horizontal_line" />
+
+                                <Button
+                                    android:id="@+id/btnAgregar"
+                                    android:layout_width="match_parent"
+                                    android:layout_height="wrap_content"
+                                    android:background="@drawable/btns"
+                                    android:backgroundTint="@color/orange"
+                                    android:fontFamily="@font/fira_bold"
+                                    android:text="agregar reto"
+                                    android:textSize="20sp" />
+                            </LinearLayout>
+                        </LinearLayout>
+                    </LinearLayout>
+                </androidx.core.widget.NestedScrollView>
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/btns"
+                    android:backgroundTint="@color/purple_200"
+                    android:orientation="vertical">
+
+                    <LinearLayout
                         android:layout_width="match_parent"
-                        android:layout_height="wrap_content"
-                        android:layout_margin="15dp"
-                        android:layout_marginLeft="15dp"
-                        android:layout_marginRight="15dp"
-                        android:background="@drawable/btns"
-                        android:fontFamily="@font/fira_bold"
-                        android:text="editar"
-                        android:textSize="20sp" />
+                        android:layout_height="match_parent"
+                        android:layout_margin="25dp"
+                        android:orientation="vertical">
+
+                        <TextView
+                            android:id="@+id/textView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/fira_bold"
+                            android:text="SELECCIONE LA CATEGORIA"
+                            android:textColor="@color/white"
+                            android:textSize="20sp" />
+
+                        <Spinner
+                            android:id="@+id/spinner"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:background="@drawable/style_spinner"
+                            android:dropDownVerticalOffset="50dp" />
+
+                        <TextView
+                            android:id="@+id/textView7"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="15dp"
+                            android:fontFamily="@font/fira_bold"
+                            android:text="ESCRIBA EL  TÍTULO DEL RETO"
+                            android:textColor="@color/white"
+                            android:textSize="20dp" />
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_marginBottom="25dp"
+                            android:background="@drawable/btns"
+                            android:backgroundTint="@color/white"
+                            android:orientation="horizontal">
+
+                            <EditText
+                                android:id="@+id/txtBuscar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/white"
+                                android:ems="10"
+                                android:fontFamily="@font/fira_bold"
+                                android:inputType="textPersonName"
+                                android:paddingLeft="10dp"
+                                android:text="Name"
+                                android:textColor="@color/light_grey"
+                                android:textSize="20sp" />
+
+                            <ImageButton
+                                android:id="@+id/btnBuscar"
+                                android:layout_width="wrap_content"
+                                android:layout_height="match_parent"
+                                android:layout_weight="1"
+                                android:backgroundTint="@color/white"
+                                app:srcCompat="@drawable/search2" />
+                        </LinearLayout>
+
+                        <Button
+                            android:id="@+id/btnAplicar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            android:background="@drawable/btns"
+                            android:fontFamily="@font/fira_bold"
+                            android:text="aplicar"
+                            android:textSize="20sp" />
+
+                        <ImageView
+                            android:id="@+id/imageView6"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:layout_marginBottom="20dp"
+                            app:srcCompat="@drawable/horizontal_line" />
+
+                        <Button
+                            android:id="@+id/btnAgregar"
+                            android:layout_width="match_parent"
+                            android:layout_height="wrap_content"
+                            android:background="@drawable/btns"
+                            android:backgroundTint="@color/orange"
+                            android:fontFamily="@font/fira_bold"
+                            android:text="agregar reto"
+                            android:textSize="20sp" />
+                    </LinearLayout>
                 </LinearLayout>
             </LinearLayout>
-        </ScrollView>
+        </androidx.core.widget.NestedScrollView>
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="30dp"
-            android:orientation="horizontal">
-
-            <Button
-                android:id="@+id/button9"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/fira_bold"
-                android:text="Nuevo"
-                android:textSize="20sp" />
-
-            <Button
-                android:id="@+id/p"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_weight="1"
-                android:fontFamily="@font/fira_bold"
-                android:text="Guardar"
-                android:textSize="20sp" />
-        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

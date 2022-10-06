@@ -55,6 +55,11 @@ public class EditarCategoriasControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                if(txtTitulo.getText().toString().isEmpty() && cat.getTitulo().equalsIgnoreCase("Personalizado")){
+                    registro.delete(cat);
+                }
+
                 Intent intent = new Intent(act, Menu_act.class);
                 act.startActivity(intent);
             }
