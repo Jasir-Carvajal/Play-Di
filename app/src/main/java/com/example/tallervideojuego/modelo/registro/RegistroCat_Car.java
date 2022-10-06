@@ -3,36 +3,72 @@ package com.example.tallervideojuego.modelo.registro;
 import android.content.ContentValues;
 import android.content.Intent;
 import android.database.Cursor;
+import android.widget.ArrayAdapter;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
+import com.example.tallervideojuego.modelo.entidades.Carta;
+import com.example.tallervideojuego.modelo.entidades.Categoria;
 
 import java.util.ArrayList;
-
+/** Clase de administracion de una tabla intermedai (relacion m:m) entre Categoria y Carta */
 public class RegistroCat_Car extends Registro {
+
+    private Registro registroCategorias;
+    private Registro registroCartas;
 
     public RegistroCat_Car() {
         super("Carta_Categoria");
+        registroCartas = new Registro(Carta.class);
+        registroCategorias = new Registro(Categoria.class);
     }
+    /** Valida si una relacion es nueva en la tabla o ya se habia creado */
+    private boolean validarRealcion(Entidad relacion){
+        ArrayList<Carta> cartas = search_cartas(relacion.getContent().getAsInteger("categoria_id"));
+        for (Carta carta:cartas) {
+            if (carta.getId() == relacion.getContent().getAsInteger("cartas_id")){
+                return false;
+            }
+        }
+        return true;
+    }
+    /** Añade una relacion a la tabla intermedia */
+    public void addRelacion(int id_categoria, int id_carta){
+        ContentValues data = new ContentValues();
+        data.put("cartas_id",id_carta);
+        data.put("categoria_id",id_categoria);
+        Entidad relacion = new Entidad();
+        relacion.setContenido(data);
+        if (validarRealcion(relacion)){
+            add(relacion);
+        }
 
-    public ArrayList<Integer> search_cat(int categoria_id){
-        ArrayList<Integer> res = new ArrayList<Integer>();
+    }
+    /** Busca las categorias relacionadas a una carta */
+    public ArrayList<Categoria> search_categorias(int carta_id_relacionada){
+        ArrayList<Categoria> res = new ArrayList<Categoria>();
 
         for (Entidad entidad:listaEntidades) {
-          int idRelacion = entidad.getContent().getAsInteger("categoria_id");
-          if (idRelacion == categoria_id)res.add(categoria_id);
+          int cartas_id = entidad.getContent().getAsInteger("cartas_id");
+          if (cartas_id == carta_id_relacionada){
+              Categoria categoria = (Categoria) registroCategorias.search(entidad.getContent().getAsInteger("categoria_id"));
+              res.add(categoria);
+          }
         }
         return res;
     }
-
-    public ArrayList<Integer> search_car(int carta_id){
-        ArrayList<Integer> res = new ArrayList<Integer>();
+    /** Busca las cartas relacionadas a una categoria */
+    public ArrayList<Carta> search_cartas(int categoria_id_relacioanda){
+        ArrayList<Carta> res = new ArrayList<Carta>();
 
         for (Entidad entidad:listaEntidades) {
-            int idRelacion = entidad.getContent().getAsInteger("cartas_id");
-            if (idRelacion == carta_id)res.add(carta_id);
+            int categoria_id = entidad.getContent().getAsInteger("categoria_id");
+            if (categoria_id == categoria_id_relacioanda){
+                Carta carta = (Carta) registroCartas.search(entidad.getContent().getAsInteger("cartas_id"));
+                res.add(carta);
+            }
         }
         return res;
     }

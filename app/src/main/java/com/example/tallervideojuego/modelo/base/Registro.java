@@ -11,6 +11,24 @@ import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
 
+
+/** Registro
+// Administa el flujo de datos entre la app y la DB
+// pasa la informacion de la tabla espesificada al crear el objeto a un array list el cual
+// facilita operar sobre los datos sin nesesidad de sql, de forma volatil y util para usos tipios de android
+//
+// @Prop  ArrayList<Entidad> listaEntidades: alamacena los datos de la tabla en un Array lis generico pero conteniendo los objetos espesificos de la tabla
+//
+// @Prop SQLiteDatabase DB: es una instancia de la base de datos utilizabnle la clase DataBase solo funciona para crear este objeto
+//
+// @Prop String tabla: es la tabla que se asigna al crear la instancia que usara para las consultas a la base de datos
+//
+// @Prop ArrayList<String> columnas: lista de columnas de la tabla espesifiacada en la tabla asignada
+//
+// @Prop Class hijo: Es la calse de un objeto hijo a entidad que referencia una tabla en la base de datos
+//
+// */
+
 public class Registro {
 
 
@@ -20,8 +38,8 @@ public class Registro {
     protected ArrayList<String> columnas;
     protected Class hijo;
 
-    public Registro(Class Hijo_) {
-        try {
+    public Registro(Class Hijo_) {//objetos entidad en el arraylsit con casting a la calse espesificada como hijo
+        try {//se intenta obtener la tabla que se queire manejar en cada isntancai
             this.hijo = Hijo_;
             this.tabla = (String) Hijo_.getDeclaredField("Tabla").get(null);
         } catch (NoSuchFieldException e) {
@@ -29,31 +47,40 @@ public class Registro {
         } catch (IllegalAccessException e) {
             e.printStackTrace();
         }
-
         listaEntidades = new ArrayList<Entidad>();
-        this.DB = (new DataBase( null, 1)).       getWritableDatabase();
-        loadDb();
-        Cursor cursor = DB.rawQuery ("SELECT * FROM "+tabla+";" ,null);
-        columnas = new ArrayList<String>( (List<String>)Arrays.asList(cursor.getColumnNames()) );
+        this.DB = (new DataBase( null, 1)).       getWritableDatabase();//crea Db
+        loadDb();//carga los datos a listaEntidades
+        getColumnas();
     }
-    public Registro(String tabla) {
 
+
+
+    public Registro(String tabla) {//objetos genericos Entidad en el arraylsit sin posibilidad de casting
         this.tabla = tabla;
         listaEntidades = new ArrayList<Entidad>();
         this.DB = (new DataBase( null, 1)).getWritableDatabase();
         loadDb();
-        Cursor cursor = DB.rawQuery ("SELECT * FROM "+tabla+";" ,null);
+        getColumnas();
+    }
+
+    private void getColumnas(){
+        Cursor cursor = DB.rawQuery ("SELECT * FROM "+tabla+";" ,null);//carga las columnas de la base de datos
         columnas = new ArrayList<String>( (List<String>)Arrays.asList(cursor.getColumnNames()) );
     }
 
     public boolean add( Entidad entidad){
-        listaEntidades.add(entidad);
-        boolean res = this.DB.insert(tabla,null,entidad.getContent())>0;
+
+        boolean res=false;
+        if (!listaEntidades.contains(entidad)) {
+            listaEntidades.add(entidad);
+            res = this.DB.insert(tabla, null, entidad.getContent()) > 0;
+
+        }
         loadDb();
         return res;
 
     }
-
+    //busqueda personalizada por propiedad
     public Entidad search(String columna, Object value){
         if (columnas.contains(columna)){
             for (Entidad entidad:listaEntidades) {
@@ -84,6 +111,7 @@ public class Registro {
         return listaEntidades;
     }
 
+    //busca por id
     public Entidad search(int id) {
         for (Entidad entidad: listaEntidades) {
             if (entidad.getId()==id)return entidad;
@@ -91,10 +119,13 @@ public class Registro {
         return null;
     }
 
+    //obtiene la posicion de un elemetno en el Arraylist local
     public Entidad search_posicion(int i) {
         return listaEntidades.get(i);
     }
 
+
+    //obtiene todos los datos de la base de datos y lo pasa al arraylist
     public void loadDb (){
         Cursor cursor = DB.rawQuery ("SELECT * FROM "+tabla+";" ,null);
         cursor.moveToFirst();

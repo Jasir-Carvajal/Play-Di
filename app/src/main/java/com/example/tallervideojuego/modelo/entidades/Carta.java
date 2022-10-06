@@ -4,29 +4,31 @@ import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 
+import java.util.ArrayList;
 import java.util.Arrays;
 
 public class Carta extends Entidad {
 
     public static String Tabla = "Cartas";
-
+    private RegistroCat_Car registroCat_car;
     public Carta(String titulo, String reto, String castigo, int[] idCategorias) {
         super();
+        registroCat_car = new RegistroCat_Car();
         setTitulo(titulo);
         setReto(reto);
         setCastigo(castigo);
-        setIdCategorias(idCategorias);
+
     }
     public Carta(){
         super();
     }
 
-    public Carta(int id, String titulo, String reto, String castigo, int[] idCategorias) {
+    public Carta(int id, String titulo, String reto, String castigo) {
         super(id);
         setTitulo(titulo);
         setReto(reto);
         setCastigo(castigo);
-        setIdCategorias(idCategorias);
+
     }
 
     public String getTitulo() {
@@ -53,18 +55,15 @@ public class Carta extends Entidad {
         contenido.put("castigo", castigo);
     }
 
-    public int[] getIdCategorias() {
-
-
-        RegistroCat_Car registro = new RegistroCat_Car();
-        return (int[]) contenido.get("idCategorias");
-
+    /** añade realcion entre la actual carta y una categoria */
+    public void addCategoria(Categoria categoria){
+        registroCat_car.addRelacion(categoria.getId(),getId());
     }
 
-    public void setIdCategorias(int[] idCategorias) {
+    /** Obtine las categorias con las que esta relacionada */
+    public ArrayList<Categoria> getCategoriasDeCartas(){
 
-        contenido.put("idCategorias", String.valueOf(idCategorias));
-
+        return  registroCat_car.search_categorias(getId());
     }
 
     @Override
@@ -74,7 +73,6 @@ public class Carta extends Entidad {
                 ", titulo='" + getTitulo() + '\'' +
                 ", reto='" + getReto() + '\'' +
                 ", castigo='" + getCastigo() + '\'' +
-                ", idCategorias=" + Arrays.toString(getIdCategorias()) +
                 '}';
     }
 }

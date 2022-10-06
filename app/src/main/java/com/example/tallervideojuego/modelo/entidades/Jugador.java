@@ -1,5 +1,8 @@
 package com.example.tallervideojuego.modelo.entidades;
 
+import android.os.Parcel;
+import android.os.Parcelable;
+
 import com.example.tallervideojuego.modelo.base.Entidad;
 
 public class Jugador  {
@@ -14,6 +17,13 @@ public class Jugador  {
         this.correo = correo;
         this.clave = clave;
     }
+
+    protected Jugador(Parcel in) {
+        nombre = in.readString();
+        correo = in.readString();
+        clave = in.readString();
+    }
+
 
     public String getNombre() {
         return nombre;
@@ -47,4 +57,6 @@ public class Jugador  {
                 ", clave='" + clave + '\'' +
                 '}';
     }
+
+
 }

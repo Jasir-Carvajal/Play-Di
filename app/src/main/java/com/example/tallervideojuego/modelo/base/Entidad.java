@@ -2,13 +2,21 @@ package com.example.tallervideojuego.modelo.base;
 
 
 import android.content.ContentValues;
+/** Entidad
+// Clase generica de objetos posibles de almacenar en la base de Datos
+//  Contiede la estructura nesesaria para que el registro administre los datos entre la app y la DB
+//
+//  Id = primary key
+//  contenido = propiedades de los hijos almacenadas en un hash table de tipo Content Value limitando los tipos de datos a los posibles en la base de datos;
+// */
+public  class Entidad {
 
-public class Entidad {
+
     private int id;
     protected ContentValues contenido;
     public static String Tabla;
 
-    public Entidad() {
+    public  Entidad() {
         contenido = new ContentValues();
     }
     public Entidad(int id) {

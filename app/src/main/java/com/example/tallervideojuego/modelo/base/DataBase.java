@@ -7,7 +7,7 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
-//administracion de la base de datos
+/**Creacion de la base de datos*/
 public class DataBase  extends SQLiteOpenHelper{
 
     protected static  String BaseDatos = "Default";
@@ -19,11 +19,13 @@ public class DataBase  extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase baseDeDatos) {
-        //crear tabla en la base de datos
-
+        //Verificar que se permitan primari keys
         baseDeDatos.execSQL("PRAGMA foreign_keys = ON;");
+        //crear tabla para objeto Carta
         baseDeDatos.execSQL("Create Table IF NOT EXISTS Cartas(id INTEGER primary key AUTOINCREMENT UNIQUE , titulo TEXT NOT NULL , reto TEXT NOT NULL, castigo TEXT NOT NULL )");
+        //crear tabla para objeto Categoria
         baseDeDatos.execSQL("Create Table IF NOT EXISTS Categorias(id INTEGER primary key AUTOINCREMENT UNIQUE , titulo TEXT NOT NULL )");
+        //crear tabla para relacion entre carta y categoria
         baseDeDatos.execSQL("create table Carta_Categoria   (id INTEGER primary key AUTOINCREMENT UNIQUE,  cartas_id  INTEGER  NOT NULL ,categoria_id  INTEGER  NOT NULL, FOREIGN KEY  (cartas_id) REFERENCES Cartas(id), FOREIGN KEY (categoria_id) REFERENCES Categorias(id));");
     }
 
@@ -32,10 +34,12 @@ public class DataBase  extends SQLiteOpenHelper{
 
     }
 
+    //Ajustes basico para el funcionamiento de la Base de datos
     public static void setContext(Context context) {
         DataBase.context = context;
     }
 
+    //Ajustes basico para el funcionamiento de la Base de datos
     public static void setName(String baseDatos) {
         BaseDatos = baseDatos;
     }
