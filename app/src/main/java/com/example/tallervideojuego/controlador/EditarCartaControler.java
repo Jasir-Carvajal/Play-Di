@@ -26,7 +26,7 @@ public class EditarCartaControler extends Controlador {
         super(act);
         this.act = act;
 
-        btnGuardar = act.findViewById(R.id.btnGuardar);
+        btnGuardar = act.findViewById(R.id.p);
         btnCancelar = act.findViewById(R.id.btnCancelar);
 
 

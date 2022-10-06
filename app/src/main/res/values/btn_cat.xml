@@ -15,5 +15,6 @@
         <item name="cornerRadius">0dp</item>
         <item name="android:radius">0dp</item>
         <item name="android:textColor">#fff</item>
+        <item name="android:textSize">20dp</item>
     </style>
 </resources>

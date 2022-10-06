@@ -11,6 +11,7 @@ import android.widget.Toast;
 
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.content.res.ResourcesCompat;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
@@ -40,15 +41,7 @@ public final class MenuControler extends Controlador{
         regresar = this.act.findViewById(R.id.regresar);
         random = this.act.findViewById(R.id.random);
         bancoPreguntas = this.act.findViewById(R.id.bancoPreguntas);
-        //____________________________________________________________
-        //____________________________________________________________
-        //____________________________________________________________
-        //registro.add(new Categoria(0,"Prueba1"));
-        //____________________________________________________________
-        //____________________________________________________________
-        //____________________________________________________________
 
-        //Toast.makeText(act, ""+registro.getEntidades().size(), Toast.LENGTH_SHORT).show();
 
         addButtons();
         setFunctions();
@@ -87,6 +80,7 @@ public final class MenuControler extends Controlador{
         LinearLayout.LayoutParams params_btn_edit = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
         params_btn_edit.width=0;
         params_btn_edit.weight= (float) 0.35;
+        params_btn_edit.height = 120;
         params_btn_edit.topMargin = dp(8);
         params_btn_edit.rightMargin = dp(8);
         params_btn_edit.bottomMargin = dp(8);
@@ -114,6 +108,9 @@ public final class MenuControler extends Controlador{
             btn_cat.setText(cat.getTitulo());
             btn_editar.setText("Editar");
 
+            btn_cat.setTypeface(ResourcesCompat.getFont(act.getApplicationContext(), R.font.fira_bold));
+            btn_editar.setTypeface(ResourcesCompat.getFont(act.getApplicationContext(), R.font.fira_bold));
+
             btn_cat.setOnClickListener(onPlay(cat.getId()));
             btn_editar.setOnClickListener(onEdit(cat.getId()));
 
@@ -132,7 +129,7 @@ public final class MenuControler extends Controlador{
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(act, "editar "+((Categoria)registro.search(id)).getTitulo(), Toast.LENGTH_SHORT).show();
+
                 Intent intent = new Intent(act, EditarCategoria_act.class);
 
                 intent.putExtra("id",id);
@@ -157,7 +154,6 @@ public final class MenuControler extends Controlador{
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //Toast.makeText(act, "editar ", Toast.LENGTH_SHORT).show();
 
                 Intent intent = new Intent(act, BancoPreguntas_act.class);
 
