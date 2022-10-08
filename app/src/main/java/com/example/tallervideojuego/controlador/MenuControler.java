@@ -80,7 +80,7 @@ public final class MenuControler extends Controlador{
         LinearLayout.LayoutParams params_btn_edit = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
         params_btn_edit.width=0;
         params_btn_edit.weight= (float) 0.35;
-        params_btn_edit.height = 120;
+        //params_btn_edit.height = 120;
         params_btn_edit.topMargin = dp(8);
         params_btn_edit.rightMargin = dp(8);
         params_btn_edit.bottomMargin = dp(8);

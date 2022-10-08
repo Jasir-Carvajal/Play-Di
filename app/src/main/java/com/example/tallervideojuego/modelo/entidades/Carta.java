@@ -44,7 +44,7 @@ public class Carta extends Entidad {
     }
 
     public void setReto(String reto) {
-        contenido.put("castigo", reto);
+        contenido.put("reto", reto);
     }
 
     public String getCastigo() {

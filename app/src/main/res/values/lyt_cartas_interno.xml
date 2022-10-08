@@ -1,0 +1,10 @@
+<?xml version="1.0" encoding="utf-8"?>
+<resources >
+    <style name="lyt_cartas_interno"  >
+        <item name="android:background">@drawable/btns</item>
+        <item name="android:backgroundTint">@color/grey</item>
+        <item name="android:orientation">horizontal</item>
+        <item name="android:radius">6dp</item>
+
+    </style>
+</resources>

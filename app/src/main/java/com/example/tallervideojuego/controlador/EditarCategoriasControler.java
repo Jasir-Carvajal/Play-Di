@@ -37,6 +37,7 @@ public class EditarCategoriasControler extends Controlador {
 
 
         setFunctions();
+
         if(id!=-1){
             cat = (Categoria) registro.search(id);
             fill();
@@ -84,6 +85,8 @@ public class EditarCategoriasControler extends Controlador {
                         registro.update(cat);
                     }else {
                         cat.setTitulo(txtTitulo.getText().toString().trim());
+
+                        //Se comprueba que no repita un nombre ya existente
                         Entidad old = registro.search("titulo",cat.getTitulo());
                         if (old == null){
                             registro.add(cat);
