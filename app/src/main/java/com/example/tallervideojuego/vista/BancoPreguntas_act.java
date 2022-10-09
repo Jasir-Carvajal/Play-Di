@@ -17,4 +17,5 @@ public class BancoPreguntas_act extends AppCompatActivity {
 
         controlador = new BancoPreguntasControler(this);
     }
+
 }

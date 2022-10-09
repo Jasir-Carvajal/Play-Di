@@ -40,14 +40,8 @@
                     android:orientation="vertical">
 
                     <LinearLayout
-                        android:layout_width="match_parent"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="30dp"
-                        android:layout_marginTop="50dp"
-                        android:layout_marginRight="30dp"
-                        android:background="@drawable/btns"
-                        android:backgroundTint="#414141"
-                        android:orientation="horizontal">
+
+                        style="@style/lyt_btns">
 
                         <Button
                             android:id="@+id/random"
@@ -55,7 +49,7 @@
                             android:layout_marginLeft="8dp"
                             android:fontFamily="@font/fira_bold"
                             android:text="Random"
-                            android:textSize="20sp" />
+                            android:textSize="16sp" />
 
                         <Button
                             android:id="@+id/button2"
@@ -92,9 +86,10 @@
                     android:background="@drawable/btns"
                     android:backgroundTint="#008F39"
                     android:fontFamily="@font/fira_bold"
+                    android:padding="3dp"
                     android:stateListAnimator="@null"
                     android:text="Añadir nuevo"
-                    android:textSize="20sp"
+                    android:textSize="16sp"
                     app:cornerRadius="0dp" />
 
                 <LinearLayout
@@ -115,9 +110,10 @@
                         android:background="@drawable/btns"
                         android:backgroundTint="#414141"
                         android:fontFamily="@font/fira_bold"
+                        android:padding="3dp"
                         android:stateListAnimator="@null"
                         android:text="Regresar"
-                        android:textSize="20sp"
+                        android:textSize="16sp"
                         app:cornerRadius="0dp" />
 
                     <Button
@@ -129,10 +125,10 @@
                         android:background="@drawable/btns"
                         android:backgroundTint="#F4A020"
                         android:fontFamily="@font/fira_bold"
+                        android:padding="3dp"
                         android:stateListAnimator="@null"
                         android:text="Banco Preguntas"
-                        android:textSize="20sp"
-                         />
+                        android:textSize="16sp" />
                 </LinearLayout>
             </LinearLayout>
         </RelativeLayout>

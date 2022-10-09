@@ -1,11 +1,6 @@
 package com.example.tallervideojuego.modelo.registro;
 
 import android.content.ContentValues;
-import android.content.Intent;
-import android.database.Cursor;
-import android.widget.ArrayAdapter;
-
-import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
@@ -26,8 +21,8 @@ public class RegistroCat_Car extends Registro {
     }
     /** Valida si una relacion es nueva en la tabla o ya se habia creado */
     private boolean validarRealcion(Entidad relacion){
-        ArrayList<Carta> cartas = search_cartas(relacion.getContent().getAsInteger("categoria_id"));
-        for (Carta carta:cartas) {
+        ArrayList<Entidad> cartas = search_cartas(relacion.getContent().getAsInteger("categoria_id"));
+        for (Entidad carta:cartas) {
             if (carta.getId() == relacion.getContent().getAsInteger("cartas_id")){
                 return false;
             }
@@ -60,8 +55,8 @@ public class RegistroCat_Car extends Registro {
         return res;
     }
     /** Busca las cartas relacionadas a una categoria */
-    public ArrayList<Carta> search_cartas(int categoria_id_relacioanda){
-        ArrayList<Carta> res = new ArrayList<Carta>();
+    public ArrayList<Entidad> search_cartas(int categoria_id_relacioanda){
+        ArrayList<Entidad> res = new ArrayList<>();
 
         for (Entidad entidad:listaEntidades) {
             int categoria_id = entidad.getContent().getAsInteger("categoria_id");

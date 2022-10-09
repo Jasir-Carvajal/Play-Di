@@ -48,7 +48,7 @@ public class Registro {
             e.printStackTrace();
         }
         listaEntidades = new ArrayList<Entidad>();
-        this.DB = (new DataBase( null, 1)).       getWritableDatabase();//crea Db
+        this.DB = (new DataBase( null, 1)).getWritableDatabase();//crea Db
         loadDb();//carga los datos a listaEntidades
         getColumnas();
     }
@@ -80,6 +80,7 @@ public class Registro {
         return res;
 
     }
+
     //busqueda personalizada por propiedad
     public Entidad search(String columna, Object value){
         if (columnas.contains(columna)){

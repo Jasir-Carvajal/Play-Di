@@ -36,7 +36,7 @@ public class Categoria extends Entidad {
         registroCat_car.addRelacion(getId(),carta.getId());
     }
     /** Busca las cartas relacionadas con la categoria actual*/
-    public ArrayList<Carta> getCartasDeCategoria(){
+    public ArrayList<Entidad> getCartasDeCategoria(){
 
         return  registroCat_car.search_cartas(getId());
     }
