@@ -51,11 +51,17 @@ public class EditarCartaControler extends Controlador {
 
     private AdapterCategorías adapterCategorías;
 
+    private Carta carta;
+    private Boolean isNew;
 
     @SuppressLint("ClickableViewAccessibility")
     public EditarCartaControler(AppCompatActivity act) {
         super(act);
         this.act = act;
+
+        int id = act.getIntent().getIntExtra("id",-1);
+
+
 
         btnAgregar = this.act.findViewById(R.id.btnAgregar);
         btnCancelar = this.act.findViewById(R.id.btnCancelar);
@@ -92,7 +98,22 @@ public class EditarCartaControler extends Controlador {
         //////////SPINNER MANEJO/////////////
 
 
+
         setFunctions();
+
+        if(id!=-1){
+            carta = (Carta) registroCartas.search(id);
+            fill();
+            isNew = false;
+        }else{
+            carta = new Carta();
+            isNew = true;
+        }
+
+    }
+
+    public void fill(){
+
     }
 
     public void setFunctions(){
@@ -103,6 +124,8 @@ public class EditarCartaControler extends Controlador {
         miScrollView.setOnTouchListener(scrollTouch());
         listCat.setOnTouchListener(listViewTouch());
     }
+
+
 
     public View.OnClickListener add(){
         return new View.OnClickListener() {
@@ -121,6 +144,15 @@ public class EditarCartaControler extends Controlador {
                     }
 
                 }
+            }
+        };
+    }
+
+    public View.OnClickListener delet(Categoria cat){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                categoriasRelacionadas.remove(cat);
             }
         };
     }

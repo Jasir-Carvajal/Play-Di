@@ -17,6 +17,7 @@ import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Carta;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.vista.EditarCarta_act;
+import com.example.tallervideojuego.vista.EditarCategoria_act;
 
 import java.util.ArrayList;
 
@@ -75,6 +76,7 @@ public class BancoPreguntasControler extends Controlador{
             @Override
             public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
                 itemSelected = adapterView.getItemAtPosition(i).toString();
+                apply();
             }
 
             @Override
@@ -101,9 +103,7 @@ public class BancoPreguntasControler extends Controlador{
             @Override
             public void onClick(View view) {
                 Intent intent = new Intent(act, EditarCarta_act.class);
-
                 intent.putExtra("id",id);
-
                 act.startActivity(intent);
             }
         };
@@ -128,14 +128,8 @@ public class BancoPreguntasControler extends Controlador{
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Carta carta = new Carta();
-
-                carta.setTitulo("IMITAR A UN MONO"+Math.random());
-                carta.setCastigo("Castigo ");
-                carta.setReto("Rteo");
-
-                registroCartas.add(carta);
-                update(registroCartas.getListaEntidades());
+                Intent intent = new Intent(act, EditarCarta_act.class);
+                act.startActivity(intent);
             }
         };
     }
