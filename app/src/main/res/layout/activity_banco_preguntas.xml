@@ -94,14 +94,14 @@
             android:layout_width="match_parent"
             android:layout_height="match_parent"
             android:layout_marginTop="15dp"
+            android:layout_marginBottom="20dp"
             android:orientation="vertical">
 
             <ListView
                 android:id="@+id/lista_categorias"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:dividerHeight="15.0sp"
-                />
+                android:dividerHeight="15.0sp" />
         </LinearLayout>
 
     </LinearLayout>

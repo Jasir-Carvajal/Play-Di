@@ -93,6 +93,7 @@ public class BancoPreguntasControler extends Controlador{
 
     public void setFunctions(){
         btnAgregar.setOnClickListener(add());
+        //btnAplicar.setOnClickListener(apply());
     }
 
     public View.OnClickListener edit(int id){

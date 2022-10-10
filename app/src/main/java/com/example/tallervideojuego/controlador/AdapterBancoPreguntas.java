@@ -77,10 +77,13 @@ public class AdapterBancoPreguntas  extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.adapter_cards,null);
             TextView textView = view.findViewById(R.id.titulo_card);
             textView.setText(((Carta)lista.get(i)).getTitulo());
+            textView.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
             Button edit = view.findViewById(R.id.editar_card);
             edit.setOnClickListener(edit(i));
+            edit.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
             Button del = view.findViewById(R.id.eliminar_card);
             del.setOnClickListener(delete(lista.get(i)));
+            del.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
         }
 
         return view;

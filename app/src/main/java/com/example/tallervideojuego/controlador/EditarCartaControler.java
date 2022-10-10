@@ -1,9 +1,14 @@
 package com.example.tallervideojuego.controlador;
 
+import android.annotation.SuppressLint;
 import android.content.Intent;
+import android.view.MotionEvent;
 import android.view.View;
+import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
 import android.widget.Button;
+import android.widget.ListView;
+import android.widget.ScrollView;
 import android.widget.Spinner;
 import android.widget.Toast;
 
@@ -11,38 +16,113 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
+import com.example.tallervideojuego.modelo.base.AdapterCategorías;
+import com.example.tallervideojuego.modelo.base.Entidad;
+import com.example.tallervideojuego.modelo.base.Registro;
+import com.example.tallervideojuego.modelo.entidades.Carta;
+import com.example.tallervideojuego.modelo.entidades.Categoria;
+import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 import com.example.tallervideojuego.vista.BancoPreguntas_act;
+
+import java.util.ArrayList;
 
 public class EditarCartaControler extends Controlador {
 
     private AppCompatActivity act;
 
-    private Button btnGuardar, btnCancelar;
+    private Button btnAgregar, btnGuardar, btnCancelar;
 
-    private Spinner spinner;
+    private ListView listCat;
+
+    private ScrollView miScrollView;
+
+    private Spinner spinnerCat;
     ArrayAdapter<CharSequence> adapter;
 
+    private Registro registroCategorias;
+    private Registro registroCartas;
+    private RegistroCat_Car registroRelacion;
+
+    private ArrayList<String> catItems = new ArrayList<>();
+
+    private ArrayList<Categoria> categoriasRelacionadas = new ArrayList<>();
+
+    private String itemSelected;
+
+    private AdapterCategorías adapterCategorías;
+
+
+    @SuppressLint("ClickableViewAccessibility")
     public EditarCartaControler(AppCompatActivity act) {
         super(act);
         this.act = act;
 
-        btnGuardar = act.findViewById(R.id.p);
-        btnCancelar = act.findViewById(R.id.btnCancelar);
+        btnAgregar = this.act.findViewById(R.id.btnAgregar);
+        btnCancelar = this.act.findViewById(R.id.btnCancelar);
+        btnGuardar = this.act.findViewById(R.id.btnGuardar);
+
+        listCat = this.act.findViewById(R.id.listCat);
+        miScrollView = this.act.findViewById(R.id.miScrollView);
+
+        registroCategorias = new Registro(Categoria.class);
+        registroCartas = new Registro(Carta.class);
+        registroRelacion = new RegistroCat_Car();
+
+        catItems = getStrings();
 
 
-        spinner = act.findViewById(R.id.spinner);
+        //////////SPINNER MANEJO/////////////
+        spinnerCat = this.act.findViewById(R.id.spinner);
 
-        adapter = ArrayAdapter.createFromResource(this.act,
-                R.array.planets_array, android.R.layout.simple_spinner_item);
-        adapter.setDropDownViewResource(android.R.layout.simple_spinner_dropdown_item);
-        spinner.setAdapter(adapter);
+        adapter = new ArrayAdapter(this.act, R.layout.style_spinner,catItems);
+        adapter.setDropDownViewResource(R.layout.style_dropdown_spinner);
+        spinnerCat.setAdapter(adapter);
+
+        spinnerCat.setOnItemSelectedListener(new AdapterView.OnItemSelectedListener() {
+            @Override
+            public void onItemSelected(AdapterView<?> adapterView, View view, int i, long l) {
+                itemSelected = adapterView.getItemAtPosition(i).toString();
+            }
+
+            @Override
+            public void onNothingSelected(AdapterView<?> adapterView) {
+
+            }
+        });
+        //////////SPINNER MANEJO/////////////
+
 
         setFunctions();
     }
 
     public void setFunctions(){
+        btnAgregar.setOnClickListener(add());
         btnGuardar.setOnClickListener(save());
         btnCancelar.setOnClickListener(cancel());
+
+        miScrollView.setOnTouchListener(scrollTouch());
+        listCat.setOnTouchListener(listViewTouch());
+    }
+
+    public View.OnClickListener add(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Categoria categoria = getCatPorTitulo(itemSelected);
+
+                if(categoria !=  null){
+                    if (categoriasRelacionadas.contains(categoria)){
+                        Toast.makeText(act, "Esa categoría ya fue agregada", Toast.LENGTH_SHORT).show();
+                    } else {
+                        categoriasRelacionadas.add(categoria);
+
+                        adapterCategorías = new AdapterCategorías(act.getApplicationContext(),categoriasRelacionadas);
+                        listCat.setAdapter(adapterCategorías);
+                    }
+
+                }
+            }
+        };
     }
 
     public View.OnClickListener save(){
@@ -66,5 +146,53 @@ public class EditarCartaControler extends Controlador {
                 act.startActivity(intent);
             }
         };
+    }
+
+    public View.OnTouchListener scrollTouch(){
+        return new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View view, MotionEvent motionEvent) {
+                act.findViewById(R.id.listCat).getParent()
+                        .requestDisallowInterceptTouchEvent(false);
+                return false;
+            }
+        };
+    }
+
+    public View.OnTouchListener listViewTouch(){
+        return new View.OnTouchListener(){
+            @Override
+            public boolean onTouch(View v, MotionEvent motionEvent) {
+                v.getParent().requestDisallowInterceptTouchEvent(true);
+                return false;
+            }
+        };
+    }
+
+    public ArrayList<String> getStrings(){
+        ArrayList<String> listArray = new ArrayList<>();
+
+        for (int i = 0; i< registroCategorias.getListaEntidades().size(); i++){
+
+            Categoria categoria = (Categoria) registroCategorias.getEntidades().get(i);
+
+            listArray.add(categoria.getTitulo());
+        }
+
+        return  listArray;
+    }
+
+    public Categoria getCatPorTitulo(String titulo){
+
+        Categoria cat = null;
+
+        for(Entidad entidad: registroCategorias.getEntidades()){
+            Categoria categoria = (Categoria) entidad;
+
+            if(categoria.getTitulo().equalsIgnoreCase(titulo)){
+                cat = categoria;
+            }
+        }
+        return cat;
     }
 }

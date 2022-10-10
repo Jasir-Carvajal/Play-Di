@@ -11,43 +11,55 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:orientation="vertical"
-        >
-
-        <TextView
-            android:id="@+id/titulo_card"
-            style="@style/txt_titulo"
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:text="Titulo"
-            android:textSize="14sp" />
+        tools:layout_editor_absoluteX="30dp">
 
         <LinearLayout
             android:layout_width="match_parent"
             android:layout_height="match_parent"
-            android:orientation="horizontal">
+            android:layout_margin="5dp"
+            android:orientation="vertical">
 
-            <Button
-                android:id="@+id/eliminar_card"
-                style="@style/edit_btn"
-                android:layout_width="wrap_content"
+            <TextView
+                android:id="@+id/titulo_card"
+                style="@style/txt_titulo"
+                android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginRight="8dp"
-                android:layout_weight="1"
-                android:minHeight="38dip"
-                android:text="Eliminar"
-                android:textSize="14sp" />
+                android:fontFamily="@font/fira_bold"
+                android:text="Titulo"
+                android:textSize="16sp" />
 
-            <Button
-                android:id="@+id/editar_card"
-                style="@style/edit_btn"
-                android:layout_width="wrap_content"
-                android:layout_height="wrap_content"
-                android:layout_marginLeft="8dp"
-                android:layout_marginRight="0dp"
-                android:layout_weight="1"
-                android:minHeight="38dip"
-                android:text="Editar"
-                android:textSize="14sp" />
+            <LinearLayout
+                android:layout_width="match_parent"
+                android:layout_height="match_parent"
+                android:layout_marginTop="15dp"
+                android:orientation="horizontal">
+
+                <Button
+                    android:id="@+id/eliminar_card"
+                    style="@style/edit_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginRight="8dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/fira_bold"
+                    android:minHeight="38dip"
+                    android:text="Eliminar"
+                    android:textSize="16sp" />
+
+                <Button
+                    android:id="@+id/editar_card"
+                    style="@style/edit_btn"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="8dp"
+                    android:layout_marginRight="0dp"
+                    android:layout_weight="1"
+                    android:fontFamily="@font/fira_bold"
+                    android:minHeight="38dip"
+                    android:text="Editar"
+                    android:textSize="16sp" />
+            </LinearLayout>
         </LinearLayout>
+
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
