@@ -60,6 +60,11 @@ public class Carta extends Entidad {
         registroCat_car.addRelacion(categoria.getId(),getId());
     }
 
+    public void removeCategoria(Categoria categoria){
+
+        registroCat_car.deletRelacion(categoria,this);
+    }
+
     /** Obtine las categorias con las que esta relacionada */
     public ArrayList<Categoria> getCategoriasDeCartas(){
 

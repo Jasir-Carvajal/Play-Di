@@ -68,6 +68,16 @@ public class RegistroCat_Car extends Registro {
         return res;
     }
 
+    public void deletRelacion(Categoria categoria, Carta carta){
+        for (Entidad entidad:listaEntidades) {
+           int id_categoria = entidad.getContent().getAsInteger("categoria_id");
+           int id_carta = entidad.getContent().getAsInteger("cartas_id");
+            if (id_carta == carta.getId() && id_categoria == categoria.getId()){
+                delete(entidad);
+                return;
+            }
+        }
+    }
 
 
 
