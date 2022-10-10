@@ -1,4 +1,4 @@
-package com.example.tallervideojuego.modelo.base;
+package com.example.tallervideojuego.modelo;
 
 import android.content.Context;
 import android.view.LayoutInflater;

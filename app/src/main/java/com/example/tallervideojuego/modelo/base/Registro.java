@@ -128,7 +128,7 @@ public class Registro {
 
     //obtiene todos los datos de la base de datos y lo pasa al arraylist
     public void loadDb (){
-        Cursor cursor = DB.rawQuery ("SELECT * FROM "+tabla+";" ,null);
+        Cursor cursor = DB.rawQuery ("SELECT * FROM "+tabla+" ORDER BY id DESC ;" ,null);
         cursor.moveToFirst();
         listaEntidades = new ArrayList<Entidad>();
 

@@ -16,7 +16,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
-import com.example.tallervideojuego.modelo.base.AdapterCategorías;
+import com.example.tallervideojuego.modelo.AdapterCategorías;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Carta;
