@@ -130,7 +130,7 @@
                             app:srcCompat="@drawable/linea" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName3"
+                            android:id="@+id/txtTitulo"
                             android:layout_width="match_parent"
                             android:layout_height="wrap_content"
                             android:background="@drawable/btns"
@@ -184,7 +184,7 @@
                             app:srcCompat="@drawable/linea" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName333"
+                            android:id="@+id/txtDescripcion"
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
                             android:background="@drawable/btns"
@@ -230,7 +230,7 @@
                             app:srcCompat="@drawable/linea" />
 
                         <EditText
-                            android:id="@+id/editTextTextPersonName33"
+                            android:id="@+id/txtCastigo"
                             android:layout_width="match_parent"
                             android:layout_height="150dp"
                             android:background="@drawable/btns"

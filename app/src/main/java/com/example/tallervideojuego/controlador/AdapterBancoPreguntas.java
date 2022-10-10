@@ -59,8 +59,8 @@ public class AdapterBancoPreguntas  extends BaseAdapter {
 
 
 
-    public View.OnClickListener edit(int id){
-        return controlador.edit(id);
+    public View.OnClickListener edit(Entidad entidad){
+        return controlador.edit(entidad);
     }
 
     public View.OnClickListener delete(Entidad entidad){
@@ -79,7 +79,7 @@ public class AdapterBancoPreguntas  extends BaseAdapter {
             textView.setText(((Carta)lista.get(i)).getTitulo());
             textView.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
             Button edit = view.findViewById(R.id.editar_card);
-            edit.setOnClickListener(edit(i));
+            edit.setOnClickListener(edit(lista.get(i)));
             edit.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
             Button del = view.findViewById(R.id.eliminar_card);
             del.setOnClickListener(delete(lista.get(i)));

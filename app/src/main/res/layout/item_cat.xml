@@ -6,9 +6,11 @@
 
     <TextView
         android:id="@+id/txtCat"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
+        android:layout_width="60dp"
+        android:layout_height="30dp"
         android:layout_marginLeft="15dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
         android:layout_weight="1"
         android:fontFamily="@font/fira_bold"
         android:text="TextView"
@@ -17,8 +19,10 @@
 
     <ImageView
         android:id="@+id/imgTrash"
-        android:layout_width="wrap_content"
-        android:layout_height="wrap_content"
-        android:layout_weight="1"
+        android:layout_width="0dp"
+        android:layout_height="30dp"
+        android:layout_marginTop="5dp"
+        android:layout_marginBottom="5dp"
+        android:layout_weight=".40"
         app:srcCompat="@drawable/trash" />
 </LinearLayout>

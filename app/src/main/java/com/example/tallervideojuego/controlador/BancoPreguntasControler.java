@@ -16,6 +16,7 @@ import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Carta;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
+import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 import com.example.tallervideojuego.vista.EditarCarta_act;
 import com.example.tallervideojuego.vista.EditarCategoria_act;
 
@@ -29,11 +30,13 @@ public class BancoPreguntasControler extends Controlador{
 
     private Spinner spinnerCat;
     private AdapterBancoPreguntas adapterBancoPreguntas;
+
     private Registro registroCategorias;
     private Registro registroCartas;
+    private RegistroCat_Car registroRelacion;
 
 
-    //private LinearLayout container;
+
 
 
     private ArrayAdapter<CharSequence> adapter;
@@ -55,6 +58,7 @@ public class BancoPreguntasControler extends Controlador{
 
         registroCategorias = new Registro(Categoria.class);
         registroCartas = new Registro(Carta.class);
+        registroRelacion = new RegistroCat_Car();
 
 
 
@@ -95,13 +99,14 @@ public class BancoPreguntasControler extends Controlador{
 
     public void setFunctions(){
         btnAgregar.setOnClickListener(add());
-        //btnAplicar.setOnClickListener(apply());
+        btnAplicar.setOnClickListener(apply());
     }
 
-    public View.OnClickListener edit(int id){
+    public View.OnClickListener edit(Entidad entidad){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                int id = entidad.getId();
                 Intent intent = new Intent(act, EditarCarta_act.class);
                 intent.putExtra("id",id);
                 act.startActivity(intent);
@@ -138,9 +143,14 @@ public class BancoPreguntasControler extends Controlador{
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-               Categoria categoria = (Categoria)registroCategorias.search("titulo",itemSelected);
-               ArrayList<Entidad> cartas = categoria.getCartasDeCategoria();
-               update(cartas);
+               if(itemSelected.equalsIgnoreCase("TODAS")) {
+                   update(registroCartas.getEntidades());
+               } else {
+                   Categoria categoria = (Categoria) registroCategorias.search("titulo", itemSelected);
+                   categoria.setRegistroCat_car(registroRelacion);
+                   ArrayList<Entidad> cartas = categoria.getCartasDeCategoria();
+                   update(cartas);
+               }
             }
         };
     }

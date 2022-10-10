@@ -31,6 +31,10 @@ public class Categoria extends Entidad {
         contenido.put("titulo",titulo);
     }
 
+    public void setRegistroCat_car(RegistroCat_Car registroCat_car) {
+        this.registroCat_car = registroCat_car;
+    }
+
     /** Añade una relacion entre la categoria actual y una carta*/
     public void addCarta(Carta carta){
         registroCat_car.addRelacion(getId(),carta.getId());

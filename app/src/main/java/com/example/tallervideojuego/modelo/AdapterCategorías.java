@@ -11,6 +11,8 @@ import android.widget.TextView;
 import androidx.core.content.res.ResourcesCompat;
 
 import com.example.tallervideojuego.R;
+import com.example.tallervideojuego.controlador.EditarCartaControler;
+import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 
 import java.util.ArrayList;
@@ -19,10 +21,12 @@ public class AdapterCategorías extends BaseAdapter {
 
     Context context;
     ArrayList<Categoria> lista;
+    EditarCartaControler controler;
 
-    public AdapterCategorías(Context context, ArrayList<Categoria> lista) {
+    public AdapterCategorías(Context context, ArrayList<Categoria> lista, EditarCartaControler controler) {
         this.context = context;
         this.lista = lista;
+        this.controler = controler;
     }
 
 
@@ -43,6 +47,10 @@ public class AdapterCategorías extends BaseAdapter {
         return i;
     }
 
+    public View.OnClickListener delete(Categoria categoria){
+        return controler.delete(categoria);
+    }
+
     @Override
     public View getView(int i, View view, ViewGroup viewGroup) {
         if(view == null){
@@ -55,6 +63,8 @@ public class AdapterCategorías extends BaseAdapter {
         txtCat.setText(lista.get(i).getTitulo());
         imgTrash.setImageDrawable(context.getResources().getDrawable(R.drawable.trash));
         txtCat.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
+
+        imgTrash.setOnClickListener(delete(lista.get(i)));
 
 
 

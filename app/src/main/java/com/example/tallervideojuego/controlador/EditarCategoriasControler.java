@@ -42,6 +42,7 @@ public class EditarCategoriasControler extends Controlador {
             cat = (Categoria) registro.search(id);
             fill();
             isNew =false;
+            txtTitulo.setText(cat.getTitulo());
         }else{
             cat = new Categoria();
             txtTitulo.setHint("Personalizado");
@@ -81,8 +82,15 @@ public class EditarCategoriasControler extends Controlador {
                 } else {
 
                     if (!isNew){
-                        cat.setTitulo(txtTitulo.getText().toString().trim());
-                        registro.update(cat);
+                        Entidad old = registro.search("titulo",txtTitulo.getText().toString().trim());
+                        if (old == null || old.getId() == cat.getId()) {
+                            cat.setTitulo(txtTitulo.getText().toString().trim());
+
+                            registro.update(cat);
+                            Intent intent = new Intent(act, Menu_act.class);
+                            act.startActivity(intent);
+                        } else message("Este nombre ya existe");
+
                     }else {
                         cat.setTitulo(txtTitulo.getText().toString().trim());
 
@@ -92,7 +100,7 @@ public class EditarCategoriasControler extends Controlador {
                             registro.add(cat);
                             Intent intent = new Intent(act, Menu_act.class);
                             act.startActivity(intent);
-                        }else Toast.makeText(act, "Este nombre ya existe", Toast.LENGTH_SHORT).show();
+                        } else message("Este nombre ya existe");
 
                     }
 
