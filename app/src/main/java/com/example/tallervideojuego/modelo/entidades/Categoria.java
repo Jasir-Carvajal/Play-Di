@@ -47,7 +47,7 @@ public class Categoria extends Entidad {
 
     public void removeCarta(Carta carta){
 
-        registroCat_car.deletRelacion(this,carta);
+        registroCat_car.deleteRelacion(this,carta);
     }
 
     @Override

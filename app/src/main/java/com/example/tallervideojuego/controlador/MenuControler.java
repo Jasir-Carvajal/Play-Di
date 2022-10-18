@@ -66,9 +66,9 @@ public final class MenuControler extends Controlador{
         ContextThemeWrapper contextLyt = new ContextThemeWrapper(act, R.style.lyt_personalizados);
 
         LinearLayout.LayoutParams params_lyt =  new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        params_lyt.leftMargin = dp(40);//por alguna razón no sirve con 30 como en de random
+        params_lyt.leftMargin = dp(30);//por alguna razón no sirve con 30 como en de random
         params_lyt.topMargin = dp(10);
-        params_lyt.rightMargin = dp(40);//
+        params_lyt.rightMargin = dp(30);//
 
         LinearLayout.LayoutParams params_btn_cat = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
         params_btn_cat.width=0;

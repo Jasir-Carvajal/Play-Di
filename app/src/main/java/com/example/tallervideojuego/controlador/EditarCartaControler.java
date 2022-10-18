@@ -24,7 +24,6 @@ import com.example.tallervideojuego.modelo.entidades.Carta;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 import com.example.tallervideojuego.vista.BancoPreguntas_act;
-import com.example.tallervideojuego.vista.Menu_act;
 
 import java.util.ArrayList;
 
@@ -47,6 +46,7 @@ public class EditarCartaControler extends Controlador {
     private ArrayList<String> catItems = new ArrayList<>();
 
     private ArrayList<Categoria> categoriasRelacionadas = new ArrayList<>();
+    private ArrayList<Categoria> categoriasEliminadas = new ArrayList<>();
 
     private String itemSelected;
 
@@ -127,7 +127,7 @@ public class EditarCartaControler extends Controlador {
 
         categoriasRelacionadas = carta.getCategoriasDeCartas();
 
-        update(categoriasRelacionadas);
+        updateAdapter(categoriasRelacionadas);
     }
 
     public void setFunctions(){
@@ -153,7 +153,7 @@ public class EditarCartaControler extends Controlador {
                     } else {
                         categoriasRelacionadas.add(categoria);
 
-                        update(categoriasRelacionadas);
+                        updateAdapter(categoriasRelacionadas);
                     }
 
                 }
@@ -166,7 +166,10 @@ public class EditarCartaControler extends Controlador {
             @Override
             public void onClick(View view) {
                 categoriasRelacionadas.remove(cat);
-                update(categoriasRelacionadas);
+                updateAdapter(categoriasRelacionadas);
+                categoriasEliminadas.add(cat);
+//                carta.setRegistroCat_car(registroRelacion);
+//                carta.removeCategoria(cat);
             }
         };
     }
@@ -185,7 +188,7 @@ public class EditarCartaControler extends Controlador {
                     if (!isNew){
                         Entidad old = registroCartas.search("titulo",txtTitulo.getText().toString().trim());
 
-                        if (old.getId() == carta.getId()) {
+                        if (old == null || old.getId() == carta.getId()) {
                             carta.setTitulo(txtTitulo.getText().toString().trim());
                             carta.setReto(txtDescripcion.getText().toString().trim());
                             carta.setCastigo(txtCastigo.getText().toString().trim());
@@ -193,6 +196,10 @@ public class EditarCartaControler extends Controlador {
 
                             for (Categoria categoria:categoriasRelacionadas){
                                 carta.addCategoria(categoria);
+                            }
+
+                            for (Categoria categoria:categoriasEliminadas){
+                                carta.removeCategoria(categoria);
                             }
 
                             registroCartas.update(carta);
@@ -220,6 +227,7 @@ public class EditarCartaControler extends Controlador {
                             }
 
 
+
                             Intent intent = new Intent(act, BancoPreguntas_act.class);
                             act.startActivity(intent);
                         } else message("Ese nombre ya existe");
@@ -233,7 +241,8 @@ public class EditarCartaControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
+                Intent intent = new Intent(act, BancoPreguntas_act.class);
+                act.startActivity(intent);
             }
         };
     }
@@ -297,7 +306,7 @@ public class EditarCartaControler extends Controlador {
         return true;
     }
 
-    private void update(ArrayList<Categoria> lista_usable) {
+    private void updateAdapter(ArrayList<Categoria> lista_usable) {
         adapterCategorías = new AdapterCategorías(act,lista_usable,this);
         listCat.setAdapter(adapterCategorías);
     }

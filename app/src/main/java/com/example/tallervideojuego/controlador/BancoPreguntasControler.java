@@ -19,6 +19,7 @@ import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 import com.example.tallervideojuego.vista.EditarCarta_act;
 import com.example.tallervideojuego.vista.EditarCategoria_act;
+import com.example.tallervideojuego.vista.Menu_act;
 
 import java.util.ArrayList;
 
@@ -26,7 +27,7 @@ public class BancoPreguntasControler extends Controlador{
 
     private AppCompatActivity act;
 
-    private Button btnAplicar, btnAgregar;
+    private Button btnAplicar, btnAgregar, btnRegresar;
 
     private Spinner spinnerCat;
     private AdapterBancoPreguntas adapterBancoPreguntas;
@@ -53,6 +54,7 @@ public class BancoPreguntasControler extends Controlador{
 
         btnAplicar = this.act.findViewById(R.id.btnAplicar);
         btnAgregar = this.act.findViewById(R.id.btnAgregar);
+        btnRegresar = this.act.findViewById(R.id.btnRegresar);
         listaE = this.act.findViewById(R.id.lista_categorias);
 
 
@@ -100,6 +102,7 @@ public class BancoPreguntasControler extends Controlador{
     public void setFunctions(){
         btnAgregar.setOnClickListener(add());
         btnAplicar.setOnClickListener(apply());
+        btnRegresar.setOnClickListener(onReturn());
     }
 
     public View.OnClickListener edit(Entidad entidad){
@@ -119,7 +122,25 @@ public class BancoPreguntasControler extends Controlador{
             @Override
             public void onClick(View view) {
                 registroCartas.delete(entidad);
+                Carta carta = (Carta) entidad;
+                carta.setRegistroCat_car(registroRelacion);
+                ArrayList<Categoria> categoriasRelacionadas = carta.getCategoriasDeCartas();
+
+                for (Categoria categoria:categoriasRelacionadas){
+                    carta.removeCategoria(categoria);
+                }
+
                 update(registroCartas.getListaEntidades());
+            }
+        };
+    }
+
+    public View.OnClickListener onReturn(){
+        return new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                Intent intent = new Intent(act, Menu_act.class);
+                act.startActivity(intent);
             }
         };
     }

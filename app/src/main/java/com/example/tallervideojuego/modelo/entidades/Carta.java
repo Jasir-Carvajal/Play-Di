@@ -1,11 +1,9 @@
 package com.example.tallervideojuego.modelo.entidades;
 
 import com.example.tallervideojuego.modelo.base.Entidad;
-import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 
 import java.util.ArrayList;
-import java.util.Arrays;
 
 public class Carta extends Entidad {
 
@@ -66,7 +64,7 @@ public class Carta extends Entidad {
 
     public void removeCategoria(Categoria categoria){
 
-        registroCat_car.deletRelacion(categoria,this);
+        registroCat_car.deleteRelacion(categoria,this);
     }
 
     /** Obtine las categorias con las que esta relacionada */

@@ -13,19 +13,24 @@ import com.example.tallervideojuego.controlador.bace.Controlador;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
+import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 import com.example.tallervideojuego.vista.Menu_act;
+
+import java.util.ArrayList;
 
 public class EditarCategoriasControler extends Controlador {
 
     private EditText txtTitulo;
     private Button btnRegresar, btnGuardar,btnEliminar;
     private Registro registro;
+    private RegistroCat_Car registroRelacion;
     private Categoria cat;
     private boolean isNew;
     public EditarCategoriasControler(AppCompatActivity act) {
         super(act);
 
         registro = new Registro(Categoria.class);
+        registroRelacion = new RegistroCat_Car();
 
         int id = act.getIntent().getIntExtra("id",-1);
 
@@ -117,9 +122,23 @@ public class EditarCategoriasControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registro.delete(cat);
-                Intent intent = new Intent(act, Menu_act.class);
-                act.startActivity(intent);
+                if (isNew){
+                    registro.delete(cat);
+                    Intent intent = new Intent(act, Menu_act.class);
+                    act.startActivity(intent);
+                }else {
+                    cat.setRegistroCat_car(registroRelacion);
+                    ArrayList<Entidad> cartasRelacionadas = cat.getCartasDeCategoria();
+
+                    if(cartasRelacionadas.isEmpty()){
+                        registro.delete(cat);
+                        Intent intent = new Intent(act, Menu_act.class);
+                        act.startActivity(intent);
+                    } else {
+                        message("Esta categoría esta asignada, no se puede eliminar");
+                    }
+                }
+
             }
         };
     }
