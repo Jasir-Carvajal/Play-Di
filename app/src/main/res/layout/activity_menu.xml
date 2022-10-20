@@ -30,7 +30,8 @@
                 android:layout_height="315dp"
                 android:layout_above="@id/btns"
                 android:layout_below="@id/imageView"
-                android:layout_marginBottom="0dp">
+                android:layout_marginTop="-1dp"
+                android:layout_marginBottom="1dp">
 
                 <LinearLayout
                     android:id="@+id/cat_container"
@@ -74,6 +75,7 @@
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
 
+                android:layout_centerHorizontal="true"
                 android:orientation="vertical">
 
                 <Button

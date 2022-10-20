@@ -37,7 +37,7 @@ public class EditarCartaControler extends Controlador {
 
     private ScrollView miScrollView;
     private Spinner spinnerCat;
-    ArrayAdapter<CharSequence> adapter;
+    private ArrayAdapter<CharSequence> adapter;
 
     private Registro registroCategorias;
     private Registro registroCartas;
