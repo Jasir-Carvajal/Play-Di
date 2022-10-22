@@ -18,6 +18,7 @@ import com.example.tallervideojuego.vista.Jugar_act;
 import com.example.tallervideojuego.vista.Menu_act;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AddJugadoresControler extends Controlador {
     private AppCompatActivity act;
@@ -62,9 +63,13 @@ public class AddJugadoresControler extends Controlador {
                 if(txtJugador.getText().toString().trim().isEmpty()){
                     message("Debe de ingresar un nombre");
                 } else {
-                    listaJugadores.add(txtJugador.getText().toString());
-                    updateAdapter(listaJugadores);
-                    limpiar();
+                    if (comprobarJugador(txtJugador.getText().toString())){
+                        listaJugadores.add(0,txtJugador.getText().toString());
+                        updateAdapter(listaJugadores);
+                        limpiar();
+                    } else {
+                        message("Ese jugador ya fue agregado");
+                    }
                 }
             }
         };
@@ -105,6 +110,15 @@ public class AddJugadoresControler extends Controlador {
         listJ.setAdapter(adapterJugadores);
     }
 
+    private boolean comprobarJugador(String jugador){
+        for (int i = 0; i < listaJugadores.size(); i++) {
+            if(listaJugadores.get(i).equalsIgnoreCase(jugador)){
+                return false;
+            }
+        }
+        return true;
+    }
+
     public void message(String text){
         Toast.makeText(act, text, Toast.LENGTH_SHORT).show();
     }
@@ -112,5 +126,6 @@ public class AddJugadoresControler extends Controlador {
     public void limpiar(){
         txtJugador.setText("");
     }
+
 
 }
