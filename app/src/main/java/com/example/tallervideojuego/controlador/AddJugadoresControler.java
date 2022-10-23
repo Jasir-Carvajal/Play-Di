@@ -1,6 +1,7 @@
 package com.example.tallervideojuego.controlador;
 
 import android.content.Intent;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -30,11 +31,20 @@ public class AddJugadoresControler extends Controlador {
     private ArrayList<String> listaJugadores;
 
     private AdapterJugadores adapterJugadores;
+    private int alto;
+
+    public int size(float porcentaje){
+
+        return Math.round(porcentaje*alto);
+
+    }
 
     public AddJugadoresControler(AppCompatActivity act) {
         super(act);
         this.act = act;
-
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        act.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        alto = displayMetrics.heightPixels;
 
         btnAgregar = this.act.findViewById(R.id.btnAgregar);
         btnRegresar = this.act.findViewById(R.id.btnRegresar);
@@ -43,6 +53,9 @@ public class AddJugadoresControler extends Controlador {
         txtJugador = this.act.findViewById(R.id.txtJugador);
 
         listJ = this.act.findViewById(R.id.listJ);
+        if (alto>2800 ) listJ.getLayoutParams().height = size(0.50F);
+        if (alto>1900 && alto<2800) listJ.getLayoutParams().height = size(0.40F);
+        if ( alto<1900) listJ.getLayoutParams().height = size(0.35F);
 
         listaJugadores = new ArrayList<>();
 
