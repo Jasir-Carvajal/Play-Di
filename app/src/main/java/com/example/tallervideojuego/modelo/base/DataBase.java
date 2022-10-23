@@ -22,7 +22,7 @@ public class DataBase  extends SQLiteOpenHelper{
         //Verificar que se permitan primari keys
         baseDeDatos.execSQL("PRAGMA foreign_keys = ON;");
         //crear tabla para objeto Carta
-        baseDeDatos.execSQL("Create Table IF NOT EXISTS Cartas(id INTEGER primary key AUTOINCREMENT UNIQUE , titulo TEXT NOT NULL , reto TEXT NOT NULL, castigo TEXT NOT NULL )");
+
         //crear tabla para objeto Categoria
         baseDeDatos.execSQL("Create Table IF NOT EXISTS Categorias(id INTEGER primary key AUTOINCREMENT UNIQUE , titulo TEXT NOT NULL )");
         //crear tabla para relacion entre carta y categoria
