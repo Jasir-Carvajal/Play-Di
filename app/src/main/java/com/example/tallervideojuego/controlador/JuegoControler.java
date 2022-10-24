@@ -1,7 +1,10 @@
 package com.example.tallervideojuego.controlador;
 
+import android.content.res.Resources;
+import android.graphics.drawable.Drawable;
 import android.view.View;
-import android.widget.Button;
+import android.widget.ImageButton;
+import android.widget.LinearLayout;
 import android.widget.TextView;
 import android.widget.Toast;
 
@@ -9,25 +12,64 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
+import com.example.tallervideojuego.modelo.base.Registro;
+import com.example.tallervideojuego.modelo.entidades.Carta;
+import com.example.tallervideojuego.modelo.entidades.Categoria;
+import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
+
+import java.util.ArrayList;
+import java.util.Random;
 
 public class JuegoControler extends Controlador {
     private AppCompatActivity act;
-    private Button btnContinuar, btnRegresar;
-    private TextView txtTitulo, txtJugador, txtReto, txtCastigo;
-    private int n = 0;
+    private LinearLayout lytJugar;
+    private ImageButton btnContinuar, btnRegresar;
+    private TextView txtJugador, txtReto, txtCastigo;
+
+    private int id;
+
+    private int numeroRetoTotal = -1;
+    private int numeroRetoActual = -1;
+
+    private Registro registroCategorias;
+    private RegistroCat_Car registroRelacion;
+
+    private Categoria categoria;
+
+    private ArrayList<String> listaJugadores;
+    private ArrayList<Carta> listaCartas;
+
+    private ArrayList<String> listaJugadoresUsados = new ArrayList<>();
+    private ArrayList<Carta> listaCartasUsadas = new ArrayList<>();
+    private ArrayList<Integer> listaFondosUsados = new ArrayList<>();
+
+    private Random random = new Random();
+
 
     public JuegoControler(AppCompatActivity act) {
         super(act);
         this.act = act;
 
-        btnContinuar = act.findViewById(R.id.btnContinuar);
-        btnRegresar = act.findViewById(R.id.btnRegresar);
+        lytJugar = this.act.findViewById(R.id.lytJugar);
 
-        txtTitulo = act.findViewById(R.id.txtTitulo);
-        txtJugador = act.findViewById(R.id.txtJugador);
-        txtReto = act.findViewById(R.id.txtReto);
-        txtCastigo = act.findViewById(R.id.txtCastigo);
+        btnContinuar = this.act.findViewById(R.id.btnContinuar);
+        btnRegresar = this.act.findViewById(R.id.btnRegresar);
 
+        txtJugador = this.act.findViewById(R.id.txtJugador);
+        txtReto = this.act.findViewById(R.id.txtReto);
+        txtCastigo = this.act.findViewById(R.id.txtCastigo);
+
+        listaJugadores = this.act.getIntent().getStringArrayListExtra("lista");
+        id = act.getIntent().getIntExtra("id",0);
+
+        registroCategorias = new Registro(Categoria.class);
+        registroRelacion = new RegistroCat_Car();
+
+        setCategoria();
+
+        listaCartas = getCartas();
+
+        avanzarCarta();
         setFunctions();
     }
 
@@ -40,14 +82,9 @@ public class JuegoControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (n>=0){
-                    sumar();
-                    resetTitles();
-                    txtTitulo.setText(txtTitulo.getText().toString()+""+n);
-                    txtJugador.setText(txtJugador.getText().toString()+""+n);
-                    txtReto.setText(txtReto.getText().toString()+""+n);
-                    txtCastigo.setText(txtCastigo.getText().toString()+""+n);
-                }
+                avanzarCarta();
+//                message(numeroRetoActual+"");
+//                message(numeroRetoTotal+"");
             }
         };
     }
@@ -56,34 +93,102 @@ public class JuegoControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                if (n>0){
-                    restar();
-                    resetTitles();
-                    txtTitulo.setText(txtTitulo.getText().toString()+""+n);
-                    txtJugador.setText(txtJugador.getText().toString()+""+n);
-                    txtReto.setText(txtReto.getText().toString()+""+n);
-                    txtCastigo.setText(txtCastigo.getText().toString()+""+n);
+                if (numeroRetoActual > 0){
+                    retrocederCarta();
+//                    message(numeroRetoActual+"");
+//                    message(numeroRetoTotal+"");
                 } else {
-                    Toast.makeText(act, "No hay opción anterior ", Toast.LENGTH_SHORT).show();
+                    message("No hay retos anteriores");
                 }
-
             }
         };
     }
 
-    public void sumar(){
-        n= n+1;
+
+
+    public void setCategoria(){
+        categoria = (Categoria) registroCategorias.search(id);
+        categoria.setRegistroCat_car(registroRelacion);
     }
 
-    public void restar(){
-        n= n-1;
+    public  ArrayList<Carta> getCartas(){
+
+        ArrayList<Carta> listaConvertida = new ArrayList<>();
+        Carta carta;
+
+        for (int i = 0; i < categoria.getCartasDeCategoria().size(); i++) {
+            carta = (Carta) categoria.getCartasDeCategoria().get(i);
+            listaConvertida.add(carta);
+        }
+        return listaConvertida;
     }
 
-    public void resetTitles(){
-        txtTitulo.setText("Titulo");
-        txtJugador.setText("Jugador");
-        txtReto.setText("Reto");
-        txtCastigo.setText("Castigo");
+    public void avanzarCarta(){
+        if (numeroRetoActual == numeroRetoTotal) {
+            int cantidadJugadores = listaJugadores.size();
+            int cantidadCartas = listaCartas.size();
+
+            int jugadorRandom = random.nextInt(cantidadJugadores);
+            int cartaRandom = random.nextInt(cantidadCartas);
+            int fondoRandom = random.nextInt(3);
+
+            txtJugador.setText(listaJugadores.get(jugadorRandom));
+            txtReto.setText(listaCartas.get(cartaRandom).getReto());
+            txtCastigo.setText(listaCartas.get(cartaRandom).getCastigo());
+
+            cambiarFondo(fondoRandom);
+
+            listaJugadoresUsados.add(listaJugadores.get(jugadorRandom));
+            listaCartasUsadas.add(listaCartas.get(cartaRandom));
+
+            listaFondosUsados.add(fondoRandom);
+
+            numeroRetoTotal++;
+            numeroRetoActual++;
+        } else {
+            numeroRetoActual++;
+            String jugador = listaJugadoresUsados.get(numeroRetoActual);
+            Carta carta = listaCartasUsadas.get(numeroRetoActual);
+            int fondo = listaFondosUsados.get(numeroRetoActual);
+
+            cambiarFondo(fondo);
+
+            txtJugador.setText(jugador);
+            txtReto.setText(carta.getReto());
+            txtCastigo.setText(carta.getCastigo());
+        }
+    }
+
+    public void retrocederCarta(){
+        numeroRetoActual--;
+        String jugador = listaJugadoresUsados.get(numeroRetoActual);
+        Carta carta = listaCartasUsadas.get(numeroRetoActual);
+        int fondo = listaFondosUsados.get(numeroRetoActual);
+
+        cambiarFondo(fondo);
+
+        txtJugador.setText(jugador);
+        txtReto.setText(carta.getReto());
+        txtCastigo.setText(carta.getCastigo());
+    }
+
+    public void cambiarFondo(int fondoRandom){
+
+        switch (fondoRandom){
+            case 0:
+                lytJugar.setBackgroundResource(R.drawable.fondo1);
+                break;
+            case 1:
+                lytJugar.setBackgroundResource(R.drawable.fondo2);
+                break;
+            case 2:
+                lytJugar.setBackgroundResource(R.drawable.fondo3);
+                break;
+        }
+    }
+
+    public void message(String text){
+        Toast.makeText(act, text, Toast.LENGTH_SHORT).show();
     }
 
 }

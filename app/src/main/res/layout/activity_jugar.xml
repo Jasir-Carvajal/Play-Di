@@ -7,101 +7,201 @@
     tools:context=".vista.Jugar_act">
 
     <LinearLayout
+        android:id="@+id/lytJugar"
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondo1"
+        android:background="@drawable/fondo2"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView3"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            app:srcCompat="@drawable/logo" />
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="30dp"
-            android:orientation="vertical">
+            android:layout_marginRight="30dp">
 
             <TextView
-                android:id="@+id/txtTitulo"
+                android:id="@+id/textView5"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
+                android:layout_marginTop="20dp"
                 android:fontFamily="@font/fira_bold"
-                android:text="Titulo"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
-
-            <TextView
-                android:id="@+id/txtJugador"
-                android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@color/cardview_dark_background"
-                android:fontFamily="@font/fira_bold"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:text="Jugador"
+                android:text="PARTIDA ACTIVA"
                 android:textAlignment="center"
-                android:textColor="#FFFFFF"
+                android:textColor="#ABFFFFFF"
                 android:textSize="30sp" />
 
-            <TextView
-                android:id="@+id/txtReto"
+            <ImageView
+                android:id="@+id/imageView3"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@color/cardview_dark_background"
-                android:fontFamily="@font/fira_bold"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:text="Reto"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
+                android:layout_below="@id/textView5"
+                app:srcCompat="@drawable/linea2" />
 
-            <TextView
-                android:id="@+id/txtCastigo"
+            <ScrollView
                 android:layout_width="match_parent"
-                android:layout_height="wrap_content"
-                android:layout_marginBottom="20dp"
-                android:background="@color/cardview_dark_background"
-                android:fontFamily="@font/fira_bold"
-                android:paddingTop="20dp"
-                android:paddingBottom="20dp"
-                android:text="Castigo"
-                android:textAlignment="center"
-                android:textColor="#FFFFFF"
-                android:textSize="30sp" />
+                android:layout_height="550dp"
+                android:layout_below="@id/imageView3"
+                android:layout_marginTop="30dp">
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:orientation="vertical">
+
+                    <LinearLayout
+                        android:id="@+id/lytPlayer"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:background="@drawable/btns"
+                        android:backgroundTint="@color/grey"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="15dp"
+                            android:orientation="horizontal">
+
+                            <ImageView
+                                android:id="@+id/imageView7"
+                                android:layout_width="0dp"
+                                android:layout_height="wrap_content"
+                                android:layout_weight="0.5"
+                                app:srcCompat="@drawable/player" />
+
+                            <TextView
+                                android:id="@+id/txtJugador"
+                                android:layout_width="wrap_content"
+                                android:layout_height="wrap_content"
+                                android:layout_gravity="center_vertical"
+                                android:layout_weight="1"
+                                android:fontFamily="@font/fira_bold"
+                                android:text="TextView"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lytReto"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="50dp"
+                        android:background="@drawable/btns"
+                        android:backgroundTint="@color/grey"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView8"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/fira_bold"
+                                android:text="RETO"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+
+                            <ImageView
+                                android:id="@+id/imageView8"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                app:srcCompat="@drawable/linea" />
+
+                            <TextView
+                                android:id="@+id/txtReto"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/fira_bold"
+                                android:text="TextView"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+                    </LinearLayout>
+
+                    <LinearLayout
+                        android:id="@+id/lytCastigo"
+                        android:layout_width="match_parent"
+                        android:layout_height="wrap_content"
+                        android:layout_marginTop="30dp"
+                        android:background="@drawable/btns"
+                        android:backgroundTint="@color/grey"
+                        android:orientation="vertical">
+
+                        <LinearLayout
+                            android:layout_width="match_parent"
+                            android:layout_height="match_parent"
+                            android:layout_margin="20dp"
+                            android:orientation="vertical">
+
+                            <TextView
+                                android:id="@+id/textView10"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/fira_bold"
+                                android:text="CASTIGO"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+
+                            <ImageView
+                                android:id="@+id/imageView9"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:layout_marginTop="10dp"
+                                android:layout_marginBottom="10dp"
+                                app:srcCompat="@drawable/linea" />
+
+                            <TextView
+                                android:id="@+id/txtCastigo"
+                                android:layout_width="match_parent"
+                                android:layout_height="wrap_content"
+                                android:fontFamily="@font/fira_bold"
+                                android:text="TextView"
+                                android:textColor="@color/white"
+                                android:textSize="20sp" />
+                        </LinearLayout>
+
+                    </LinearLayout>
+
+                </LinearLayout>
+            </ScrollView>
 
             <LinearLayout
+                android:id="@+id/lytButtons"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_marginTop="20dp"
+                android:layout_marginBottom="20dp"
                 android:orientation="horizontal">
 
-                <Button
+                <ImageButton
                     android:id="@+id/btnRegresar"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginRight="10dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/fira_bold"
-                    android:text="Regresar"
-                    android:textSize="20sp" />
+                    android:background="@drawable/btns"
+                    android:backgroundTint="@color/grey"
+                    app:srcCompat="@drawable/arrow_l" />
 
-                <Button
+                <ImageButton
                     android:id="@+id/btnContinuar"
                     android:layout_width="wrap_content"
-                    android:layout_height="wrap_content"
+                    android:layout_height="50dp"
+                    android:layout_marginLeft="10dp"
                     android:layout_weight="1"
-                    android:fontFamily="@font/fira_bold"
-                    android:text="Continuar"
-                    android:textSize="20sp" />
+                    android:background="@drawable/btns"
+                    android:backgroundTint="@color/grey"
+                    app:srcCompat="@drawable/arrow_r" />
             </LinearLayout>
+        </RelativeLayout>
 
-        </LinearLayout>
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>

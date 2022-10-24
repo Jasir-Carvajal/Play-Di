@@ -145,7 +145,10 @@ public final class MenuControler extends Controlador{
             public void onClick(View view) {
                 Intent intent = new Intent(act, AddJugadores_act.class);
 
+                intent.putExtra("id",id);
+
                 act.startActivity(intent);
+
             }
         };
     }

@@ -28,6 +28,8 @@ public class AddJugadoresControler extends Controlador {
     private EditText txtJugador;
     private ListView listJ;
 
+    private int id;
+
     private ArrayList<String> listaJugadores;
 
     private AdapterJugadores adapterJugadores;
@@ -51,6 +53,8 @@ public class AddJugadoresControler extends Controlador {
         btnJugar = this.act.findViewById(R.id.btnJugar);
 
         txtJugador = this.act.findViewById(R.id.txtJugador);
+
+        id = act.getIntent().getIntExtra("id",0);
 
         listJ = this.act.findViewById(R.id.listJ);
         if (alto>2800 ) listJ.getLayoutParams().height = size(0.50F);
@@ -92,8 +96,16 @@ public class AddJugadoresControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(act, Jugar_act.class);
-                act.startActivity(intent);
+                if(listaJugadores.size()>=2){
+                    Intent intent = new Intent(act, Jugar_act.class);
+
+                    intent.putExtra("id",id);
+                    intent.putStringArrayListExtra("lista",listaJugadores);
+
+                    act.startActivity(intent);
+                } else {
+                    message("Debe agregar al menos 2 jugadores");
+                }
             }
         };
     }
