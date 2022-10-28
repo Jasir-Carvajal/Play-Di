@@ -70,9 +70,9 @@ public class EditarCategoriasControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-
-                Intent intent = new Intent(act, Menu_act.class);
-                act.startActivity(intent);
+                act.finish();
+               // Intent intent = new Intent(act, Menu_act.class);
+               // act.startActivity(intent);
             }
         };
     }
@@ -92,8 +92,7 @@ public class EditarCategoriasControler extends Controlador {
                             cat.setTitulo(txtTitulo.getText().toString().trim());
 
                             registro.update(cat);
-                            Intent intent = new Intent(act, Menu_act.class);
-                            act.startActivity(intent);
+                            act.finish();
                         } else message("Este nombre ya existe");
 
                     }else {
@@ -103,8 +102,7 @@ public class EditarCategoriasControler extends Controlador {
                         Entidad old = registro.search("titulo",cat.getTitulo());
                         if (old == null){
                             registro.add(cat);
-                            Intent intent = new Intent(act, Menu_act.class);
-                            act.startActivity(intent);
+                            act.finish();
                         } else message("Este nombre ya existe");
 
                     }

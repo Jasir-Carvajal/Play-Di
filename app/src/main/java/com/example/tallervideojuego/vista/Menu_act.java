@@ -19,7 +19,7 @@ public class Menu_act extends AppCompatActivity {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu);
         DataBase.setContext(getApplicationContext());
-        DataBase.setName("Playdi");
+        DataBase.setName("PlaydiDB");
         controlador = new MenuControler(this);
 
     }

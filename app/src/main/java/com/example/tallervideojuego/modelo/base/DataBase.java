@@ -24,7 +24,11 @@ public class DataBase  extends SQLiteOpenHelper{
         //crear tabla para objeto Carta
 
         //crear tabla para objeto Categoria
-        baseDeDatos.execSQL("Create Table IF NOT EXISTS Categorias(id INTEGER primary key AUTOINCREMENT UNIQUE , titulo TEXT NOT NULL )");
+        baseDeDatos.execSQL("Create Table IF NOT EXISTS Cartas(id INTEGER primary key AUTOINCREMENT UNIQUE , titulo TEXT NOT NULL , reto TEXT NOT NULL, castigo TEXT NOT NULL )");
+        baseDeDatos.execSQL("Create Table IF NOT EXISTS Categorias(id INTEGER primary key AUTOINCREMENT UNIQUE , titulo TEXT NOT NULL UNIQUE)");
+
+        //crear categoria random
+        baseDeDatos.execSQL("INSERT INTO Categorias (titulo) VALUES('Random');");
         //crear tabla para relacion entre carta y categoria
         baseDeDatos.execSQL("create table Carta_Categoria   (id INTEGER primary key AUTOINCREMENT UNIQUE,  cartas_id  INTEGER  NOT NULL ,categoria_id  INTEGER  NOT NULL, FOREIGN KEY  (cartas_id) REFERENCES Cartas(id), FOREIGN KEY (categoria_id) REFERENCES Categorias(id));");
     }

@@ -204,8 +204,7 @@ public class EditarCartaControler extends Controlador {
 
                             registroCartas.update(carta);
 
-                            Intent intent = new Intent(act, BancoPreguntas_act.class);
-                            act.startActivity(intent);
+                            act.finish();
                         } else message("Ese nombre ya existe");
 
                     } else {
@@ -241,8 +240,7 @@ public class EditarCartaControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(act, BancoPreguntas_act.class);
-                act.startActivity(intent);
+                act.finish();
             }
         };
     }

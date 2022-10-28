@@ -39,7 +39,7 @@ public final class MenuControler extends Controlador{
         add = this.act.findViewById(R.id.add);
         container = this.act.findViewById(R.id.cat_container);
         regresar = this.act.findViewById(R.id.regresar);
-        random = this.act.findViewById(R.id.random);
+        //random = this.act.findViewById(R.id.random);
         bancoPreguntas = this.act.findViewById(R.id.bancoPreguntas);
 
 
@@ -50,7 +50,7 @@ public final class MenuControler extends Controlador{
         add.setOnClickListener(onAdd());
         // regresar.setOnClickListener(onRegresa());
         bancoPreguntas.setOnClickListener(onBancoPreguntas());
-        random.setOnClickListener(random());
+        //random.setOnClickListener(random());
 
     }
 
@@ -87,8 +87,34 @@ public final class MenuControler extends Controlador{
 
 
 
+        Categoria random = (Categoria) registroCategorias.search("titulo","Random");
+        int indexOfRandom = lista.indexOf(random);
+
+        personalizados[indexOfRandom] = new LinearLayout(contextLyt);
+        Button btn_random = new Button(contextCat);
+
+
+
+        //aplica parametros de layaout anteriormente obtenidos
+        btn_random.setLayoutParams(params_btn_cat);
+
+        personalizados[indexOfRandom].setLayoutParams(params_lyt);
+
+        //quita sombra
+        btn_random.setStateListAnimator(null);
+
+        //coloca titulos
+        btn_random.setText(random.getTitulo());
+
+        btn_random.setTypeface(ResourcesCompat.getFont(act.getApplicationContext(), R.font.fira_bold));
+        btn_random.setOnClickListener(onPlay(random.getId()));
+
+        //añade a la vista
+        personalizados[indexOfRandom] .addView(btn_random,0);
+        container.addView(personalizados[indexOfRandom] );
 
         for (Entidad entidad:lista) {
+            if (lista.indexOf(entidad)!=indexOfRandom){
             //obtiene los parametros de layaout de los botones ya definodos
             Categoria cat = (Categoria)entidad;
             personalizados[lista.indexOf(entidad)] = new LinearLayout(contextLyt);
@@ -118,10 +144,12 @@ public final class MenuControler extends Controlador{
             personalizados[lista.indexOf(entidad)] .addView(btn_cat,0);
             personalizados[lista.indexOf(entidad)] .addView(btn_editar,1);
             container.addView(personalizados[lista.indexOf(entidad)] );
+            }
         }
 
         //Toast.makeText(act, "Prueba btns", Toast.LENGTH_SHORT).show();
     }
+
 
 
 
@@ -135,6 +163,7 @@ public final class MenuControler extends Controlador{
                 intent.putExtra("id",id);
 
                 act.startActivity(intent);
+
             }
         };
     }
