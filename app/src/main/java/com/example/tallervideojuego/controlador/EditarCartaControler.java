@@ -29,6 +29,13 @@ import java.util.ArrayList;
 
 public class EditarCartaControler extends Controlador {
 
+    /**
+     * La clase controlador para el activity editar_carta
+     *
+     * categoriasRelacionadas = la lista de categorias relacionadas a la carta
+     * categoriasRelacionadas = la lista de categorias que antes estaban relacionadas, pero ahora se van a eliminar
+     */
+
     private AppCompatActivity act;
 
     private Button btnAgregar, btnGuardar, btnCancelar;
@@ -55,6 +62,10 @@ public class EditarCartaControler extends Controlador {
     private Carta carta;
     private Boolean isNew;
 
+    /**
+     * Constructor de la clase
+     * @param act La referencia del activity donde se inicializa el controlador
+     */
     @SuppressLint("ClickableViewAccessibility")
     public EditarCartaControler(AppCompatActivity act) {
         super(act);
@@ -106,6 +117,8 @@ public class EditarCartaControler extends Controlador {
 
         setFunctions();
 
+        //Al ser una pantalla en la cual se pueden tanto crear nuevas cartas como editar cartas existentes,se necesita comprobar si es nueva o no
+        //Esto se maneja aquí, si es nueva se crea una nueva referencia, y si no, se busca en la base de datos
         if(id!=-1){
             carta = (Carta) registroCartas.search(id);
             fill();
@@ -118,6 +131,9 @@ public class EditarCartaControler extends Controlador {
 
     }
 
+    /**
+     * Este método rellena los campos en caso de que la carta NO sea nueva y al contrario, se va a editar
+     */
     public void fill(){
         txtTitulo.setText(carta.getTitulo());
         txtDescripcion.setText(carta.getReto());
@@ -130,6 +146,9 @@ public class EditarCartaControler extends Controlador {
         updateAdapter(categoriasRelacionadas);
     }
 
+    /**
+     * Este método funciona para asignar los View.OnClickListener a los botones o elementos necesarios
+     */
     public void setFunctions(){
         btnAgregar.setOnClickListener(add());
         btnGuardar.setOnClickListener(save());
@@ -140,14 +159,19 @@ public class EditarCartaControler extends Controlador {
     }
 
 
-
+    /**
+     * MÉTODO para la funcion de agregar una nueva categoria asociada a la carta, este metodo se asigna a los botones en el AdapterCategorias
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener add(){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
                 Categoria categoria = getCatPorTitulo(itemSelected);
 
+                //Se comprueba que la categoria que se quiere agregar se una valida
                 if(categoria !=  null){
+                    //Se comprueba que no haya sido agregada antes
                     if (!comprobarCat(itemSelected)){
                         Toast.makeText(act, "Esa categoría ya fue agregada", Toast.LENGTH_SHORT).show();
                     } else {
@@ -160,11 +184,15 @@ public class EditarCartaControler extends Controlador {
             }
         };
     }
-
+    /**
+     * MÉTODO para la funcion de eliminar las categorias relacionadas, este metodo se asigna a los botones en el AdapterCategorias
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener delete(Categoria cat){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Elimina la categoria de las relacionadas y la agrega a las que se van a eliminar
                 categoriasRelacionadas.remove(cat);
                 updateAdapter(categoriasRelacionadas);
                 categoriasEliminadas.add(cat);
@@ -174,10 +202,15 @@ public class EditarCartaControler extends Controlador {
         };
     }
 
+    /**
+     * MÉTODO para la funcion de guardar los datos creados (Si es nueva) o los cambios realizados (Si se esta editando una ya existente)
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener save(){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+                //Se comprueba que los campos de texto NO esten vacios
                 if(txtTitulo.getText().toString().trim().isEmpty()
                         || txtDescripcion.getText().toString().trim().isEmpty()
                         || txtCastigo.getText().toString().trim().isEmpty() || categoriasRelacionadas.isEmpty()){
@@ -185,10 +218,14 @@ public class EditarCartaControler extends Controlador {
                     message("Debe de ingresar todos los valores");
 
                 } else {
+                    //Se comprueba si es nueva o no
                     if (!isNew){
+
                         Entidad old = registroCartas.search("titulo",txtTitulo.getText().toString().trim());
 
+                        //Se comprueba que el nombre no exista, ya que los nombres deben de ser unicos
                         if (old == null || old.getId() == carta.getId()) {
+                            //Se asignan los valores
                             carta.setTitulo(txtTitulo.getText().toString().trim());
                             carta.setReto(txtDescripcion.getText().toString().trim());
                             carta.setCastigo(txtCastigo.getText().toString().trim());
@@ -202,15 +239,21 @@ public class EditarCartaControler extends Controlador {
                                 carta.removeCategoria(categoria);
                             }
 
+                            //Se actualiza la carta
                             registroCartas.update(carta);
 
-                            act.finish();
+                            //act.finish();
+                            Intent intent = new Intent(act, BancoPreguntas_act.class);
+                            act.startActivity(intent);
                         } else message("Ese nombre ya existe");
 
                     } else {
                         Entidad old = registroCartas.search("titulo",txtTitulo.getText().toString().trim());
 
+                        //Se comprueba que el nombre no exista, ya que los nombres deben de ser unicos
                         if (old == null) {
+
+                            //Se asignan los valores
                             carta.setTitulo(txtTitulo.getText().toString().trim());
                             carta.setReto(txtDescripcion.getText().toString().trim());
                             carta.setCastigo(txtCastigo.getText().toString().trim());
@@ -236,6 +279,10 @@ public class EditarCartaControler extends Controlador {
         };
     }
 
+    /**
+     * MÉTODO para la funcion de cancelar la creacion o edicion de la carta, devuelve a la pantalla anterior
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener cancel(){
         return new View.OnClickListener() {
             @Override
@@ -245,6 +292,10 @@ public class EditarCartaControler extends Controlador {
         };
     }
 
+    /**
+     * MÉTODO que controla si estoy tocando el ScrollView
+     * @return Retorna el View.OnTouchListener
+     */
     public View.OnTouchListener scrollTouch(){
         return new View.OnTouchListener(){
             @Override
@@ -256,6 +307,10 @@ public class EditarCartaControler extends Controlador {
         };
     }
 
+    /**
+     * MÉTODO que controla si estoy tocando el listView
+     * @return Retorna el View.OnTouchListener
+     */
     public View.OnTouchListener listViewTouch(){
         return new View.OnTouchListener(){
             @Override
@@ -266,6 +321,10 @@ public class EditarCartaControler extends Controlador {
         };
     }
 
+    /**
+     * Este método obtiene los nombres de las categorias existentes, para utilizar en el spinner
+     * @return Retorna la lista de String con los nombres
+     */
     public ArrayList<String> getStrings(){
         ArrayList<String> listArray = new ArrayList<>();
 
@@ -279,6 +338,11 @@ public class EditarCartaControler extends Controlador {
         return  listArray;
     }
 
+    /**
+     * Este método comprueba que el nombre que ingresa por parametros sea el nombre de alguna categoria existente
+     * @param titulo nombre que se desea comprobar
+     * @return Retorna la categoria a la cual pertenece el nombre (si no retorna null)
+     */
     public Categoria getCatPorTitulo(String titulo){
 
         Categoria cat = null;
@@ -293,6 +357,11 @@ public class EditarCartaControler extends Controlador {
         return cat;
     }
 
+    /**
+     * Este método comprueba que la categoria no este ya asignada
+     * @param titulo nombre que se desea comprobar
+     * @return Retorna true si no esta asignada y false si ya se encuentra
+     */
     public boolean comprobarCat (String titulo){
         for(Categoria categoria1: categoriasRelacionadas){
             Categoria categoria = categoria1;
@@ -304,11 +373,20 @@ public class EditarCartaControler extends Controlador {
         return true;
     }
 
+
+    /**
+     * Este método actualiza el adapter se llama cada vez que se hace un cambio a  la lista de de categorias
+     * @param lista_usable lista de categorias actualizada
+     */
     private void updateAdapter(ArrayList<Categoria> lista_usable) {
         adapterCategorías = new AdapterCategorías(act,lista_usable,this);
         listCat.setAdapter(adapterCategorías);
     }
 
+    /**
+     * MÉTODO para crear un mensaje por Toast
+     * @param text texto para el mensaje
+     */
     public void message(String text){
         Toast.makeText(act, text, Toast.LENGTH_SHORT).show();
     }

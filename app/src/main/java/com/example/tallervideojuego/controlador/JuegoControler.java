@@ -21,6 +21,17 @@ import java.util.ArrayList;
 import java.util.Random;
 
 public class JuegoControler extends Controlador {
+
+    /**
+     * La clase controlador para el activity jugar
+     * numeroRetoTotal = la cantidad de veces que se ha avanzado de pantalla
+     * numeroRetoActual = en la pantalla en la que estoy (esto porque se puede retroceder y avanzar)
+     * listaJugadoresUsados = para ir guardando los datos de los jugadores que ya salieron
+     * listaCartasUsados = para ir guardando los datos de los cartas que ya salieron
+     * listaFondosUsados = para ir guardando los datos de los fondos que ya salieron
+     * id = Se refiere al id de la categoria a la cual se va a jugar, el cual se pasa por el Intent
+     */
+
     private AppCompatActivity act;
     private LinearLayout lytJugar;
     private ImageButton btnContinuar, btnRegresar;
@@ -45,7 +56,10 @@ public class JuegoControler extends Controlador {
 
     private Random random = new Random();
 
-
+    /**
+     * Constructor de la clase
+     * @param act La referencia del activity donde se inicializa el controlador
+     */
     public JuegoControler(AppCompatActivity act) {
         super(act);
         this.act = act;
@@ -73,11 +87,18 @@ public class JuegoControler extends Controlador {
         setFunctions();
     }
 
+    /**
+     * Este método funciona para asignar los View.OnClickListener a los botones o elementos necesarios
+     */
     public void setFunctions(){
         btnContinuar.setOnClickListener(next());
         btnRegresar.setOnClickListener(toReturn());
     }
 
+    /**
+     * MÉTODO para la funcion de avanzar al siguiente reto
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener next(){
         return new View.OnClickListener() {
             @Override
@@ -89,6 +110,10 @@ public class JuegoControler extends Controlador {
         };
     }
 
+    /**
+     * MÉTODO para la funcion de retroceder al reto anterior
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener toReturn(){
         return new View.OnClickListener() {
             @Override
@@ -105,12 +130,18 @@ public class JuegoControler extends Controlador {
     }
 
 
-
+    /**
+     * MÉTODO para asignar la categoria de juego en la que se esta jugando
+     */
     public void setCategoria(){
         categoria = (Categoria) registroCategorias.search(id);
         categoria.setRegistroCat_car(registroRelacion);
     }
 
+    /**
+     * MÉTODO para crear la lista de retos que estan asociados a la categoria que se esta jugando
+     * @return Retorna la lista
+     */
     public  ArrayList<Carta> getCartas(){
 
         ArrayList<Carta> listaConvertida = new ArrayList<>();
@@ -123,55 +154,80 @@ public class JuegoControler extends Controlador {
         return listaConvertida;
     }
 
+    /**
+     * Este método controla la funcion de avanzar carta
+     * Hay dos tipos de avanzar:
+     * - Avanzar creando un nuevo reto, se crean nuevos datos
+     * - Avanzar luego de retroceder, osea se tienen que volver a poner los datos que ya habían salido, NO crear nuevos
+     */
     public void avanzarCarta(){
+        //Se comprueba que tipo de avanzar es.
+        // Si el numero actual es igual al total, es el primer tipo
         if (numeroRetoActual == numeroRetoTotal) {
+            //Se asigna la cantidad de jugadores y cartas que hay
             int cantidadJugadores = listaJugadores.size();
             int cantidadCartas = listaCartas.size();
 
+            //Se saca un numero random
             int jugadorRandom = random.nextInt(cantidadJugadores);
             int cartaRandom = random.nextInt(cantidadCartas);
             int fondoRandom = random.nextInt(3);
 
+            //Se asignan los valores en la pantalla
             txtJugador.setText(listaJugadores.get(jugadorRandom));
             txtReto.setText(listaCartas.get(cartaRandom).getReto());
             txtCastigo.setText(listaCartas.get(cartaRandom).getCastigo());
-
             cambiarFondo(fondoRandom);
 
+            //Se guardan los datos que salieron
             listaJugadoresUsados.add(listaJugadores.get(jugadorRandom));
             listaCartasUsadas.add(listaCartas.get(cartaRandom));
-
             listaFondosUsados.add(fondoRandom);
 
+            //Se aumentan los contadores
             numeroRetoTotal++;
             numeroRetoActual++;
         } else {
+            //Segundo tipo de avanzar
+            //Se aumenta el contador actual
             numeroRetoActual++;
+
+            //Se buscan los datos que ya salieron
             String jugador = listaJugadoresUsados.get(numeroRetoActual);
             Carta carta = listaCartasUsadas.get(numeroRetoActual);
             int fondo = listaFondosUsados.get(numeroRetoActual);
 
+            //Se asignan los valores a la pantalla
             cambiarFondo(fondo);
-
             txtJugador.setText(jugador);
             txtReto.setText(carta.getReto());
             txtCastigo.setText(carta.getCastigo());
         }
     }
 
+    /**
+     * Este método controla la funcion de retroceder carta
+     */
     public void retrocederCarta(){
+        //Se disminuye el reto actual
         numeroRetoActual--;
+
+        //Busca los valores que ya habían salido
         String jugador = listaJugadoresUsados.get(numeroRetoActual);
         Carta carta = listaCartasUsadas.get(numeroRetoActual);
         int fondo = listaFondosUsados.get(numeroRetoActual);
 
+        //Los asigna a la pantalla
         cambiarFondo(fondo);
-
         txtJugador.setText(jugador);
         txtReto.setText(carta.getReto());
         txtCastigo.setText(carta.getCastigo());
     }
 
+    /**
+     * Este método controla la funcion de cambiar de fondo entre 3 tipos
+     * @param fondoRandom El numero de fondo al que va a cambiar, entre los 3 tipos
+     */
     public void cambiarFondo(int fondoRandom){
 
         switch (fondoRandom){
@@ -187,6 +243,10 @@ public class JuegoControler extends Controlador {
         }
     }
 
+    /**
+     * MÉTODO para crear un mensaje por Toast
+     * @param text texto para el mensaje
+     */
     public void message(String text){
         Toast.makeText(act, text, Toast.LENGTH_SHORT).show();
     }

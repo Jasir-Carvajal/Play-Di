@@ -20,12 +20,21 @@ import java.util.ArrayList;
 
 public class EditarCategoriasControler extends Controlador {
 
+    /**
+     * La clase controlador para el activity editar_categoria
+     */
+
     private EditText txtTitulo;
     private Button btnRegresar, btnGuardar,btnEliminar;
     private Registro registro;
     private RegistroCat_Car registroRelacion;
     private Categoria cat;
     private boolean isNew;
+
+    /**
+     * Constructor de la clase
+     * @param act La referencia del activity donde se inicializa el controlador
+     */
     public EditarCategoriasControler(AppCompatActivity act) {
         super(act);
 
@@ -43,6 +52,9 @@ public class EditarCategoriasControler extends Controlador {
 
         setFunctions();
 
+
+        //Al ser una pantalla en la cual se pueden tanto crear nuevas categorias como editar categorias existentes,se necesita comprobar si es nueva o no
+        //Esto se maneja aquí, si es nueva se crea una nueva referencia, y si no, se busca en la base de datos
         if(id!=-1){
             cat = (Categoria) registro.search(id);
             fill();
@@ -56,27 +68,41 @@ public class EditarCategoriasControler extends Controlador {
 
     }
 
+    /**
+     * Este método rellena los campos en caso de que la categoria NO sea nueva y al contrario, se va a editar
+     */
     private void fill() {
         txtTitulo.setHint(cat.getTitulo());
     }
 
+    /**
+     * Este método funciona para asignar los View.OnClickListener a los botones o elementos necesarios
+     */
     public void setFunctions(){
         btnRegresar.setOnClickListener(toReturn());
         btnGuardar.setOnClickListener(saveTitle());
         btnEliminar.setOnClickListener(eliminar());
     }
 
+    /**
+     * MÉTODO para la funcion de regresar (regresa a la pantalla anterior)
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener toReturn(){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                act.finish();
-               // Intent intent = new Intent(act, Menu_act.class);
-               // act.startActivity(intent);
+                //act.finish();
+                Intent intent = new Intent(act, Menu_act.class);
+                act.startActivity(intent);
             }
         };
     }
 
+    /**
+     * MÉTODO para la funcion de guardar los datos creados (Si es nueva) o los cambios realizados (Si se esta editando una ya existente)
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener saveTitle(){
         return new View.OnClickListener() {
             @Override
@@ -92,7 +118,9 @@ public class EditarCategoriasControler extends Controlador {
                             cat.setTitulo(txtTitulo.getText().toString().trim());
 
                             registro.update(cat);
-                            act.finish();
+                            //act.finish();
+                            Intent intent = new Intent(act, Menu_act.class);
+                            act.startActivity(intent);
                         } else message("Este nombre ya existe");
 
                     }else {
@@ -102,7 +130,9 @@ public class EditarCategoriasControler extends Controlador {
                         Entidad old = registro.search("titulo",cat.getTitulo());
                         if (old == null){
                             registro.add(cat);
-                            act.finish();
+                            //act.finish();
+                            Intent intent = new Intent(act, Menu_act.class);
+                            act.startActivity(intent);
                         } else message("Este nombre ya existe");
 
                     }
@@ -115,7 +145,10 @@ public class EditarCategoriasControler extends Controlador {
     }
 
 
-
+    /**
+     * MÉTODO para la funcion de eliminar la categoria
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener eliminar(){
         return new View.OnClickListener() {
             @Override
@@ -141,6 +174,10 @@ public class EditarCategoriasControler extends Controlador {
         };
     }
 
+    /**
+     * MÉTODO para crear un mensaje por Toast
+     * @param text texto para el mensaje
+     */
     public void message(String text){
         Toast.makeText(act, text, Toast.LENGTH_SHORT).show();
     }

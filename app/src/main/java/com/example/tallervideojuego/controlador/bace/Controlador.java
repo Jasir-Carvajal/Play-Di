@@ -4,8 +4,18 @@ import android.util.TypedValue;
 
 import androidx.appcompat.app.AppCompatActivity;
 
+    /**
+     * La clase padre que se utilizará para los controladores
+     */
+
     public class Controlador {
         protected AppCompatActivity act;
+
+        /**
+         * Constructor de la clase
+         * @param act se refiere al Activity que corresponde este controlador
+         */
+
         public Controlador(AppCompatActivity act) {
             this.act = act;
 

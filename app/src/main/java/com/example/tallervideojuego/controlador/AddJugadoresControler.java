@@ -22,6 +22,14 @@ import java.util.ArrayList;
 import java.util.Collections;
 
 public class AddJugadoresControler extends Controlador {
+
+    /**
+     * La clase controlador para el activity add_jugadores
+     *
+     * id = Se refiere al id de la categoria a la cual se va a jugar, el cual se pasa por el Intent
+     * alto = maneja el alto de la pantalla
+     */
+
     private AppCompatActivity act;
 
     private Button btnAgregar, btnRegresar, btnJugar;
@@ -40,6 +48,11 @@ public class AddJugadoresControler extends Controlador {
         return Math.round(porcentaje*alto);
 
     }
+
+    /**
+     * Constructor de la clase
+     * @param act La referencia del activity donde se inicializa el controlador
+     */
 
     public AddJugadoresControler(AppCompatActivity act) {
         super(act);
@@ -66,21 +79,32 @@ public class AddJugadoresControler extends Controlador {
         setFunctions();
     }
 
+    /**
+     * Este método funciona para asignar los View.OnClickListener a los botones o elementos necesarios
+     */
     public void setFunctions(){
-
         btnRegresar.setOnClickListener(toReturn());
         btnAgregar.setOnClickListener(add());
         btnJugar.setOnClickListener(play());
     }
 
+
+    /**
+     * MÉTODO para la funcion de agregar
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener add(){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Se comprueba que los campos de textos no esten vacios
                 if(txtJugador.getText().toString().trim().isEmpty()){
                     message("Debe de ingresar un nombre");
                 } else {
+                    //Se comprueba que el jugador ya no haya sido agregado
                     if (comprobarJugador(txtJugador.getText().toString())){
+                        //Se agrega el jugador, se actualiza el arraylist y se limpian los campos de texto
                         listaJugadores.add(0,txtJugador.getText().toString());
                         updateAdapter(listaJugadores);
                         limpiar();
@@ -92,10 +116,18 @@ public class AddJugadoresControler extends Controlador {
         };
     }
 
+
+    /**
+     * MÉTODO para la funcion de jugar
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener play(){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
+
+                //Se comprueba que haya al menos dos jugadores agregados para poder comenzar el juego
+                //Si es así se pasa el id de la categoría, para posteriormente tomar los retos asociados, y la lista de jugadores
                 if(listaJugadores.size()>=2){
                     Intent intent = new Intent(act, Jugar_act.class);
 
@@ -110,6 +142,10 @@ public class AddJugadoresControler extends Controlador {
         };
     }
 
+    /**
+     * MÉTODO para la funcion de regresar (regresa a la pantalla anterior)
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener toReturn(){
         return new View.OnClickListener() {
             @Override
@@ -120,6 +156,10 @@ public class AddJugadoresControler extends Controlador {
         };
     }
 
+    /**
+     * MÉTODO para la funcion de eliminar un jugador
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener delete(int i){
         return new View.OnClickListener() {
             @Override
@@ -130,11 +170,20 @@ public class AddJugadoresControler extends Controlador {
         };
     }
 
+    /**
+     * Este método actualiza el adapter se llama cada vez que se hace un cambio a  la lista de jugadores
+     * @param lista_usable lista de jugadores actualizada
+     */
     private void updateAdapter(ArrayList<String> lista_usable) {
         adapterJugadores = new AdapterJugadores(act,lista_usable,this);
         listJ.setAdapter(adapterJugadores);
     }
 
+    /**
+     * Este metodo recorre la lista de jugadores y comprueba que el jugador que se pasa por parametros no se encuentra en la lista
+     * @param jugador El nombre del jugador el cual se quiere comprobar
+     * @return Retorna un true si el jugador no se encuentra y false si se encuentra ya agregado
+     */
     private boolean comprobarJugador(String jugador){
         for (int i = 0; i < listaJugadores.size(); i++) {
             if(listaJugadores.get(i).equalsIgnoreCase(jugador)){
@@ -144,10 +193,18 @@ public class AddJugadoresControler extends Controlador {
         return true;
     }
 
+    /**
+     * MÉTODO para crear un mensaje por Toast
+     * @param text texto para el mensaje
+     */
     public void message(String text){
         Toast.makeText(act, text, Toast.LENGTH_SHORT).show();
     }
 
+
+    /**
+     * MÉTODO para limpiar los campos de texto
+     */
     public void limpiar(){
         txtJugador.setText("");
     }

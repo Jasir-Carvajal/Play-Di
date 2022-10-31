@@ -26,11 +26,19 @@ import com.example.tallervideojuego.vista.EditarCategoria_act;
 import java.util.ArrayList;
 
 public final class MenuControler extends Controlador{
+    /**
+     * La clase controlador para el activity menu
+     */
+
     private LinearLayout container;
     private LinearLayout[] personalizados;
     private Button add, bancoPreguntas, regresar, random;
     private Registro registroCategorias;
 
+    /**
+     * Constructor de la clase
+     * @param act La referencia del activity donde se inicializa el controlador
+     */
     public MenuControler(AppCompatActivity act) {
         super(act);
 
@@ -46,6 +54,10 @@ public final class MenuControler extends Controlador{
         addButtons();
         setFunctions();
     }
+
+    /**
+     * Este método funciona para asignar los View.OnClickListener a los botones o elementos necesarios
+     */
     private void setFunctions(){
         add.setOnClickListener(onAdd());
         // regresar.setOnClickListener(onRegresa());
@@ -53,7 +65,9 @@ public final class MenuControler extends Controlador{
         //random.setOnClickListener(random());
 
     }
-
+    /**
+     * Este método funciona para asignar los valores al menu de categorias
+     */
     private void addButtons() {
 
         ArrayList<Entidad> lista = registroCategorias.getEntidades();
@@ -61,14 +75,15 @@ public final class MenuControler extends Controlador{
 
         personalizados = new LinearLayout[lista.size()];
 
+
         ContextThemeWrapper contextCat = new ContextThemeWrapper(act, R.style.btn_cat);
         ContextThemeWrapper contextEdit = new ContextThemeWrapper(act, R.style.edit_btn);
         ContextThemeWrapper contextLyt = new ContextThemeWrapper(act, R.style.lyt_personalizados);
 
         LinearLayout.LayoutParams params_lyt =  new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-        params_lyt.leftMargin = dp(30);//por alguna razón no sirve con 30 como en de random
+        params_lyt.leftMargin = dp(40);//
         params_lyt.topMargin = dp(10);
-        params_lyt.rightMargin = dp(30);//
+        params_lyt.rightMargin = dp(40);//
 
         LinearLayout.LayoutParams params_btn_cat = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
         params_btn_cat.width=0;
@@ -152,7 +167,10 @@ public final class MenuControler extends Controlador{
 
 
 
-
+    /**
+     * MÉTODO para la funcion de editar categoria
+     * @return Retorna el View.OnClickListener
+     */
     private View.OnClickListener onEdit(int id) {
         return new View.OnClickListener() {
             @Override
@@ -168,6 +186,11 @@ public final class MenuControler extends Controlador{
         };
     }
 
+
+    /**
+     * MÉTODO para la funcion de jugar (dirige a la pantalla de añadir jugadores)
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener onPlay(int id){
         return new View.OnClickListener() {
             @Override
@@ -182,6 +205,10 @@ public final class MenuControler extends Controlador{
         };
     }
 
+    /**
+     * MÉTODO para la funcion de redirigir al banco de preguntas
+     * @return Retorna el View.OnClickListener
+     */
     private View.OnClickListener onBancoPreguntas() {
         return new View.OnClickListener() {
             @Override
@@ -203,6 +230,10 @@ public final class MenuControler extends Controlador{
         };
     }
 
+    /**
+     * MÉTODO para la funcion de añadir categoria
+     * @return Retorna el View.OnClickListener
+     */
     private View.OnClickListener onAdd() {
         return new View.OnClickListener() {
             @Override
