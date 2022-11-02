@@ -17,11 +17,17 @@ import java.util.Arrays;
  */
 public class ExampleUnitTest {
     @Test
+    public void testExample() {
+        assertEquals(0, 0);
+    }
+
+
+    @Test
     public void Radom_player_Test() {
         System.out.print("\n\ninicio test\n\n");
         ArrayList<Jugador> prelista = new ArrayList<>();
 
-        for (int i = 0; i < 128; i++) {
+        for (int i = 0; i < 18; i++) {
             prelista.add(new Jugador(""+(i+1)));
         }
         Jugador[] example = new Jugador[1];
@@ -30,7 +36,7 @@ public class ExampleUnitTest {
         Radom_player.setJugadores(jugadores);
         ArrayList<Jugador> res = new ArrayList();
 
-        for (int i = 0; i < 45000; i++) {
+        for (int i = 0; i < 4500; i++) {
             res.add(Radom_player.RANDOM());
         }
 
