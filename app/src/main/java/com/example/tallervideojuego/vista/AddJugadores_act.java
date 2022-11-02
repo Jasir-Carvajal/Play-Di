@@ -6,7 +6,7 @@ import com.example.tallervideojuego.controlador.AddJugadoresControler;
 
 import android.os.Bundle;
 
-public class AddJugadores_act extends AppCompatActivity {
+public class AddJugadores_act extends Vista {
     private AddJugadoresControler controlador;
 
     @Override

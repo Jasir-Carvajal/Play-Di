@@ -6,7 +6,7 @@ import com.example.tallervideojuego.controlador.EditarCategoriasControler;
 
 import android.os.Bundle;
 
-public class EditarCategoria_act extends AppCompatActivity {
+public class EditarCategoria_act extends Vista {
 
     private EditarCategoriasControler controlador;
 
@@ -16,4 +16,5 @@ public class EditarCategoria_act extends AppCompatActivity {
         setContentView(R.layout.activity_editar_categoria);
         controlador = new EditarCategoriasControler(this);
     }
+
 }

@@ -242,9 +242,9 @@ public class EditarCartaControler extends Controlador {
                             //Se actualiza la carta
                             registroCartas.update(carta);
 
-                            //act.finish();
-                            Intent intent = new Intent(act, BancoPreguntas_act.class);
-                            act.startActivity(intent);
+                            regresar();
+                            //Intent intent = new Intent(act, BancoPreguntas_act.class);
+                            //act.startActivity(intent);
                         } else message("Ese nombre ya existe");
 
                     } else {
@@ -269,9 +269,9 @@ public class EditarCartaControler extends Controlador {
                             }
 
 
-
-                            Intent intent = new Intent(act, BancoPreguntas_act.class);
-                            act.startActivity(intent);
+                             regresar();
+                            //Intent intent = new Intent(act, BancoPreguntas_act.class);
+                           // act.startActivity(intent);
                         } else message("Ese nombre ya existe");
                     }
                 }
@@ -287,7 +287,7 @@ public class EditarCartaControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                act.finish();
+                regresar();
             }
         };
     }

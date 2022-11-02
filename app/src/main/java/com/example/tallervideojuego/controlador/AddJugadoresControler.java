@@ -150,8 +150,7 @@ public class AddJugadoresControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(act, Menu_act.class);
-                act.startActivity(intent);
+                regresar();
             }
         };
     }

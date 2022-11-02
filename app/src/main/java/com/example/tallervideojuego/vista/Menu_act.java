@@ -10,10 +10,11 @@ import android.os.Bundle;
 import android.widget.Button;
 import android.widget.LinearLayout;
 
-public class Menu_act extends AppCompatActivity {
+public class Menu_act extends Vista {
     private MenuControler controlador;
     private LinearLayout container;
     private Button random;
+
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
@@ -21,6 +22,5 @@ public class Menu_act extends AppCompatActivity {
         DataBase.setContext(getApplicationContext());
         DataBase.setName("PlaydiDB");
         controlador = new MenuControler(this);
-
     }
 }

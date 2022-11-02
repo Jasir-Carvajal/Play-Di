@@ -6,7 +6,7 @@ import com.example.tallervideojuego.controlador.BancoPreguntasControler;
 
 import android.os.Bundle;
 
-public class BancoPreguntas_act extends AppCompatActivity {
+public class BancoPreguntas_act extends Vista {
 
     private BancoPreguntasControler controlador;
 

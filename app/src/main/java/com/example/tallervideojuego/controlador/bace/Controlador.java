@@ -18,7 +18,6 @@ import androidx.appcompat.app.AppCompatActivity;
 
         public Controlador(AppCompatActivity act) {
             this.act = act;
-
         }
 
 
@@ -26,5 +25,9 @@ import androidx.appcompat.app.AppCompatActivity;
             return  ((int) TypedValue.applyDimension(TypedValue.COMPLEX_UNIT_DIP, 1, act.getResources().getDisplayMetrics()))*n;
         }
 
-    }
+        public void regresar(){
+            act.finish();
+        }
+
+     }
 

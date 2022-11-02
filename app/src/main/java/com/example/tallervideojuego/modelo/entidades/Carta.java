@@ -9,6 +9,7 @@ public class Carta extends Entidad {
 
     public static String Tabla = "Cartas";
     private RegistroCat_Car registroCat_car;
+
     public Carta(String titulo, String reto, String castigo, int[] idCategorias) {
         super();
         registroCat_car = new RegistroCat_Car();

@@ -43,6 +43,10 @@ public class BancoPreguntasControler extends Controlador{
     private Registro registroCartas;
     private RegistroCat_Car registroRelacion;
 
+
+
+
+
     private ArrayAdapter<CharSequence> adapter;
     private ArrayList<String> catItems = new ArrayList<>();
 
@@ -63,11 +67,15 @@ public class BancoPreguntasControler extends Controlador{
         btnRegresar = this.act.findViewById(R.id.btnRegresar);
         listaE = this.act.findViewById(R.id.lista_categorias);
 
+
         registroCategorias = new Registro(Categoria.class);
         registroCartas = new Registro(Carta.class);
         registroRelacion = new RegistroCat_Car();
 
+
+
         //  = this.act.findViewById(R.id.cartas_container);
+
 
         catItems = getStrings();
 
@@ -124,6 +132,7 @@ public class BancoPreguntasControler extends Controlador{
                 Intent intent = new Intent(act, EditarCarta_act.class);
                 intent.putExtra("id",id);
                 act.startActivity(intent);
+
             }
         };
     }
@@ -137,7 +146,7 @@ public class BancoPreguntasControler extends Controlador{
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registroCartas.delete(entidad); //se elimina la carte de reto del registro de cartas
+                registroCartas.delete(entidad);
                 Carta carta = (Carta) entidad;
                 carta.setRegistroCat_car(registroRelacion);
 

@@ -6,7 +6,7 @@ import com.example.tallervideojuego.controlador.JuegoControler;
 
 import android.os.Bundle;
 
-public class Jugar_act extends AppCompatActivity {
+public class Jugar_act extends Vista {
 
     private JuegoControler controlador;
 

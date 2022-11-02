@@ -6,7 +6,7 @@ import com.example.tallervideojuego.controlador.EditarCartaControler;
 
 import android.os.Bundle;
 
-public class EditarCarta_act extends AppCompatActivity {
+public class EditarCarta_act extends Vista {
 
     private EditarCartaControler controlador;
 

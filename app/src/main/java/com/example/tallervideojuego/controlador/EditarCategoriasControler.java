@@ -92,9 +92,9 @@ public class EditarCategoriasControler extends Controlador {
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                //act.finish();
-                Intent intent = new Intent(act, Menu_act.class);
-                act.startActivity(intent);
+                regresar();
+                //Intent intent = new Intent(act, Menu_act.class);
+                //act.startActivity(intent);
             }
         };
     }
@@ -118,9 +118,9 @@ public class EditarCategoriasControler extends Controlador {
                             cat.setTitulo(txtTitulo.getText().toString().trim());
 
                             registro.update(cat);
-                            //act.finish();
-                            Intent intent = new Intent(act, Menu_act.class);
-                            act.startActivity(intent);
+                            regresar();
+                            //Intent intent = new Intent(act, Menu_act.class);
+                            //act.startActivity(intent);
                         } else message("Este nombre ya existe");
 
                     }else {
@@ -130,9 +130,9 @@ public class EditarCategoriasControler extends Controlador {
                         Entidad old = registro.search("titulo",cat.getTitulo());
                         if (old == null){
                             registro.add(cat);
-                            //act.finish();
-                            Intent intent = new Intent(act, Menu_act.class);
-                            act.startActivity(intent);
+                            regresar();
+                            //Intent intent = new Intent(act, Menu_act.class);
+                            //act.startActivity(intent);
                         } else message("Este nombre ya existe");
 
                     }
@@ -163,8 +163,9 @@ public class EditarCategoriasControler extends Controlador {
 
                     if(cartasRelacionadas.isEmpty()){
                         registro.delete(cat);
-                        Intent intent = new Intent(act, Menu_act.class);
-                        act.startActivity(intent);
+                        regresar();
+                        //Intent intent = new Intent(act, Menu_act.class);
+                        //act.startActivity(intent);
                     } else {
                         message("Esta categoría esta asignada, no se puede eliminar");
                     }
