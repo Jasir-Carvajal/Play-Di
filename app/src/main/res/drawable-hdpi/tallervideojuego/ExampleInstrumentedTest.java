@@ -10,9 +10,6 @@ import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-import com.example.tallervideojuego.modelo.Radom_player;
-import com.example.tallervideojuego.modelo.entidades.Jugador;
-
 /**
  * Instrumented test, which will execute on an Android device.
  *
