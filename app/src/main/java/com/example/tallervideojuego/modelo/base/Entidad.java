@@ -2,6 +2,10 @@ package com.example.tallervideojuego.modelo.base;
 
 
 import android.content.ContentValues;
+
+import java.util.Calendar;
+import java.util.Date;
+
 /** Entidad
 // Clase generica de objetos posibles de almacenar en la base de Datos
 //  Contiede la estructura nesesaria para que el registro administre los datos entre la app y la DB
@@ -18,6 +22,11 @@ public  class Entidad {
 
     public  Entidad() {
         contenido = new ContentValues();
+    }
+
+    protected void update(){
+        Date currentTime = Calendar.getInstance().getTime();
+        contenido.put("time_stamp", currentTime.toString());
     }
 
     public Entidad(int id) {

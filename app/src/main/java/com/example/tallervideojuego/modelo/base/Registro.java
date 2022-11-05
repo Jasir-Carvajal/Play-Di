@@ -69,7 +69,7 @@ public class Registro {
     }
 
     public boolean add( Entidad entidad){
-
+        entidad.update();
         boolean res=false;
         if (!listaEntidades.contains(entidad)) {
             listaEntidades.add(entidad);
@@ -99,7 +99,7 @@ public class Registro {
     }
 
     public void update(Entidad entidad){
-
+        entidad.update();
         listaEntidades.set(getIndex(entidad.getId()),entidad);
         this.DB.update(tabla,entidad.getContent(),"id="+entidad.getId(),null);
     }

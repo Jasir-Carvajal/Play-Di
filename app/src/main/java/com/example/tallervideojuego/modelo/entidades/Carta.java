@@ -4,6 +4,8 @@ import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 
 import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.Date;
 
 public class Carta extends Entidad {
 
@@ -30,19 +32,24 @@ public class Carta extends Entidad {
 
     }
 
+
     public String getTitulo() {
+
         return contenido.getAsString("titulo");
     }
 
     public void setTitulo(String titulo) {
+
         contenido.put("titulo", titulo);
     }
 
     public String getReto() {
+
         return contenido.getAsString("reto");
     }
 
     public void setReto(String reto) {
+
         contenido.put("reto", reto);
     }
 
@@ -51,15 +58,18 @@ public class Carta extends Entidad {
     }
 
     public void setCastigo(String castigo) {
+
         contenido.put("castigo", castigo);
     }
 
     public void setRegistroCat_car(RegistroCat_Car registroCat_car) {
+
         this.registroCat_car = registroCat_car;
     }
 
     /** añade realcion entre la actual carta y una categoria */
     public void addCategoria(Categoria categoria){
+
         registroCat_car.addRelacion(categoria.getId(),getId());
     }
 

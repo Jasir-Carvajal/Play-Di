@@ -21,10 +21,25 @@ public class ExampleUnitTest {
         assertEquals(0, 0);
     }
 
+    @Test
+    public void time() {
+        long start = System.nanoTime();
+        while ( System.nanoTime() < (start+(1*1000000000L)) ){
+            try {
+                Thread.sleep(  10 );
+            } catch (InterruptedException e) {
+                e.printStackTrace();
+            }
+        }
+        assertEquals(0, 0);
+    }
+
+
 
     @Test
     public void Radom_player_Test() {
-        System.out.print("\n\ninicio test\n\n");
+        System.out.print("\n\n \n\n");
+        System.out.print(System.nanoTime());
         ArrayList<Jugador> prelista = new ArrayList<>();
 
         for (int i = 0; i < 18; i++) {
@@ -63,6 +78,7 @@ public class ExampleUnitTest {
 
 
         System.out.print("\n\nfin test\n\n");
+        System.out.print(System.nanoTime());
         assertEquals(0, 0);
     }
 }
