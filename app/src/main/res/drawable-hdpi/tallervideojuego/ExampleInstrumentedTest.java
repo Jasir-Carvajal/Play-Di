@@ -5,23 +5,14 @@ import android.content.Context;
 import androidx.test.platform.app.InstrumentationRegistry;
 import androidx.test.ext.junit.runners.AndroidJUnit4;
 
-import org.json.JSONArray;
-import org.json.JSONException;
-import org.json.JSONObject;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import static org.junit.Assert.*;
 
-import com.example.tallervideojuego.modelo.Api.Api;
-import com.example.tallervideojuego.modelo.Api.Login;
 import com.example.tallervideojuego.modelo.Radom_player;
-import com.example.tallervideojuego.modelo.entidades.Jugador;
 
 import java.io.IOException;
-import java.util.concurrent.ExecutionException;
-
-import okhttp3.Headers;
 
 /**
  * Instrumented test, which will execute on an Android device.

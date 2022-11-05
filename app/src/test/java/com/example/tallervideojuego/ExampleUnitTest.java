@@ -4,9 +4,11 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
+import com.example.tallervideojuego.modelo.Api.Api;
 import com.example.tallervideojuego.modelo.RandomPlayer;
 import com.example.tallervideojuego.modelo.entidades.Jugador;
 
+import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
 
@@ -22,19 +24,16 @@ public class ExampleUnitTest {
     }
 
     @Test
-    public void time() {
-        long start = System.nanoTime();
-        while ( System.nanoTime() < (start+(1*1000000000L)) ){
-            try {
-                Thread.sleep(  10 );
-            } catch (InterruptedException e) {
-                e.printStackTrace();
-            }
-        }
-        assertEquals(0, 0);
+    public void log() throws IOException {
+        Api login = new Api();
+        assertEquals(0, login.login("jean@test.com","test"));
     }
 
-
+    @Test
+    public void reg() throws IOException {
+        Api login = new Api();
+        assertEquals(0, login.register("nombre2","jean2@test2.com","test2"));
+    }
 
     @Test
     public void Radom_player_Test() {
