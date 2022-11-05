@@ -1,6 +1,7 @@
 package com.example.tallervideojuego.controlador.bace;
 
 import android.util.TypedValue;
+import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -27,6 +28,14 @@ import androidx.appcompat.app.AppCompatActivity;
 
         public void regresar(){
             act.finish();
+        }
+
+        /**
+         * MÉTODO para crear un mensaje por Toast
+         * @param text texto para el mensaje
+         */
+        public void message(String text){
+            Toast.makeText(act, text, Toast.LENGTH_SHORT).show();
         }
 
      }

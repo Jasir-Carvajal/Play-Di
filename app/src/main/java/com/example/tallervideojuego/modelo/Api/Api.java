@@ -2,6 +2,7 @@ package com.example.tallervideojuego.modelo.Api;
 
 
 
+
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -22,6 +23,9 @@ public class Api {
     public static final MediaType JSON  = MediaType.get("application/json; charset=utf-8");
     final OkHttpClient client = new OkHttpClient();
     private String token;
+
+
+
 
 
     public String login(String email, String password) throws IOException {
@@ -57,6 +61,7 @@ public class Api {
     }
 
     public String register(String name,String email, String password) throws IOException {
+
         RequestBody formBody = new FormBody.Builder()
                 .add("name", name)
                 .add("email", email)
@@ -76,7 +81,6 @@ public class Api {
         Response response = call.execute();
 
         return response.body().string();
-
 
     }
 

@@ -175,11 +175,4 @@ public class EditarCategoriasControler extends Controlador {
         };
     }
 
-    /**
-     * MÉTODO para crear un mensaje por Toast
-     * @param text texto para el mensaje
-     */
-    public void message(String text){
-        Toast.makeText(act, text, Toast.LENGTH_SHORT).show();
-    }
 }
