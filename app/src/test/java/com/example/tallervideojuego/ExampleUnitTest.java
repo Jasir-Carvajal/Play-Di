@@ -4,7 +4,7 @@ import org.junit.Test;
 
 import static org.junit.Assert.*;
 
-import com.example.tallervideojuego.modelo.Radom_player;
+import com.example.tallervideojuego.modelo.RandomPlayer;
 import com.example.tallervideojuego.modelo.entidades.Jugador;
 
 import java.util.ArrayList;
@@ -48,11 +48,11 @@ public class ExampleUnitTest {
         Jugador[] example = new Jugador[1];
 
         Jugador[] jugadores = prelista.toArray(example);
-        Radom_player.setJugadores(jugadores);
+        RandomPlayer.setJugadores(jugadores);
         ArrayList<Jugador> res = new ArrayList();
 
         for (int i = 0; i < 4500; i++) {
-            res.add(Radom_player.RANDOM());
+            res.add(RandomPlayer.RANDOM());
         }
 
 

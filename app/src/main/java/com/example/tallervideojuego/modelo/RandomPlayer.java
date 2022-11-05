@@ -5,7 +5,7 @@ import com.example.tallervideojuego.modelo.entidades.Jugador;
 import java.util.ArrayList;
 import java.util.Random;
 
-public class Radom_player {
+public class RandomPlayer {
 
     static private Jugador[] jugadores;
     static private ArrayList<Jugador> jugadoresProbabilidades;
@@ -15,7 +15,7 @@ public class Radom_player {
     }
 
     public static void setJugadores(Jugador[] jugadores) {
-        Radom_player.jugadores = jugadores;
+        RandomPlayer.jugadores = jugadores;
         Probabilidades();
     }
 
@@ -23,7 +23,7 @@ public class Radom_player {
         jugadoresProbabilidades = new ArrayList<>();
         int n = 0;
         for (int i = 0; i < jugadores.length*2; i++) {
-            Radom_player.jugadoresProbabilidades.add(jugadores[n]);
+            RandomPlayer.jugadoresProbabilidades.add(jugadores[n]);
             n = n==jugadores.length-1?0:n+1;
         }
     }
