@@ -178,7 +178,7 @@ public class EditarCartaControler extends Controlador {
                         categoriasRelacionadas.add(categoria);
 
                         for (Categoria categoria2:categoriasEliminadas){
-                            if (categoria2 == categoria){
+                            if (categoria2.getTitulo().equalsIgnoreCase(categoria.getTitulo())){
                                 categoriasEliminadas.remove(categoria2);
                             }
                         }

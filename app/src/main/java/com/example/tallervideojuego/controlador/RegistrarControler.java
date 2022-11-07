@@ -11,6 +11,7 @@ import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
 import com.example.tallervideojuego.modelo.Api.Api;
 import com.example.tallervideojuego.modelo.LoadingDialog;
+import com.example.tallervideojuego.vista.Login_act;
 import com.example.tallervideojuego.vista.MenuCategorias_act;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -73,7 +74,8 @@ public class RegistrarControler extends Controlador {
                            //loadingDialog.dismissDialog();
                            txtCorreo.setError("Ya existe una cuenta con este correo");
                        } else{
-                           Intent intent = new Intent(act, MenuCategorias_act.class);
+//                           Intent intent = new Intent(act, MenuCategorias_act.class);
+                           Intent intent = new Intent(act, Login_act.class);
                            act.startActivity(intent);
                            regresar();
                        }

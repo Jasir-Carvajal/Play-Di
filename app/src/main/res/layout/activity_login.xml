@@ -101,7 +101,7 @@
             android:fontFamily="@font/fira_bold"
             android:text="RECUPERAR CONTRASEÑA"
             android:textAlignment="center"
-            android:textColor="@color/orange"
+            android:textColor="@color/grey"
             android:textSize="20sp" />
 
       </LinearLayout>

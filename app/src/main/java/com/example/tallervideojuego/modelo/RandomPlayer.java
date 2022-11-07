@@ -22,7 +22,7 @@ public class RandomPlayer {
     private static void Probabilidades(){
         jugadoresProbabilidades = new ArrayList<>();
         int n = 0;
-        for (int i = 0; i < jugadores.length; i++) {
+        for (int i = 0; i < jugadores.length*2; i++) {
             RandomPlayer.jugadoresProbabilidades.add(jugadores[n]);
             n = n==jugadores.length-1?0:n+1;
         }
