@@ -25,8 +25,8 @@ public  class Entidad {
     }
 
     protected void update(){
-        Date currentTime = Calendar.getInstance().getTime();
-        contenido.put("time_stamp", currentTime.toString());
+        //Date currentTime = Calendar.getInstance().getTime();
+       // contenido.put("time_stamp", currentTime.toString());
     }
 
     public Entidad(int id) {

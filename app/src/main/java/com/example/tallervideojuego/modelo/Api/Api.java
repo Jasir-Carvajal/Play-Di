@@ -11,7 +11,6 @@ import java.io.IOException;
 
 import okhttp3.Call;
 import okhttp3.FormBody;
-import okhttp3.MediaType;
 import okhttp3.OkHttpClient;
 import okhttp3.Request;
 import okhttp3.RequestBody;
@@ -20,7 +19,6 @@ import okhttp3.Response;
 
 public class Api {
 
-    public static final MediaType JSON  = MediaType.get("application/json; charset=utf-8");
     final OkHttpClient client = new OkHttpClient();
     private String token;
 
