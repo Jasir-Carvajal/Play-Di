@@ -25,7 +25,7 @@ import com.example.tallervideojuego.vista.EditarCategoria_act;
 
 import java.util.ArrayList;
 
-public final class MenuControler extends Controlador{
+public final class MenuCategoriasControler extends Controlador{
     /**
      * La clase controlador para el activity menu
      */
@@ -39,7 +39,7 @@ public final class MenuControler extends Controlador{
      * Constructor de la clase
      * @param act La referencia del activity donde se inicializa el controlador
      */
-    public MenuControler(AppCompatActivity act) {
+    public MenuCategoriasControler(AppCompatActivity act) {
         super(act);
 
         registroCategorias = new Registro(Categoria.class);

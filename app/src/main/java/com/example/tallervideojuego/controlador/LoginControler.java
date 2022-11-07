@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
-import android.widget.EditText;
 import android.widget.TextView;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -13,7 +12,7 @@ import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
 import com.example.tallervideojuego.modelo.Api.Api;
 import com.example.tallervideojuego.modelo.LoadingDialog;
-import com.example.tallervideojuego.vista.Menu_act;
+import com.example.tallervideojuego.vista.MenuCategorias_act;
 import com.example.tallervideojuego.vista.Registrar_act;
 import com.google.android.material.textfield.TextInputEditText;
 
@@ -74,8 +73,8 @@ public class LoginControler extends Controlador {
                 }else if(!isValidEmail()){
                     txtCorreo.setError("Correo invalido");
                 } else {
+                    //loadingDialog.starLoadingDialog();
                     try {
-                        //loadingDialog.starLoadingDialog();
                         retorno = api.login(correo,password);;
                         System.out.println(retorno);
 
@@ -84,7 +83,7 @@ public class LoginControler extends Controlador {
                             txtCorreo.setError("Datos incorrectos");
                             txtPassword.setError("Datos incorrectos",null);
                         } else{
-                            Intent intent = new Intent(act, Menu_act.class);
+                            Intent intent = new Intent(act, MenuCategorias_act.class);
                             act.startActivity(intent);
                             regresar();
                         }

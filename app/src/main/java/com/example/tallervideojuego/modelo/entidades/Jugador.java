@@ -5,7 +5,7 @@ import android.os.Parcelable;
 
 import com.example.tallervideojuego.modelo.base.Entidad;
 
-public class Jugador  {
+public class Jugador implements Parcelable {
 
     private String nombre;
 
@@ -21,6 +21,18 @@ public class Jugador  {
 
     }
 
+
+    public static final Creator<Jugador> CREATOR = new Creator<Jugador>() {
+        @Override
+        public Jugador createFromParcel(Parcel in) {
+            return new Jugador(in);
+        }
+
+        @Override
+        public Jugador[] newArray(int size) {
+            return new Jugador[size];
+        }
+    };
 
     public String getNombre() {
         return nombre;
@@ -40,4 +52,13 @@ public class Jugador  {
     }
 
 
+    @Override
+    public int describeContents() {
+        return 0;
+    }
+
+    @Override
+    public void writeToParcel(Parcel parcel, int i) {
+        parcel.writeString(nombre);
+    }
 }

@@ -1,0 +1,143 @@
+<?xml version="1.0" encoding="utf-8"?>
+<androidx.constraintlayout.widget.ConstraintLayout xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:layout_width="match_parent"
+    android:layout_height="match_parent"
+    tools:context=".vista.MenuCategorias_act">
+
+    <LinearLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        android:background="@drawable/fondo1"
+        android:orientation="vertical">
+
+        <RelativeLayout
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_marginBottom="20dp">
+
+
+            <ImageView
+                android:id="@+id/imageView"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="20dp"
+                app:srcCompat="@drawable/logo" />
+
+            <ScrollView
+                android:layout_width="match_parent"
+                android:layout_height="315dp"
+                android:layout_above="@id/btns"
+                android:layout_below="@id/imageView"
+                android:layout_marginTop="-1dp"
+                android:layout_marginBottom="1dp">
+
+                <LinearLayout
+                    android:id="@+id/cat_container"
+                    android:layout_width="match_parent"
+
+                    android:layout_height="match_parent"
+                    android:layout_marginTop="20dp"
+                    android:orientation="vertical">
+
+                    <!--LinearLayout
+
+                        style="@style/lyt_btns">
+
+                        <Button
+                            android:id="@+id/random"
+                            style="@style/btn_cat"
+                            android:layout_marginLeft="8dp"
+                            android:fontFamily="@font/fira_bold"
+                            android:text="Random"
+                            android:textSize="16sp" />
+
+                        <Button
+                            android:id="@+id/button2"
+                            style="@style/edit_btn"
+
+                            android:layout_gravity="center"
+                            android:backgroundTint="#414141"
+                            android:foreground="@drawable/btn_candado"
+                            android:foregroundGravity="center"
+                            android:gravity="center" />
+
+                    </LinearLayout-->
+
+
+                </LinearLayout>
+
+            </ScrollView>
+
+            <LinearLayout
+                android:id="@+id/btns"
+
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+
+                android:layout_centerHorizontal="true"
+                android:orientation="vertical">
+
+                <Button
+                    android:id="@+id/add"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:background="@drawable/btns"
+                    android:backgroundTint="#008F39"
+                    android:fontFamily="@font/fira_bold"
+                    android:padding="3dp"
+                    android:stateListAnimator="@null"
+                    android:text="Añadir nuevo"
+                    android:textSize="16sp"
+                    app:cornerRadius="0dp" />
+
+                <LinearLayout
+                    android:layout_width="match_parent"
+                    android:layout_height="match_parent"
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginTop="20dp"
+                    android:layout_marginRight="30dp"
+                    android:orientation="horizontal">
+
+
+                    <Button
+                        android:id="@+id/regresar"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginRight="10dp"
+                        android:layout_weight="0.5 "
+                        android:background="@drawable/btns"
+                        android:backgroundTint="#414141"
+                        android:fontFamily="@font/fira_bold"
+                        android:padding="3dp"
+                        android:stateListAnimator="@null"
+                        android:text="Regresar"
+                        android:textSize="16sp"
+                        app:cornerRadius="0dp" />
+
+                    <Button
+                        android:id="@+id/bancoPreguntas"
+                        android:layout_width="0dp"
+                        android:layout_height="match_parent"
+                        android:layout_marginLeft="10dp"
+                        android:layout_weight="0.5"
+                        android:background="@drawable/btns"
+                        android:backgroundTint="#F4A020"
+                        android:fontFamily="@font/fira_bold"
+                        android:padding="3dp"
+                        android:stateListAnimator="@null"
+                        android:text="Banco Preguntas"
+                        android:textSize="16sp" />
+                </LinearLayout>
+            </LinearLayout>
+        </RelativeLayout>
+
+
+    </LinearLayout>
+
+</androidx.constraintlayout.widget.ConstraintLayout>

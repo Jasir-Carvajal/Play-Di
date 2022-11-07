@@ -3,7 +3,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     package="com.example.tallervideojuego">
 
-    <uses-permission android:name="android.permission.INTERNET"/>
+    <uses-permission android:name="android.permission.INTERNET" />
 
     <application
         android:allowBackup="true"
@@ -15,6 +15,9 @@
         android:supportsRtl="true"
         android:theme="@style/Theme.AppCompat.NoActionBar"
         tools:targetApi="31">
+        <activity
+            android:name=".Menu_act"
+            android:exported="false" />
         <activity
             android:name=".vista.Registrar_act"
             android:exported="false" />
@@ -28,7 +31,7 @@
             </intent-filter>
         </activity>
         <activity
-            android:name=".vista.Menu_act"
+            android:name=".vista.MenuCategorias_act"
             android:exported="false">
 
             <!-- <intent-filter> -->
