@@ -18,8 +18,7 @@ import com.example.tallervideojuego.modelo.entidades.Carta;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 import com.example.tallervideojuego.vista.EditarCarta_act;
-import com.example.tallervideojuego.vista.EditarCategoria_act;
-import com.example.tallervideojuego.vista.Menu_act;
+import com.example.tallervideojuego.vista.MenuCategorias_act;
 
 import java.util.ArrayList;
 
@@ -172,7 +171,7 @@ public class BancoPreguntasControler extends Controlador{
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(act, Menu_act.class);
+                Intent intent = new Intent(act, MenuCategorias_act.class);
                 act.startActivity(intent);
             }
         };

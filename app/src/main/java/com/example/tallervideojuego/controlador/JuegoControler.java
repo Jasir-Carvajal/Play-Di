@@ -12,9 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
+import com.example.tallervideojuego.modelo.RandomPlayer;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Carta;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
+import com.example.tallervideojuego.modelo.entidades.Jugador;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 
 import java.util.ArrayList;
@@ -47,14 +49,20 @@ public class JuegoControler extends Controlador {
 
     private Categoria categoria;
 
-    private ArrayList<String> listaJugadores;
+//    private ArrayList<String> listaJugadores;
+    private ArrayList<Jugador> listaJugadores;
     private ArrayList<Carta> listaCartas;
 
-    private ArrayList<String> listaJugadoresUsados = new ArrayList<>();
+    private ArrayList<Jugador> listaJugadoresUsados = new ArrayList<>();
+//    private ArrayList<String> listaJugadoresUsados = new ArrayList<>();
     private ArrayList<Carta> listaCartasUsadas = new ArrayList<>();
     private ArrayList<Integer> listaFondosUsados = new ArrayList<>();
 
     private Random random = new Random();
+
+//    private RandomPlayer randomPlayer = new RandomPlayer();
+
+    private Jugador[] jugadores;
 
     /**
      * Constructor de la clase
@@ -73,11 +81,16 @@ public class JuegoControler extends Controlador {
         txtReto = this.act.findViewById(R.id.txtReto);
         txtCastigo = this.act.findViewById(R.id.txtCastigo);
 
-        listaJugadores = this.act.getIntent().getStringArrayListExtra("lista");
+        listaJugadores = this.act.getIntent().getParcelableArrayListExtra("lista");
+//        listaJugadores = this.act.getIntent().getParcelableArrayListExtra("lista");
         id = act.getIntent().getIntExtra("id",0);
 
         registroCategorias = new Registro(Categoria.class);
         registroRelacion = new RegistroCat_Car();
+
+        fillJugadores();
+
+        RandomPlayer.setJugadores(jugadores);
 
         setCategoria();
 
@@ -169,18 +182,21 @@ public class JuegoControler extends Controlador {
             int cantidadCartas = listaCartas.size();
 
             //Se saca un numero random
-            int jugadorRandom = random.nextInt(cantidadJugadores);
+            Jugador jugadorRandom = RandomPlayer.RANDOM();
+//            int jugadorRandom = random.nextInt(cantidadJugadores);
             int cartaRandom = random.nextInt(cantidadCartas);
             int fondoRandom = random.nextInt(3);
 
             //Se asignan los valores en la pantalla
-            txtJugador.setText(listaJugadores.get(jugadorRandom));
+            txtJugador.setText(jugadorRandom.getNombre());
+//            txtJugador.setText(listaJugadores.get(jugadorRandom));
             txtReto.setText(listaCartas.get(cartaRandom).getReto());
             txtCastigo.setText(listaCartas.get(cartaRandom).getCastigo());
             cambiarFondo(fondoRandom);
 
             //Se guardan los datos que salieron
-            listaJugadoresUsados.add(listaJugadores.get(jugadorRandom));
+            listaJugadoresUsados.add(jugadorRandom);
+//            listaJugadoresUsados.add(listaJugadores.get(jugadorRandom));
             listaCartasUsadas.add(listaCartas.get(cartaRandom));
             listaFondosUsados.add(fondoRandom);
 
@@ -193,7 +209,7 @@ public class JuegoControler extends Controlador {
             numeroRetoActual++;
 
             //Se buscan los datos que ya salieron
-            String jugador = listaJugadoresUsados.get(numeroRetoActual);
+            String jugador = listaJugadoresUsados.get(numeroRetoActual).getNombre();
             Carta carta = listaCartasUsadas.get(numeroRetoActual);
             int fondo = listaFondosUsados.get(numeroRetoActual);
 
@@ -213,7 +229,7 @@ public class JuegoControler extends Controlador {
         numeroRetoActual--;
 
         //Busca los valores que ya habían salido
-        String jugador = listaJugadoresUsados.get(numeroRetoActual);
+        String jugador = listaJugadoresUsados.get(numeroRetoActual).getNombre();
         Carta carta = listaCartasUsadas.get(numeroRetoActual);
         int fondo = listaFondosUsados.get(numeroRetoActual);
 
@@ -243,12 +259,13 @@ public class JuegoControler extends Controlador {
         }
     }
 
-    /**
-     * MÉTODO para crear un mensaje por Toast
-     * @param text texto para el mensaje
-     */
-    public void message(String text){
-        Toast.makeText(act, text, Toast.LENGTH_SHORT).show();
+
+    public void fillJugadores(){
+        jugadores = new Jugador[listaJugadores.size()];
+
+        for (int i = 0; i < listaJugadores.size(); i++) {
+            jugadores[i] = listaJugadores.get(i);
+        }
     }
 
 }

@@ -12,14 +12,11 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.bace.Controlador;
-import com.example.tallervideojuego.modelo.AdapterCategorías;
 import com.example.tallervideojuego.modelo.AdapterJugadores;
-import com.example.tallervideojuego.modelo.entidades.Categoria;
+import com.example.tallervideojuego.modelo.entidades.Jugador;
 import com.example.tallervideojuego.vista.Jugar_act;
-import com.example.tallervideojuego.vista.Menu_act;
 
 import java.util.ArrayList;
-import java.util.Collections;
 
 public class AddJugadoresControler extends Controlador {
 
@@ -38,7 +35,7 @@ public class AddJugadoresControler extends Controlador {
 
     private int id;
 
-    private ArrayList<String> listaJugadores;
+    private ArrayList<Jugador> listaJugadores;
 
     private AdapterJugadores adapterJugadores;
     private int alto;
@@ -105,7 +102,8 @@ public class AddJugadoresControler extends Controlador {
                     //Se comprueba que el jugador ya no haya sido agregado
                     if (comprobarJugador(txtJugador.getText().toString())){
                         //Se agrega el jugador, se actualiza el arraylist y se limpian los campos de texto
-                        listaJugadores.add(0,txtJugador.getText().toString());
+                        Jugador jugador = new Jugador(txtJugador.getText().toString());
+                        listaJugadores.add(0,jugador);
                         updateAdapter(listaJugadores);
                         limpiar();
                     } else {
@@ -132,7 +130,7 @@ public class AddJugadoresControler extends Controlador {
                     Intent intent = new Intent(act, Jugar_act.class);
 
                     intent.putExtra("id",id);
-                    intent.putStringArrayListExtra("lista",listaJugadores);
+                    intent.putParcelableArrayListExtra("lista",listaJugadores);
 
                     act.startActivity(intent);
                 } else {
@@ -173,7 +171,7 @@ public class AddJugadoresControler extends Controlador {
      * Este método actualiza el adapter se llama cada vez que se hace un cambio a  la lista de jugadores
      * @param lista_usable lista de jugadores actualizada
      */
-    private void updateAdapter(ArrayList<String> lista_usable) {
+    private void updateAdapter(ArrayList<Jugador> lista_usable) {
         adapterJugadores = new AdapterJugadores(act,lista_usable,this);
         listJ.setAdapter(adapterJugadores);
     }
@@ -185,7 +183,7 @@ public class AddJugadoresControler extends Controlador {
      */
     private boolean comprobarJugador(String jugador){
         for (int i = 0; i < listaJugadores.size(); i++) {
-            if(listaJugadores.get(i).equalsIgnoreCase(jugador)){
+            if(listaJugadores.get(i).getNombre().equalsIgnoreCase(jugador)){
                 return false;
             }
         }

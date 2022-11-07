@@ -177,6 +177,12 @@ public class EditarCartaControler extends Controlador {
                     } else {
                         categoriasRelacionadas.add(categoria);
 
+                        for (Categoria categoria2:categoriasEliminadas){
+                            if (categoria2 == categoria){
+                                categoriasEliminadas.remove(categoria2);
+                            }
+                        }
+
                         updateAdapter(categoriasRelacionadas);
                     }
 

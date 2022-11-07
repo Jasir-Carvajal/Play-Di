@@ -4,7 +4,6 @@ import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -14,7 +13,7 @@ import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
-import com.example.tallervideojuego.vista.Menu_act;
+import com.example.tallervideojuego.vista.MenuCategorias_act;
 
 import java.util.ArrayList;
 
@@ -118,9 +117,9 @@ public class EditarCategoriasControler extends Controlador {
                             cat.setTitulo(txtTitulo.getText().toString().trim());
 
                             registro.update(cat);
+                            Intent intent = new Intent(act, MenuCategorias_act.class);
+                            act.startActivity(intent);
                             regresar();
-                            //Intent intent = new Intent(act, Menu_act.class);
-                            //act.startActivity(intent);
                         } else message("Este nombre ya existe");
 
                     }else {
@@ -130,9 +129,9 @@ public class EditarCategoriasControler extends Controlador {
                         Entidad old = registro.search("titulo",cat.getTitulo());
                         if (old == null){
                             registro.add(cat);
+                            Intent intent = new Intent(act, MenuCategorias_act.class);
+                            act.startActivity(intent);
                             regresar();
-                            //Intent intent = new Intent(act, Menu_act.class);
-                            //act.startActivity(intent);
                         } else message("Este nombre ya existe");
 
                     }
@@ -155,7 +154,7 @@ public class EditarCategoriasControler extends Controlador {
             public void onClick(View view) {
                 if (isNew){
                     registro.delete(cat);
-                    Intent intent = new Intent(act, Menu_act.class);
+                    Intent intent = new Intent(act, MenuCategorias_act.class);
                     act.startActivity(intent);
                 }else {
                     cat.setRegistroCat_car(registroRelacion);

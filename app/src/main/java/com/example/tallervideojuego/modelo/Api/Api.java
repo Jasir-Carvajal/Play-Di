@@ -28,7 +28,6 @@ public class Api {
 
     public String login(String email, String password) throws IOException {
 
-
         RequestBody formBody = new FormBody.Builder()
                 .add("email", email)
                 .add("password", password)
@@ -76,10 +75,13 @@ public class Api {
 
 
         Call call = client.newCall(request);
+
         Response response = call.execute();
+
 
         return response.body().string();
 
     }
+
 
 }
