@@ -28,30 +28,14 @@ public class Api {
 
     public String login(String email, String password) throws IOException {
 
-        RequestBody formBody = new FormBody.Builder()
-                .add("email", email)
-                .add("password", password)
-                .build();
-
-        Request request = new Request.Builder()
-                .url("http://playdi.ml/api/login")
-                .header("Accept", "application/json")
-                .addHeader("User-Agent", "OkHttp Headers.java")
-                .addHeader("Content-Type", "application/x-www-form-urlencoded")
-                .post(formBody)
-                .build();
-
-
-        Call call = client.newCall(request);
-        Response response = call.execute();
-
+        Login login = new Login(email, password);
+        login.start();
         try {
-            JSONObject res = new JSONObject(response.body().string());
-            token = res.getString("token");
-            return token;
-        } catch (JSONException e) {
+            login.join();
+            return login.getRes();
+        } catch (InterruptedException e) {
             e.printStackTrace();
-            return "false";
+            return e.getMessage();
         }
 
 
@@ -59,27 +43,16 @@ public class Api {
 
     public String register(String name,String email, String password) throws IOException {
 
-        RequestBody formBody = new FormBody.Builder()
-                .add("name", name)
-                .add("email", email)
-                .add("password", password)
-                .build();
+        Register register = new Register(name, email,  password);
+        register.start();
+        try {
+            register.join();
+            return register.getRes();
+        } catch (InterruptedException e) {
+            e.printStackTrace();
+            return e.getMessage();
+        }
 
-        Request request = new Request.Builder()
-                .url("http://playdi.ml/api/register")
-                .header("Accept", "application/json")
-                .addHeader("User-Agent", "OkHttp Headers.java")
-                .addHeader("Content-Type", "application/x-www-form-urlencoded")
-                .post(formBody)
-                .build();
-
-
-        Call call = client.newCall(request);
-
-        Response response = call.execute();
-
-
-        return response.body().string();
 
     }
 

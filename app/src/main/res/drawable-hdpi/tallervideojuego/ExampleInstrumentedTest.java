@@ -25,7 +25,7 @@ public class ExampleInstrumentedTest {
     public void useAppContext() throws  IOException {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
-        Login api = new Login();
+        //Login api = new Login();
         assertEquals(true, api.post("http://playdi.ml/api/login/") );
 
     }
