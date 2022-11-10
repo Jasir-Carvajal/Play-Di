@@ -1,5 +1,6 @@
 package com.example.tallervideojuego.modelo;
 
+import android.annotation.SuppressLint;
 import android.app.AlertDialog;
 import android.view.LayoutInflater;
 
@@ -9,24 +10,21 @@ import com.example.tallervideojuego.R;
 
 public class LoadingDialog {
 
-    private AppCompatActivity act;
-    private AlertDialog alertDialog;
+    private final AlertDialog alertDialog;
 
+    @SuppressLint("InflateParams")
     public LoadingDialog(AppCompatActivity act) {
-        this.act = act;
+        AlertDialog.Builder builder = new AlertDialog.Builder(act);
+
+        LayoutInflater inflater = act.getLayoutInflater();
+        builder.setView(inflater.inflate(R.layout.loading_dialog, null));
+        builder.setCancelable(true);
+
+        alertDialog = builder.create();
     }
 
     public void starLoadingDialog(){
-        if (alertDialog==null){
-            AlertDialog.Builder builder = new AlertDialog.Builder(act);
-
-            LayoutInflater inflater = act.getLayoutInflater();
-            builder.setView(inflater.inflate(R.layout.loading_dialog, null));
-            builder.setCancelable(true);
-
-            alertDialog = builder.create();
             alertDialog.show();
-        }
     }
 
     public void dismissDialog(){

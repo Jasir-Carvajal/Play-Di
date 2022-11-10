@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
@@ -18,15 +19,17 @@ import com.example.tallervideojuego.vista.Registrar_act;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.common.util.concurrent.FutureCallback;
 
+import java.util.Objects;
+
 public class LoginControler extends Controlador {
 
-    private AppCompatActivity act;
-    private Button btnLogin, btnRegistrarse;
-    private TextInputEditText txtCorreo, txtPassword;
-    private TextView txtRecuperar;
+    private final AppCompatActivity act;
+    private final Button btnLogin, btnRegistrarse;
+    private final  TextInputEditText txtCorreo, txtPassword;
+    private final TextView txtRecuperar;
 
-    private Api api;
-    private LoadingDialog loadingDialog;
+    private final Api api;
+    private final LoadingDialog loadingDialog;
 
     /**
      * Constructor de la clase
@@ -58,41 +61,38 @@ public class LoginControler extends Controlador {
     }
 
     public View.OnClickListener login(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+        return view -> {
 //                Intent intent = new Intent(act, Menu_act.class);
 //                act.startActivity(intent);
 
-                String correo = txtCorreo.getText().toString().trim();
-                String password = txtPassword.getText().toString().trim();
-                String retorno;
+            String correo = Objects.requireNonNull(txtCorreo.getText()).toString().trim();
+            String password = Objects.requireNonNull(txtPassword.getText()).toString().trim();
+            String retorno;
 
-                if (correo.isEmpty() || password.isEmpty()) {
-                    message("Debe de llenar todos los campos");
-                }else if(!isValidEmail()){
-                    txtCorreo.setError("Correo invalido");
-                } else {
-                    loadingDialog.starLoadingDialog();
+            if (correo.isEmpty() || password.isEmpty()) {
+                message("Debe de llenar todos los campos");
+            }else if(!isValidEmail()){
+                txtCorreo.setError("Correo invalido");
+            } else {
+                loadingDialog.starLoadingDialog();
 
-                       api.login(correo, password, new FutureCallback<String>() {
-                            @Override
-                            public void onSuccess(String retorno) {
-                                //este metodo para poder interactuar con la interface se debe declarar externamente
-                                onLoginSuccess(retorno);
-                            }
+                   api.login(correo, password, new FutureCallback<String>() {
+                        @Override
+                        public void onSuccess(String retorno) {
+                            //este metodo para poder interactuar con la interface se debe declarar externamente
+                            onLoginSuccess(retorno);
+                        }
 
-                            @Override
-                            public void onFailure(Throwable t) {
+                        @Override
+                        public void onFailure(@NonNull Throwable t) {
 
-                            }
-                        });
-
-
-                }
+                        }
+                    });
 
 
             }
+
+
         };
     }
     //WorkerThread para poder hacer uso de act
@@ -118,17 +118,14 @@ public class LoginControler extends Controlador {
 
 
     public View.OnClickListener registrar(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(act, Registrar_act.class);
-                act.startActivity(intent);
-            }
+        return view -> {
+            Intent intent = new Intent(act, Registrar_act.class);
+            act.startActivity(intent);
         };
     }
 
     public boolean isValidEmail() {
-        String correo = txtCorreo.getText().toString().trim();
+        String correo = Objects.requireNonNull(txtCorreo.getText()).toString().trim();
 
         return (Patterns.EMAIL_ADDRESS.matcher(correo).matches());
     }
