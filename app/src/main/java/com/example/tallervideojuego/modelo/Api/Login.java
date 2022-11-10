@@ -46,7 +46,8 @@ public class Login extends Thread{
                     this.res = res.getString("token");
                 } catch (JSONException e) {
                     e.printStackTrace();
-                    res = response.body().string();
+//                    res = response.body().string();
+                    res = "false";
                 } catch (IOException e) {
                     e.printStackTrace();
                 }

@@ -66,6 +66,7 @@ public class RegistrarControler extends Controlador {
                 }else if(!isValidEmail()){
                     txtCorreo.setError("Correo invalido");
                 } else {
+                    loadingDialog.starLoadingDialog();
                     try {
                        retorno = api.register(nombre,correo,password);;
                        System.out.println(retorno);
@@ -75,6 +76,7 @@ public class RegistrarControler extends Controlador {
                            txtCorreo.setError("Ya existe una cuenta con este correo");
                        } else{
 //                           Intent intent = new Intent(act, MenuCategorias_act.class);
+                           loadingDialog.dismissDialog();
                            Intent intent = new Intent(act, Login_act.class);
                            act.startActivity(intent);
                            regresar();

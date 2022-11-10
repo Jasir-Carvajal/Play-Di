@@ -17,6 +17,7 @@ import com.example.tallervideojuego.vista.Registrar_act;
 import com.google.android.material.textfield.TextInputEditText;
 
 import java.io.IOException;
+import java.util.logging.Handler;
 
 public class LoginControler extends Controlador {
 
@@ -73,16 +74,20 @@ public class LoginControler extends Controlador {
                 }else if(!isValidEmail()){
                     txtCorreo.setError("Correo invalido");
                 } else {
-                    //loadingDialog.starLoadingDialog();
+                    loadingDialog.starLoadingDialog();
                     try {
                         retorno = api.login(correo,password);;
                         System.out.println(retorno);
 
-                        if (retorno.equalsIgnoreCase("false")){
-                            //loadingDialog.dismissDialog();
+
+
+                        if (retorno!= null && retorno.equalsIgnoreCase("false")){
+                           // loadingDialog.dismissDialog();
+                            message("mensajito");
                             txtCorreo.setError("Datos incorrectos");
                             txtPassword.setError("Datos incorrectos",null);
                         } else{
+                            loadingDialog.dismissDialog();
                             Intent intent = new Intent(act, MenuCategorias_act.class);
                             act.startActivity(intent);
                             regresar();
