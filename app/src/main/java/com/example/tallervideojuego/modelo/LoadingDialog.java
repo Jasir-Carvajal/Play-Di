@@ -1,8 +1,6 @@
 package com.example.tallervideojuego.modelo;
 
-import android.app.Activity;
 import android.app.AlertDialog;
-import android.text.Layout;
 import android.view.LayoutInflater;
 
 import androidx.appcompat.app.AppCompatActivity;
@@ -19,14 +17,16 @@ public class LoadingDialog {
     }
 
     public void starLoadingDialog(){
-        AlertDialog.Builder builder = new AlertDialog.Builder(act);
+        if (alertDialog==null){
+            AlertDialog.Builder builder = new AlertDialog.Builder(act);
 
-        LayoutInflater inflater = act.getLayoutInflater();
-        builder.setView(inflater.inflate(R.layout.loading_dialog, null));
-        builder.setCancelable(true);
+            LayoutInflater inflater = act.getLayoutInflater();
+            builder.setView(inflater.inflate(R.layout.loading_dialog, null));
+            builder.setCancelable(true);
 
-        alertDialog = builder.create();
-        alertDialog.show();
+            alertDialog = builder.create();
+            alertDialog.show();
+        }
     }
 
     public void dismissDialog(){

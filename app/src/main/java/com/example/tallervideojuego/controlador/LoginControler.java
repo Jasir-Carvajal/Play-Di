@@ -6,6 +6,7 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
 
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
@@ -15,9 +16,7 @@ import com.example.tallervideojuego.modelo.LoadingDialog;
 import com.example.tallervideojuego.vista.MenuCategorias_act;
 import com.example.tallervideojuego.vista.Registrar_act;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.io.IOException;
-import java.util.logging.Handler;
+import com.google.common.util.concurrent.FutureCallback;
 
 public class LoginControler extends Controlador {
 
@@ -75,32 +74,48 @@ public class LoginControler extends Controlador {
                     txtCorreo.setError("Correo invalido");
                 } else {
                     loadingDialog.starLoadingDialog();
-                    try {
-                        retorno = api.login(correo,password);;
-                        System.out.println(retorno);
+
+                       api.login(correo, password, new FutureCallback<String>() {
+                            @Override
+                            public void onSuccess(String retorno) {
+                                //este metodo para poder interactuar con la interface se debe declarar externamente
+                                onLoginSuccess(retorno);
+                            }
+
+                            @Override
+                            public void onFailure(Throwable t) {
+
+                            }
+                        });
 
 
-
-                        if (retorno!= null && retorno.equalsIgnoreCase("false")){
-                           // loadingDialog.dismissDialog();
-                            message("mensajito");
-                            txtCorreo.setError("Datos incorrectos");
-                            txtPassword.setError("Datos incorrectos",null);
-                        } else{
-                            loadingDialog.dismissDialog();
-                            Intent intent = new Intent(act, MenuCategorias_act.class);
-                            act.startActivity(intent);
-                            regresar();
-                        }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
                 }
 
 
             }
         };
     }
+    //WorkerThread para poder hacer uso de act
+    @WorkerThread
+    public void onLoginSuccess(String retorno){
+        //indica que se ejecutara dentro del hilo con acceso a la interface
+        act.runOnUiThread(() -> {
+            if (retorno!= null && retorno.equalsIgnoreCase("false")){
+                loadingDialog.dismissDialog();
+                message("mensajito");
+
+                txtCorreo.setError("Datos incorrectos");
+                txtPassword.setError("Datos incorrectos",null);
+            } else{
+                loadingDialog.dismissDialog();
+                Intent intent = new Intent(act, MenuCategorias_act.class);
+                act.startActivity(intent);
+                regresar();
+            }
+        });
+    }
+
+
 
     public View.OnClickListener registrar(){
         return new View.OnClickListener() {

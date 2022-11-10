@@ -15,7 +15,6 @@ import java.util.Date;
 // */
 public  class Entidad {
 
-
     private int id;
     protected ContentValues contenido;
     public static String Tabla;
@@ -24,9 +23,12 @@ public  class Entidad {
         contenido = new ContentValues();
     }
 
-    protected void update(){
-        //Date currentTime = Calendar.getInstance().getTime();
-       // contenido.put("time_stamp", currentTime.toString());
+    protected void update(String accion,String tabla){
+       Registro cambios = new Registro("Cambios");
+        Date currentTime = Calendar.getInstance().getTime();
+
+        Cambios nuevo = new Cambios(tabla,getId(),accion,currentTime.toString());
+        cambios.add(nuevo);
     }
 
     public Entidad(int id) {
@@ -52,7 +54,5 @@ public  class Entidad {
     public void setId(int id) {
         this.id = id;
     }
-
-
 
 }

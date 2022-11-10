@@ -5,6 +5,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
@@ -12,10 +13,8 @@ import com.example.tallervideojuego.controlador.bace.Controlador;
 import com.example.tallervideojuego.modelo.Api.Api;
 import com.example.tallervideojuego.modelo.LoadingDialog;
 import com.example.tallervideojuego.vista.Login_act;
-import com.example.tallervideojuego.vista.MenuCategorias_act;
 import com.google.android.material.textfield.TextInputEditText;
-
-import java.io.IOException;
+import com.google.common.util.concurrent.FutureCallback;
 
 public class RegistrarControler extends Controlador {
     private AppCompatActivity act;
@@ -67,28 +66,44 @@ public class RegistrarControler extends Controlador {
                     txtCorreo.setError("Correo invalido");
                 } else {
                     loadingDialog.starLoadingDialog();
-                    try {
-                       retorno = api.register(nombre,correo,password);;
-                       System.out.println(retorno);
 
-                       if (retorno.equalsIgnoreCase("{\"status\":false,\"message\":\"validation error\",\"errors\":{\"email\":[\"The email has already been taken.\"]}}")){
-                           //loadingDialog.dismissDialog();
-                           txtCorreo.setError("Ya existe una cuenta con este correo");
-                       } else{
-//                           Intent intent = new Intent(act, MenuCategorias_act.class);
-                           loadingDialog.dismissDialog();
-                           Intent intent = new Intent(act, Login_act.class);
-                           act.startActivity(intent);
-                           regresar();
-                       }
-                    } catch (IOException e) {
-                        e.printStackTrace();
-                    }
+                      api.register(nombre, correo, password, new FutureCallback<String>() {
+                           @Override
+                           public void onSuccess(String result) {
+                               onRegSuccess(result);
+                           }
+
+                           @Override
+                           public void onFailure(Throwable t) {
+
+                           }
+                       });
+
+
                 }
 
             }
         };
     }
+
+    @WorkerThread
+    public void onRegSuccess(String retorno){
+        act.runOnUiThread(() -> {
+            System.out.println(retorno);
+
+            if (retorno.equalsIgnoreCase("{\"status\":false,\"message\":\"validation error\",\"errors\":{\"email\":[\"The email has already been taken.\"]}}")){
+                //loadingDialog.dismissDialog();
+                txtCorreo.setError("Ya existe una cuenta con este correo");
+            } else{
+//                           Intent intent = new Intent(act, MenuCategorias_act.class);
+                loadingDialog.dismissDialog();
+                Intent intent = new Intent(act, Login_act.class);
+                act.startActivity(intent);
+                regresar();
+            }
+        });
+    }
+
 
     public boolean isValidEmail() {
         String correo = txtCorreo.getText().toString().trim();

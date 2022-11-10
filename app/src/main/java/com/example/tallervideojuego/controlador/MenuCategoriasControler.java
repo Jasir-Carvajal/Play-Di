@@ -9,7 +9,6 @@ import android.widget.Button;
 import android.widget.LinearLayout;
 import android.widget.Toast;
 
-
 import androidx.appcompat.app.AppCompatActivity;
 import androidx.core.content.res.ResourcesCompat;
 
@@ -21,7 +20,6 @@ import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.vista.AddJugadores_act;
 import com.example.tallervideojuego.vista.BancoPreguntas_act;
 import com.example.tallervideojuego.vista.EditarCategoria_act;
-
 
 import java.util.ArrayList;
 
@@ -50,6 +48,8 @@ public final class MenuCategoriasControler extends Controlador{
         //random = this.act.findViewById(R.id.random);
         bancoPreguntas = this.act.findViewById(R.id.bancoPreguntas);
 
+        Registro cambios = new Registro("Cambios");
+        Toast.makeText(act, "Cambios:" +cambios.getEntidades().size(), Toast.LENGTH_SHORT).show();
 
         addButtons();
         setFunctions();

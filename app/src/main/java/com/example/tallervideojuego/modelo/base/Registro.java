@@ -4,9 +4,6 @@ import android.content.ContentValues;
 import android.database.Cursor;
 import android.database.sqlite.SQLiteDatabase;
 
-
-import com.example.tallervideojuego.modelo.entidades.Categoria;
-
 import java.util.ArrayList;
 import java.util.Arrays;
 import java.util.List;
@@ -68,20 +65,8 @@ public class Registro {
         columnas = new ArrayList<String>( (List<String>)Arrays.asList(cursor.getColumnNames()) );
     }
 
-    public boolean add( Entidad entidad){
-        entidad.update();
-        boolean res=false;
-        if (!listaEntidades.contains(entidad)) {
-            listaEntidades.add(entidad);
-            res = this.DB.insert(tabla, null, entidad.getContent()) > 0;
 
-        }
-        loadDb();
-        return res;
 
-    }
-
-    //busqueda personalizada por propiedad
     public Entidad search(String columna, Object value){
         if (columnas.contains(columna)){
             for (Entidad entidad:listaEntidades) {
@@ -93,13 +78,38 @@ public class Registro {
         return null;
     }
 
+    public boolean add( Cambios entidad){
+        boolean res=false;
+        res = this.DB.insert(tabla, null, entidad.getContent()) > 0;
+        loadDb();
+        return res;
+    }
+
+    public boolean add( Entidad entidad){
+
+        boolean res=false;
+        if (!listaEntidades.contains(entidad)) {
+            listaEntidades.add(entidad);
+            res = this.DB.insert(tabla, null, entidad.getContent()) > 0;
+
+        }
+        loadDb();
+        listaEntidades.get(0).update("add",tabla);
+        return res;
+
+    }
+
+    //busqueda personalizada por propiedad
+
+
     public void delete(Entidad entidad){
+        entidad.update("delete",tabla);
         listaEntidades.remove(entidad);
         this.DB.delete(tabla,"id="+entidad.getId(),null);
     }
 
     public void update(Entidad entidad){
-        entidad.update();
+        entidad.update("update",tabla);
         listaEntidades.set(getIndex(entidad.getId()),entidad);
         this.DB.update(tabla,entidad.getContent(),"id="+entidad.getId(),null);
     }
