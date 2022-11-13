@@ -21,6 +21,7 @@ import com.example.tallervideojuego.modelo.Adapters.AdapterMenuCategorias;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
+import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 import com.example.tallervideojuego.vista.AddJugadores_act;
 import com.example.tallervideojuego.vista.BancoPreguntas_act;
 import com.example.tallervideojuego.vista.EditarCategoria_act;
@@ -39,6 +40,7 @@ public final class MenuCategoriasControler extends Controlador{
     private ListView listAdapterCat;
 
     private Registro registroCategorias;
+    private RegistroCat_Car registroRelacion;
 
     private AdapterMenuCategorias adapterMenuCategorias;
 
@@ -54,6 +56,7 @@ public final class MenuCategoriasControler extends Controlador{
         this.act=act;
 
         registroCategorias = new Registro(Categoria.class);
+        registroRelacion = new RegistroCat_Car();
 
         btnAdd = this.act.findViewById(R.id.btnAdd);
         listAdapterCat = this.act.findViewById(R.id.listAdapterCat);
@@ -150,17 +153,18 @@ public final class MenuCategoriasControler extends Controlador{
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-//                    cat.setRegistroCat_car(registroRelacion);
-//                    ArrayList<Entidad> cartasRelacionadas = cat.getCartasDeCategoria();
-//
-//                    if(cartasRelacionadas.isEmpty()){
-//                        registro.delete(cat);
-//                        regresar();
-//                        //Intent intent = new Intent(act, Menu_act.class);
-//                        //act.startActivity(intent);
-//                    } else {
-//                        message("Esta categoría esta asignada, no se puede eliminar");
-//                    }
+
+                Categoria cat = (Categoria) entidad;
+
+                cat.setRegistroCat_car(registroRelacion);
+                ArrayList<Entidad> cartasRelacionadas = cat.getCartasDeCategoria();
+
+                if(cartasRelacionadas.isEmpty()){
+                    registroCategorias.delete(cat);
+                    update(registroCategorias.getEntidades());
+                } else {
+                    message("Esta categoría esta asignada, no se puede eliminar");
+                }
 
             }
         };
