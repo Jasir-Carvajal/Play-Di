@@ -11,7 +11,8 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
-import com.example.tallervideojuego.controlador.bace.Controlador;
+import com.example.tallervideojuego.controlador.base.Controlador;
+import com.example.tallervideojuego.modelo.Adapters.AdapterBancoPreguntas;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Carta;
@@ -41,10 +42,6 @@ public class BancoPreguntasControler extends Controlador{
     private Registro registroCategorias;
     private Registro registroCartas;
     private RegistroCat_Car registroRelacion;
-
-
-
-
 
     private ArrayAdapter<CharSequence> adapter;
     private ArrayList<String> catItems = new ArrayList<>();

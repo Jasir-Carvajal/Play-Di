@@ -17,8 +17,8 @@ public class MenuCategorias_act extends Vista {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_menu_categorias);
-        DataBase.setContext(getApplicationContext());
-        DataBase.setName("PlaydiDB");
+//        DataBase.setContext(getApplicationContext());
+//        DataBase.setName("PlaydiDB");
         controlador = new MenuCategoriasControler(this);
     }
 }

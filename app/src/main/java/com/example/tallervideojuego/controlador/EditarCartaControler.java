@@ -1,7 +1,6 @@
 package com.example.tallervideojuego.controlador;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -16,14 +15,13 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
-import com.example.tallervideojuego.controlador.bace.Controlador;
-import com.example.tallervideojuego.modelo.AdapterCategorías;
+import com.example.tallervideojuego.controlador.base.Controlador;
+import com.example.tallervideojuego.modelo.Adapters.AdapterCategorías;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Carta;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
-import com.example.tallervideojuego.vista.BancoPreguntas_act;
 
 import java.util.ArrayList;
 

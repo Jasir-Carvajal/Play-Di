@@ -1,4 +1,4 @@
-package com.example.tallervideojuego.controlador;
+package com.example.tallervideojuego.modelo.Adapters;
 
 import android.content.Context;
 import android.content.Intent;

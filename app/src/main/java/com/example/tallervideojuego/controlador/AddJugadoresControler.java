@@ -11,8 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
-import com.example.tallervideojuego.controlador.bace.Controlador;
-import com.example.tallervideojuego.modelo.AdapterJugadores;
+import com.example.tallervideojuego.controlador.base.Controlador;
+import com.example.tallervideojuego.modelo.Adapters.AdapterJugadores;
 import com.example.tallervideojuego.modelo.entidades.Jugador;
 import com.example.tallervideojuego.vista.Jugar_act;
 

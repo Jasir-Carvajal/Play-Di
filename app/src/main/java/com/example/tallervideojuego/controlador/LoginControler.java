@@ -11,10 +11,10 @@ import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
-import com.example.tallervideojuego.controlador.bace.Controlador;
+import com.example.tallervideojuego.controlador.base.Controlador;
 import com.example.tallervideojuego.modelo.Api.Api;
 import com.example.tallervideojuego.modelo.LoadingDialog;
-import com.example.tallervideojuego.vista.MenuCategorias_act;
+import com.example.tallervideojuego.vista.Menu_act;
 import com.example.tallervideojuego.vista.Registrar_act;
 import com.google.android.material.textfield.TextInputEditText;
 import com.google.common.util.concurrent.FutureCallback;
@@ -102,13 +102,12 @@ public class LoginControler extends Controlador {
         act.runOnUiThread(() -> {
             if (retorno!= null && retorno.equalsIgnoreCase("false")){
                 loadingDialog.dismissDialog();
-                message("mensajito");
 
                 txtCorreo.setError("Datos incorrectos");
                 txtPassword.setError("Datos incorrectos",null);
             } else{
                 loadingDialog.dismissDialog();
-                Intent intent = new Intent(act, MenuCategorias_act.class);
+                Intent intent = new Intent(act, Menu_act.class);
                 act.startActivity(intent);
                 regresar();
             }

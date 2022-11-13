@@ -9,7 +9,7 @@ import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
-import com.example.tallervideojuego.controlador.bace.Controlador;
+import com.example.tallervideojuego.controlador.base.Controlador;
 import com.example.tallervideojuego.modelo.Api.Api;
 import com.example.tallervideojuego.modelo.LoadingDialog;
 import com.example.tallervideojuego.vista.Login_act;
@@ -92,7 +92,7 @@ public class RegistrarControler extends Controlador {
             System.out.println(retorno);
 
             if (retorno.equalsIgnoreCase("{\"status\":false,\"message\":\"validation error\",\"errors\":{\"email\":[\"The email has already been taken.\"]}}")){
-                //loadingDialog.dismissDialog();
+                loadingDialog.dismissDialog();
                 txtCorreo.setError("Ya existe una cuenta con este correo");
             } else{
 //                           Intent intent = new Intent(act, MenuCategorias_act.class);
