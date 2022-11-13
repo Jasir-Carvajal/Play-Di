@@ -12,6 +12,7 @@ import com.example.tallervideojuego.modelo.Adapters.AdapterJugarCategoria;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
+import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 import com.example.tallervideojuego.vista.AddJugadores_act;
 
 import java.util.ArrayList;
@@ -23,6 +24,7 @@ public class JugarCategoriasControler extends Controlador {
     private ListView listaAdapterCat;
 
     private Registro registroCategorias;
+    private RegistroCat_Car registroCat_car;
 
     private AdapterJugarCategoria adapterJugarCategoria;
 
@@ -40,6 +42,8 @@ public class JugarCategoriasControler extends Controlador {
 
         registroCategorias = new Registro(Categoria.class);
 
+        registroCat_car = new RegistroCat_Car();
+
         adapterJugarCategoria = new AdapterJugarCategoria(this.act, registroCategorias.getListaEntidades(), this);
         listaAdapterCat.setAdapter(adapterJugarCategoria);
 
@@ -50,15 +54,25 @@ public class JugarCategoriasControler extends Controlador {
      * MÉTODO para la funcion de jugar (dirige a la pantalla de añadir jugadores)
      * @return Retorna el View.OnClickListener
      */
-    public View.OnClickListener onPlay(int id){
+    public View.OnClickListener onPlay(Entidad entidad){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                Intent intent = new Intent(act, AddJugadores_act.class);
 
-                intent.putExtra("id",id);
+                Categoria categoria = (Categoria) entidad;
+                categoria.setRegistroCat_car(registroCat_car);
 
-                act.startActivity(intent);
+
+                if (!categoria.getCartasDeCategoria().isEmpty()) {
+
+                    Intent intent = new Intent(act, AddJugadores_act.class);
+
+                    intent.putExtra("id", categoria.getId());
+
+                    act.startActivity(intent);
+                } else {
+                    message("Esta categoría no tiene ningún reto asociado");
+                }
 
             }
         };

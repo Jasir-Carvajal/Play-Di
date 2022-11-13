@@ -117,8 +117,8 @@ public class EditarCategoriasControler extends Controlador {
                             cat.setTitulo(txtTitulo.getText().toString().trim());
 
                             registro.update(cat);
-                            Intent intent = new Intent(act, MenuCategorias_act.class);
-                            act.startActivity(intent);
+//                            Intent intent = new Intent(act, MenuCategorias_act.class);
+//                            act.startActivity(intent);
                             regresar();
                         } else message("Este nombre ya existe");
 
@@ -129,8 +129,8 @@ public class EditarCategoriasControler extends Controlador {
                         Entidad old = registro.search("titulo",cat.getTitulo());
                         if (old == null){
                             registro.add(cat);
-                            Intent intent = new Intent(act, MenuCategorias_act.class);
-                            act.startActivity(intent);
+//                            Intent intent = new Intent(act, MenuCategorias_act.class);
+//                            act.startActivity(intent);
                             regresar();
                         } else message("Este nombre ya existe");
 

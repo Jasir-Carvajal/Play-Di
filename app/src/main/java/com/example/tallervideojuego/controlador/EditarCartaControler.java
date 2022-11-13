@@ -48,7 +48,7 @@ public class EditarCartaControler extends Controlador {
     private Registro registroCartas;
     private RegistroCat_Car registroRelacion;
 
-    private ArrayList<String> catItems = new ArrayList<>();
+    private ArrayList<String> catItemsAdapter = new ArrayList<>();
 
     private ArrayList<Categoria> categoriasRelacionadas = new ArrayList<>();
     private ArrayList<Categoria> categoriasEliminadas = new ArrayList<>();
@@ -88,13 +88,13 @@ public class EditarCartaControler extends Controlador {
         registroCartas = new Registro(Carta.class);
         registroRelacion = new RegistroCat_Car();
 
-        catItems = getStrings();
+        catItemsAdapter = getStrings();
 
 
         //////////SPINNER MANEJO/////////////
         spinnerCat = this.act.findViewById(R.id.spinner);
 
-        adapter = new ArrayAdapter(this.act, R.layout.style_spinner,catItems);
+        adapter = new ArrayAdapter(this.act, R.layout.style_spinner, catItemsAdapter);
         adapter.setDropDownViewResource(R.layout.style_dropdown_spinner);
         spinnerCat.setAdapter(adapter);
 
@@ -155,6 +155,7 @@ public class EditarCartaControler extends Controlador {
         miScrollView.setOnTouchListener(scrollTouch());
         listCat.setOnTouchListener(listViewTouch());
     }
+
 
 
     /**

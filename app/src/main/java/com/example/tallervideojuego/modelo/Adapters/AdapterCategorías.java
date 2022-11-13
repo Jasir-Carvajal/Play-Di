@@ -16,6 +16,7 @@ import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AdapterCategorías extends BaseAdapter {
 
@@ -27,6 +28,7 @@ public class AdapterCategorías extends BaseAdapter {
         this.context = context;
         this.lista = lista;
         this.controler = controler;
+
     }
 
 

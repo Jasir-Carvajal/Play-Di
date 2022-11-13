@@ -18,17 +18,22 @@ import com.example.tallervideojuego.modelo.entidades.Carta;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 
 import java.util.ArrayList;
+import java.util.Collections;
 
 public class AdapterJugarCategoria extends BaseAdapter {
 
-    Context context;
-    ArrayList<Entidad> lista;
-    JugarCategoriasControler controler;
+    private Context context;
+    private ArrayList<Entidad> lista;
+    private JugarCategoriasControler controler;
+
+
 
     public AdapterJugarCategoria(Context context, ArrayList<Entidad> lista, JugarCategoriasControler controler) {
         this.context = context;
         this.lista = lista;
         this.controler = controler;
+
+        Collections.reverse(this.lista);
     }
 
     //Devuelve el tamaño de la lista
@@ -52,11 +57,11 @@ public class AdapterJugarCategoria extends BaseAdapter {
 
     /**
      * Este método se utiliza para asignar el método play del controlador al boton correspondiente
-     * @param id La entidad que se va a enviar por el metodo onPlay
+     * @param entidad La entidad que se va a enviar por el metodo onPlay
      * @return Retorna el View.OnClickListener de play del controlador
      */
-    public View.OnClickListener play(int id){
-        return controler.onPlay(id);
+    public View.OnClickListener play(Entidad entidad){
+        return controler.onPlay(entidad);
     }
 
     @Override
@@ -66,10 +71,11 @@ public class AdapterJugarCategoria extends BaseAdapter {
             view = layoutInflater.inflate(R.layout.item_jugar_categoria,null);
         }
         //Se crea el boton de edit, se le asigna el texto y se cambia a la tipografia correcta
-        Button categoria = view.findViewById(R.id.btnJugarCategoria);
-        categoria.setOnClickListener(play(lista.get(i).getId()));
-        categoria.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
-        categoria.setText(((Categoria)lista.get(i)).getTitulo());
+
+            Button categoria = view.findViewById(R.id.btnJugarCategoria);
+            categoria.setOnClickListener(play(lista.get(i)));
+            categoria.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
+            categoria.setText(((Categoria) lista.get(i)).getTitulo());
 //        categoria.setBackgroundResource(R.color.orange);
 
 
