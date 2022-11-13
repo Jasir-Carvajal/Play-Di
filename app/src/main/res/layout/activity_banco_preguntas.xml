@@ -13,110 +13,99 @@
         android:background="@drawable/fondo2"
         android:orientation="vertical">
 
-        <ImageView
-            android:id="@+id/imageView4"
+        <RelativeLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginTop="0dp"
-            app:srcCompat="@drawable/logo" />
+            android:layout_height="match_parent">
 
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="wrap_content"
-            android:layout_marginLeft="30dp"
-            android:layout_marginTop="20dp"
-            android:layout_marginRight="30dp"
-            android:background="@drawable/btns"
-            android:backgroundTint="@color/purple_200"
-            android:orientation="vertical">
+            <TextView
+                android:id="@+id/textView12"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_marginTop="15dp"
+                android:fontFamily="@font/fira_bold"
+                android:text="EDITAR RETOS"
+                android:textAlignment="center"
+                android:textSize="30sp" />
+
+            <ImageView
+                android:id="@+id/imageView4"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView12"
+                app:srcCompat="@drawable/linea2" />
 
             <LinearLayout
+                android:id="@+id/lytFiltro"
                 android:layout_width="match_parent"
-                android:layout_height="match_parent"
-                android:layout_margin="15dp"
+                android:layout_height="wrap_content"
+                android:layout_below="@id/imageView4"
+                android:layout_marginLeft="30dp"
+                android:layout_marginTop="25dp"
+                android:layout_marginRight="30dp"
+                android:background="@drawable/btns"
+                android:backgroundTint="@color/purple_200"
                 android:orientation="vertical">
-
-                <TextView
-                    android:id="@+id/textView6"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="15dp"
-                    android:fontFamily="@font/fira_bold"
-                    android:text="SELECCIONE LA CATEGORIA"
-                    android:textColor="@color/white"
-                    android:textSize="16sp" />
-
-                <Spinner
-                    android:id="@+id/spinnerCat"
-                    android:textSize="16sp"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginBottom="20dp"
-                    android:background="@drawable/style_spinner"
-                    android:dropDownVerticalOffset="50dp" />
 
                 <LinearLayout
                     android:layout_width="match_parent"
                     android:layout_height="match_parent"
-                    android:orientation="horizontal">
+                    android:layout_margin="15dp"
+                    android:orientation="vertical">
 
-                    <Button
-                        android:id="@+id/btnAplicar"
-                        android:layout_width="wrap_content"
+                    <TextView
+                        android:id="@+id/textView6"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/btns"
-                        android:backgroundTint="@color/orange"
+                        android:layout_marginBottom="15dp"
                         android:fontFamily="@font/fira_bold"
-                        android:minHeight="42dip"
-                        android:text="Aplicar"
+                        android:text="SELECCIONE LA CATEGORIA"
+                        android:textColor="@color/white"
                         android:textSize="16sp" />
 
-                    <Button
-                        android:id="@+id/btnAgregar"
-                        android:layout_width="wrap_content"
+                    <Spinner
+                        android:id="@+id/spinnerCat"
+                        android:layout_width="match_parent"
                         android:layout_height="wrap_content"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="1"
-                        android:background="@drawable/btns"
-                        android:fontFamily="@font/fira_bold"
-                        android:minHeight="42dip"
-                        android:text="Agregar"
+                        android:layout_marginBottom="20dp"
+                        android:background="@drawable/style_spinner"
+                        android:dropDownVerticalOffset="50dp"
                         android:textSize="16sp" />
+
+                    <LinearLayout
+                        android:layout_width="match_parent"
+                        android:layout_height="match_parent"
+                        android:orientation="horizontal"/>
+
                 </LinearLayout>
 
             </LinearLayout>
-
-        </LinearLayout>
-
-        <LinearLayout
-            android:layout_width="match_parent"
-            android:layout_height="match_parent"
-            android:layout_marginTop="15dp"
-            android:layout_marginBottom="20dp"
-            android:orientation="vertical">
 
             <ListView
                 android:id="@+id/lista_categorias"
                 android:layout_width="match_parent"
                 android:layout_height="250dp"
+                android:layout_below="@id/lytFiltro"
                 android:layout_marginLeft="30dp"
+                android:layout_marginTop="20dp"
                 android:layout_marginRight="30dp" />
 
             <Button
-                android:id="@+id/btnRegresar"
+                android:id="@+id/btnAgregarRetos"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
+                android:layout_alignParentBottom="true"
+                android:layout_centerHorizontal="true"
                 android:layout_marginLeft="30dp"
                 android:layout_marginTop="30dp"
                 android:layout_marginRight="30dp"
+                android:layout_marginBottom="20dp"
                 android:background="@drawable/btns"
                 android:backgroundTint="@color/purple_200"
                 android:fontFamily="@font/fira_bold"
-                android:text="Regresar"
+                android:text="Agregar"
                 android:textSize="16sp" />
-        </LinearLayout>
+
+        </RelativeLayout>
 
     </LinearLayout>
 </androidx.constraintlayout.widget.ConstraintLayout>
