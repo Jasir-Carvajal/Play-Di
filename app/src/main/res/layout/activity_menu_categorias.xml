@@ -9,132 +9,54 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="match_parent"
-        android:background="@drawable/fondo1"
+        android:background="@drawable/fondo3"
         android:orientation="vertical">
 
         <RelativeLayout
-            android:layout_width="wrap_content"
+            android:layout_width="match_parent"
             android:layout_height="wrap_content"
+            android:layout_marginLeft="30dp"
+            android:layout_marginRight="30dp"
             android:layout_marginBottom="20dp">
 
-
-            <ImageView
-                android:id="@+id/imageView"
+            <TextView
+                android:id="@+id/textView9"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
-                app:srcCompat="@drawable/logo" />
+                android:fontFamily="@font/fira_bold"
+                android:text="AGREGAR CATEGORÍA"
+                android:textAlignment="center"
+                android:textColor="@color/ligth_yellow"
+                android:textSize="30sp" />
 
-            <ScrollView
+            <ImageView
+                android:id="@+id/imageView14"
                 android:layout_width="match_parent"
-                android:layout_height="315dp"
-                android:layout_above="@id/btns"
-                android:layout_below="@id/imageView"
-                android:layout_marginTop="-1dp"
-                android:layout_marginBottom="1dp">
+                android:layout_height="wrap_content"
+                android:layout_below="@id/textView9"
+                app:srcCompat="@drawable/linea2" />
 
-                <LinearLayout
-                    android:id="@+id/cat_container"
-                    android:layout_width="match_parent"
+            <ListView
+                android:id="@+id/listAdapterCat"
+                android:layout_width="match_parent"
+                android:layout_height="400dp"
+                android:layout_below="@id/imageView14"
+                android:layout_marginTop="50dp">
 
-                    android:layout_height="match_parent"
-                    android:layout_marginTop="20dp"
-                    android:orientation="vertical">
+            </ListView>
 
-                    <!--LinearLayout
-
-                        style="@style/lyt_btns">
-
-                        <Button
-                            android:id="@+id/random"
-                            style="@style/btn_cat"
-                            android:layout_marginLeft="8dp"
-                            android:fontFamily="@font/fira_bold"
-                            android:text="Random"
-                            android:textSize="16sp" />
-
-                        <Button
-                            android:id="@+id/button2"
-                            style="@style/edit_btn"
-
-                            android:layout_gravity="center"
-                            android:backgroundTint="#414141"
-                            android:foreground="@drawable/btn_candado"
-                            android:foregroundGravity="center"
-                            android:gravity="center" />
-
-                    </LinearLayout-->
-
-
-                </LinearLayout>
-
-            </ScrollView>
-
-            <LinearLayout
-                android:id="@+id/btns"
-
+            <Button
+                android:id="@+id/btnAdd"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_alignParentBottom="true"
+                android:background="@drawable/btns"
+                android:backgroundTint="@color/purple_200"
+                android:fontFamily="@font/fira_bold"
+                android:text="añadir nuevo"
+                android:textSize="20sp" />
 
-                android:layout_centerHorizontal="true"
-                android:orientation="vertical">
-
-                <Button
-                    android:id="@+id/add"
-                    android:layout_width="match_parent"
-                    android:layout_height="wrap_content"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="30dp"
-                    android:background="@drawable/btns"
-                    android:backgroundTint="#008F39"
-                    android:fontFamily="@font/fira_bold"
-                    android:padding="3dp"
-                    android:stateListAnimator="@null"
-                    android:text="Añadir nuevo"
-                    android:textSize="16sp"
-                    app:cornerRadius="0dp" />
-
-                <LinearLayout
-                    android:layout_width="match_parent"
-                    android:layout_height="match_parent"
-                    android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
-                    android:layout_marginRight="30dp"
-                    android:orientation="horizontal">
-
-
-                    <Button
-                        android:id="@+id/regresar"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginRight="10dp"
-                        android:layout_weight="0.5 "
-                        android:background="@drawable/btns"
-                        android:backgroundTint="#414141"
-                        android:fontFamily="@font/fira_bold"
-                        android:padding="3dp"
-                        android:stateListAnimator="@null"
-                        android:text="Regresar"
-                        android:textSize="16sp"
-                        app:cornerRadius="0dp" />
-
-                    <Button
-                        android:id="@+id/bancoPreguntas"
-                        android:layout_width="0dp"
-                        android:layout_height="match_parent"
-                        android:layout_marginLeft="10dp"
-                        android:layout_weight="0.5"
-                        android:background="@drawable/btns"
-                        android:backgroundTint="#F4A020"
-                        android:fontFamily="@font/fira_bold"
-                        android:padding="3dp"
-                        android:stateListAnimator="@null"
-                        android:text="Banco Preguntas"
-                        android:textSize="16sp" />
-                </LinearLayout>
-            </LinearLayout>
         </RelativeLayout>
 
 
