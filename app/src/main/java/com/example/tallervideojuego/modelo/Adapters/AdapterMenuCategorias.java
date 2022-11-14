@@ -96,11 +96,13 @@ public class AdapterMenuCategorias extends BaseAdapter {
         Button edit = view.findViewById(R.id.editar_card);
         edit.setOnClickListener(edit(lista.get(i)));
         edit.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
+        edit.setBackgroundTintList(context.getResources().getColorStateList(R.color.purple_500));
 
         //Se crea el boton de edit, se le asigna el texto y se cambia a la tipografia correcta
         Button del = view.findViewById(R.id.eliminar_card);
         del.setOnClickListener(delete(lista.get(i)));
         del.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
+        del.setBackgroundTintList(context.getResources().getColorStateList(R.color.purple_500));
 
 
         return view;
