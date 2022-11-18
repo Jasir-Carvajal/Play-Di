@@ -25,7 +25,6 @@ public class SyncDB  {
 
     public String makeJson()
     {
-        ArrayList<Entidad> nlista = cambios.getEntidades();
         Entidad cambio  = cambios.search(0);
         String  tabla = cambio.getContent().getAsString("tabla"),
                 fecha= cambio.getContent().getAsString("fecha"),

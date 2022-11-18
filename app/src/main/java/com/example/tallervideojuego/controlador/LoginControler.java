@@ -69,7 +69,7 @@ public class LoginControler extends Controlador {
                 System.out.println(result+"\n\n\n");
                 if(result.equals("200")){
                     Api.setToken(token);
-                    Intent intent = new Intent(act, MenuCategorias_act.class);
+                    Intent intent = new Intent(act, Menu_act.class);
                     act.startActivity(intent);
                     regresar();
                 }
@@ -125,7 +125,7 @@ public class LoginControler extends Controlador {
     }
     //WorkerThread para poder hacer uso de act
     @WorkerThread
-    public void onLoginSuccess(String retorno){
+    public void  onLoginSuccess(String retorno){
         //indica que se ejecutara dentro del hilo con acceso a la interface
         act.runOnUiThread(() -> {
             if (retorno!= null && retorno.equalsIgnoreCase("false")){
