@@ -6,16 +6,14 @@ import com.example.tallervideojuego.modelo.entidades.Carta;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 
-import org.json.JSONException;
-import org.json.JSONObject;
-
 import java.util.ArrayList;
 
-public class SyncDB extends Thread{
+public class SyncDB  {
     private Registro rCarta, rCat,rRel,cambios;
     private ArrayList<Entidad> lista;
 
     public SyncDB(){
+
         rCarta = new Registro(Carta.class);
         rCat = new Registro(Categoria.class);
         rRel = new RegistroCat_Car();
@@ -23,39 +21,45 @@ public class SyncDB extends Thread{
         lista = cambios.getEntidades();
     }
 
-    @Override
-    public void run() {
-        super.run();
 
-    }
 
     public String makeJson()
     {
-        String json="{";
-        for (int i = 0; i < lista.size(); i++) {
-            Entidad entidad = lista.get(i);
-            Integer id_relacionada = entidad.getContent().getAsInteger("id_Relacionado");
-            String tabla = entidad.getContent().getAsString("tabla");
-            String accion = entidad.getContent().getAsString("accion");
-            String fecha = entidad.getContent().getAsString("fecha");
+        ArrayList<Entidad> nlista = cambios.getEntidades();
+        Entidad cambio  = cambios.search(0);
+        String  tabla = cambio.getContent().getAsString("tabla"),
+                fecha= cambio.getContent().getAsString("fecha"),
+                accion= cambio.getContent().getAsString("accion"),
+                contenido= cambio.getContent().getAsString("contenido"),
+                id_relacionado= cambio.getContent().getAsString("id_relacionado");
 
-            json = json+" '"+entidad.getId()+"':{";
-            json+="'id_relacionada':"+id_relacionada+",";
-            json+="'tabla':'"+tabla+"',";
-            json+="'accion':'"+accion+"',";
-            json+="'fecha':'"+fecha+"'";
+        String cambioJSoon = "{ \"tabla\":\""+tabla+"\", \"fecha\":\""+fecha+"\",\"accion\":\""+accion+"\",  \"id_relacionado\":\""+id_relacionado+"\",\"contenido\":"+contenido+" }";
 
-            if (i < lista.size()-1)json = json+"},";
-            if (i == lista.size()-1)json = json+"}";
+
+        String json = "{ ";
+
+        json+="\"cartas\":[";
+
+        for (Entidad entidad:rCarta.getEntidades()) {
+            Carta carta = (Carta) entidad;
+            json+=carta.getJson()+",";
         }
-        json = json+"}";
-        try {
-            JSONObject jsonObject = new JSONObject(json);
-            return jsonObject.toString();
-        } catch (JSONException e) {
-            e.printStackTrace();
-            return "fail";
-        }
+        json = json.substring(0, json.length() - 1);
+        json+="],";
 
+        json+="\"categorias\":[";
+
+        for (Entidad entidad:rCat.getEntidades()) {
+            Categoria categoria = (Categoria) entidad;
+            json+=categoria.getJson()+",";
+        }
+        json = json.substring(0, json.length() - 1);
+
+        json+="],";
+        json+="\"cambio\":"+cambioJSoon;
+
+
+        json+="}";
+        return json;
     }
 }

@@ -24,17 +24,60 @@ import okhttp3.Response;
 
 public class Api {
 
-    final OkHttpClient client = new OkHttpClient();
-    private ExecutorService executor = Executors.newSingleThreadExecutor();
-    private ListeningExecutorService lExecService = MoreExecutors.listeningDecorator(executor);
+    private final static OkHttpClient client = new OkHttpClient();
+    private static ExecutorService executor = Executors.newSingleThreadExecutor();
+    private static ListeningExecutorService lExecService = MoreExecutors.listeningDecorator(executor);
 
-    private String token;
+    private static String token = "30|oVFV7b84rf3J5aTIwD2ycocYWTXpChxRdNolw5vY";
 
 
     public  Api(){
 
     }
 
+    public static void isToken(String token, FutureCallback<String> callback) {
+        ListenableFuture<String> asyncTask = lExecService.submit(() -> {
+            String res;
+
+            Request request = new Request.Builder()
+                    .url("http://playdi.ml/api/validate/")
+                    .header("Accept", "application/json")
+                    .addHeader("User-Agent", "OkHttp Headers.java")
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .header("Authorization", "Bearer "+token)
+                    .build();
+
+            try {
+                Call call = client.newCall(request);
+                Response response = call.execute();
+
+                try {
+                    JSONObject res_ = new JSONObject(response.body().string());
+
+                    System.out.println(res_.toString());
+                    res = res_.getString("res");
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                    res = "false";
+                } catch (IOException e) {
+                    e.printStackTrace();
+                    res = "false";
+                }
+
+            }catch (IOException e) {
+                e.printStackTrace();
+                res = "false";
+            }
+
+            return res;
+        });
+        Futures.addCallback(asyncTask,callback,lExecService);
+
+    }
+
+    public static void setToken(String token) {
+        Api.token=token;
+    }
 
 
     public void login(String email, String password, FutureCallback<String> callback)  {
@@ -59,6 +102,8 @@ public class Api {
 
                 try {
                     JSONObject res_ = new JSONObject(response.body().string());
+                    System.out.println(res_.toString());
+                    Api.token = res_.getString("token");
                     res = res_.getString("token");
                 } catch (JSONException e) {
                     e.printStackTrace();
@@ -100,6 +145,7 @@ public class Api {
             Call call = client.newCall(request);
 
             Response response = null;
+
             try {
                 response = call.execute();
             } catch (IOException e) {
@@ -114,26 +160,67 @@ public class Api {
                 e.printStackTrace();
                 res = e.getMessage();
             }
+            Api.token = new JSONObject(res).getString("token");
             return res;
         });
         Futures.addCallback(asyncTask,callback,lExecService);
 
-
-       /* Register register = new Register(name, email,  password);
-        register.start();
-        try {
-            while (register.getRes()==null){
-                Thread.sleep(100);
-            }
-            //register.join();
-            return register.getRes();
-        } catch (InterruptedException e) {
-            e.printStackTrace();
-            return e.getMessage();
-        }*/
-
-
     }
 
+    public void send_Cambios() {
 
+        ListenableFuture<JSONObject> asyncTask = lExecService.submit(() -> {
+            JSONObject res_ = null;
+            SyncDB syncDB = new SyncDB();
+            System.out.println("\n+++++++++\n");
+            System.out.println(syncDB.makeJson());
+            System.out.println("\n+++++++++\n");
+            String auth_token = "Bearer "+Api.token;
+
+            RequestBody formBody = new FormBody.Builder()
+                    .add("cambios", syncDB.makeJson())
+                    .build();
+
+            Request request = new Request.Builder()
+                    .url("http://playdi.ml/api/cambios")
+                    .header("Accept", "application/json")
+                    .header("Authorization", auth_token)
+                    .addHeader("User-Agent", "OkHttp Headers.java")
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .post(formBody)
+                    .build();
+
+            try {
+                Call call = client.newCall(request);
+                Response response = call.execute();
+                try {
+                    res_ = new JSONObject(response.body().string());
+
+                } catch (JSONException e) {
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+            }
+
+            return res_;
+
+        });
+        FutureCallback callback = new FutureCallback<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject result) {
+                System.out.println("\n+++++++++\n");
+                System.out.println(result.toString());
+                System.out.println("\n+++++++++\n");
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        };
+        Futures.addCallback(asyncTask, callback, lExecService);
+    }
 }

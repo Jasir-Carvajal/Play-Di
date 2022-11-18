@@ -147,7 +147,7 @@ public class BancoPreguntasControler extends Controlador{
             public void onClick(View view) {
                 registroCartas.delete(entidad);
                 Carta carta = (Carta) entidad;
-                carta.setRegistroCat_car(registroRelacion);
+
 
                 //Se obtiene la lista de categorias con las cuales la carta tiene una relacion
                 ArrayList<Categoria> categoriasRelacionadas = carta.getCategoriasDeCartas();

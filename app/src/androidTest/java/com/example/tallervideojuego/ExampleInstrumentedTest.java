@@ -9,11 +9,13 @@ import androidx.test.platform.app.InstrumentationRegistry;
 
 import com.example.tallervideojuego.modelo.Api.SyncDB;
 import com.example.tallervideojuego.modelo.base.DataBase;
+import com.example.tallervideojuego.modelo.entidades.Carta;
 
 import org.junit.Test;
 import org.junit.runner.RunWith;
 
 import java.io.IOException;
+import java.util.Calendar;
 
 /**
  * Instrumented test, which will execute on an Android device.
@@ -23,19 +25,31 @@ import java.io.IOException;
 @RunWith(AndroidJUnit4.class)
 public class ExampleInstrumentedTest {
     @Test
+    public void date() {
+        assertEquals(0, android.text.format.DateFormat.format("yyyy-MM-dd HH:mm:ss", Calendar.getInstance().getTime()));
+    }
+
+    @Test
+    public void carta() {
+        Carta carta = new Carta();
+        carta.setReto("r");
+        carta.setTitulo("t");
+        carta.setId(0);
+
+        System.out.println(carta.getJson().replaceAll("\"","'"));
+        assertEquals(true,carta.getJson() );
+    }
+
+    @Test
     public void useAppContext() throws  IOException {
         // Context of the app under test.
         Context appContext = InstrumentationRegistry.getInstrumentation().getTargetContext();
         DataBase.setContext(appContext);
         DataBase.setName("PlaydiDB");
-        //Api api = new Api();
 
         SyncDB syncDB = new SyncDB();
 
-
-
-
-        assertEquals(true, syncDB.makeJson() );
+        assertEquals(true,syncDB.makeJson() );
 
     }
 }

@@ -1,7 +1,6 @@
 package com.example.tallervideojuego.controlador;
 
 import android.annotation.SuppressLint;
-import android.content.Intent;
 import android.view.MotionEvent;
 import android.view.View;
 import android.widget.AdapterView;
@@ -23,7 +22,6 @@ import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Carta;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
-import com.example.tallervideojuego.vista.BancoPreguntas_act;
 
 import java.util.ArrayList;
 
@@ -139,7 +137,7 @@ public class EditarCartaControler extends Controlador {
         txtDescripcion.setText(carta.getReto());
         txtCastigo.setText(carta.getCastigo());
 
-        carta.setRegistroCat_car(registroRelacion);
+
 
         categoriasRelacionadas = carta.getCategoriasDeCartas();
 
@@ -235,7 +233,7 @@ public class EditarCartaControler extends Controlador {
                             carta.setTitulo(txtTitulo.getText().toString().trim());
                             carta.setReto(txtDescripcion.getText().toString().trim());
                             carta.setCastigo(txtCastigo.getText().toString().trim());
-                            carta.setRegistroCat_car(registroRelacion);
+
 
                             for (Categoria categoria:categoriasRelacionadas){
                                 carta.addCategoria(categoria);
@@ -267,7 +265,7 @@ public class EditarCartaControler extends Controlador {
                             registroCartas.add(carta);
 
                             carta = (Carta) registroCartas.getEntidades().get(0);
-                            carta.setRegistroCat_car(registroRelacion);
+
 
 
                             for (Categoria categoria:categoriasRelacionadas){

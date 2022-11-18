@@ -31,10 +31,10 @@ public class RegistroCat_Car extends Registro {
     }
     /** Añade una relacion a la tabla intermedia */
     public void addRelacion(int id_categoria, int id_carta){
-        ContentValues data = new ContentValues();
+        Entidad relacion = new Entidad();
+        ContentValues data = relacion.getContent();
         data.put("cartas_id",id_carta);
         data.put("categoria_id",id_categoria);
-        Entidad relacion = new Entidad();
         relacion.setContenido(data);
         if (validarRealcion(relacion)){
             add(relacion);

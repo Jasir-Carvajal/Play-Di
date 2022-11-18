@@ -53,6 +53,9 @@ public class Categoria extends Entidad {
         registroCat_car.deleteRelacion(this,carta);
     }
 
+
+
+
     @Override
     public String toString() {
         return "Categoria{" +

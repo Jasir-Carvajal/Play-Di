@@ -30,7 +30,8 @@ public class Registro {
 
 
     protected ArrayList<Entidad> listaEntidades;
-    protected SQLiteDatabase DB;
+    protected DataBase DB;
+    protected SQLiteDatabase sqliteDB;
     protected String tabla;
     protected ArrayList<String> columnas;
     protected Class hijo;
@@ -45,7 +46,7 @@ public class Registro {
             e.printStackTrace();
         }
         listaEntidades = new ArrayList<Entidad>();
-        this.DB = (new DataBase( null, 1)).getWritableDatabase();//crea Db
+        this.DB = DataBase.getInstans();//crea Db
         loadDb();//carga los datos a listaEntidades
         getColumnas();
     }
@@ -53,16 +54,19 @@ public class Registro {
 
 
     public Registro(String tabla) {//objetos genericos Entidad en el arraylsit sin posibilidad de casting
+
         this.tabla = tabla;
         listaEntidades = new ArrayList<Entidad>();
-        this.DB = (new DataBase( null, 1)).getWritableDatabase();
+        this.DB = DataBase.getInstans();//crea Db
         loadDb();
         getColumnas();
     }
 
     private void getColumnas(){
-        Cursor cursor = DB.rawQuery ("SELECT * FROM "+tabla+";" ,null);//carga las columnas de la base de datos
+        sqliteDB = DB.getWritableDatabase();
+        Cursor cursor = sqliteDB.rawQuery ("SELECT * FROM "+tabla+";" ,null);//carga las columnas de la base de datos
         columnas = new ArrayList<String>( (List<String>)Arrays.asList(cursor.getColumnNames()) );
+
     }
 
 
@@ -79,20 +83,24 @@ public class Registro {
     }
 
     public boolean add( Cambios entidad){
+        sqliteDB = DB.getWritableDatabase();
         boolean res=false;
-        res = this.DB.insert(tabla, null, entidad.getContent()) > 0;
+        res = this.sqliteDB.insert(tabla, null, entidad.getContent()) > 0;
+
         loadDb();
         return res;
+
     }
 
     public boolean add( Entidad entidad){
-
+        sqliteDB = DB.getWritableDatabase();
         boolean res=false;
         if (!listaEntidades.contains(entidad)) {
             listaEntidades.add(entidad);
-            res = this.DB.insert(tabla, null, entidad.getContent()) > 0;
+            res = this.sqliteDB.insert(tabla, null, entidad.getContent()) > 0;
 
         }
+
         loadDb();
         listaEntidades.get(0).update("add",tabla);
         return res;
@@ -103,15 +111,19 @@ public class Registro {
 
 
     public void delete(Entidad entidad){
+        sqliteDB = DB.getWritableDatabase();
         entidad.update("delete",tabla);
         listaEntidades.remove(entidad);
-        this.DB.delete(tabla,"id="+entidad.getId(),null);
+        this.sqliteDB.delete(tabla,"id="+entidad.getId(),null);
+
     }
 
     public void update(Entidad entidad){
+        sqliteDB = DB.getWritableDatabase();
         entidad.update("update",tabla);
         listaEntidades.set(getIndex(entidad.getId()),entidad);
-        this.DB.update(tabla,entidad.getContent(),"id="+entidad.getId(),null);
+        this.sqliteDB.update(tabla,entidad.getContent(),"id="+entidad.getId(),null);
+
     }
 
     private int getIndex(int id) {
@@ -138,7 +150,8 @@ public class Registro {
 
     //obtiene todos los datos de la base de datos y lo pasa al arraylist
     public void loadDb (){
-        Cursor cursor = DB.rawQuery ("SELECT * FROM "+tabla+" ORDER BY id DESC ;" ,null);
+        sqliteDB = DB.getWritableDatabase();
+        Cursor cursor = sqliteDB.rawQuery ("SELECT * FROM "+tabla+" ORDER BY id DESC ;" ,null);
         cursor.moveToFirst();
         listaEntidades = new ArrayList<Entidad>();
 
@@ -189,6 +202,7 @@ public class Registro {
             cursor.moveToNext();
         }
         cursor.close();
+
     }
 
     public ArrayList<Entidad> getListaEntidades() {

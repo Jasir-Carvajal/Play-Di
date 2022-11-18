@@ -1,6 +1,7 @@
 package com.example.tallervideojuego.controlador;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
@@ -36,6 +37,7 @@ public class LoginControler extends Controlador {
      *
      * @param act se refiere al Activity que corresponde este controlador
      */
+
     public LoginControler(AppCompatActivity act) {
         super(act);
         this.act = act;
@@ -49,10 +51,36 @@ public class LoginControler extends Controlador {
         txtRecuperar = this.act.findViewById(R.id.txtRecuperar);
 
         api = new Api();
-
+        //api.sendCambios();
         loadingDialog = new LoadingDialog(this.act);
 
         setFunctions();
+
+        SharedPreferences sharedPref = act.getSharedPreferences("playdi", act.MODE_PRIVATE);
+        String token = sharedPref.getString("token", "");
+
+        loadingDialog.starLoadingDialog();
+        System.out.println("token: "+token);
+        Api.isToken(token, new FutureCallback<String>() {
+            @Override
+            @WorkerThread
+            public void onSuccess(String result) {
+                loadingDialog.dismissDialog();
+                System.out.println(result+"\n\n\n");
+                if(result.equals("200")){
+                    Api.setToken(token);
+                    Intent intent = new Intent(act, MenuCategorias_act.class);
+                    act.startActivity(intent);
+                    regresar();
+                }
+            }
+            @Override
+            public void onFailure(Throwable t) {
+
+            }
+        });
+
+
     }
 
     public void setFunctions(){
@@ -107,6 +135,12 @@ public class LoginControler extends Controlador {
                 txtCorreo.setError("Datos incorrectos");
                 txtPassword.setError("Datos incorrectos",null);
             } else{
+
+                SharedPreferences sharedPref = act.getSharedPreferences("playdi", act.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("token", retorno);
+                editor.apply();
+
                 loadingDialog.dismissDialog();
                 Intent intent = new Intent(act, MenuCategorias_act.class);
                 act.startActivity(intent);
@@ -124,7 +158,7 @@ public class LoginControler extends Controlador {
         };
     }
 
-    public boolean isValidEmail() {
+    public boolean  isValidEmail() {
         String correo = Objects.requireNonNull(txtCorreo.getText()).toString().trim();
 
         return (Patterns.EMAIL_ADDRESS.matcher(correo).matches());

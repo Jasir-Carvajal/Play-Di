@@ -89,7 +89,6 @@ public class RegistrarControler extends Controlador {
     @WorkerThread
     public void onRegSuccess(String retorno){
         act.runOnUiThread(() -> {
-            System.out.println(retorno);
 
             if (retorno.equalsIgnoreCase("{\"status\":false,\"message\":\"validation error\",\"errors\":{\"email\":[\"The email has already been taken.\"]}}")){
                 //loadingDialog.dismissDialog();

@@ -3,8 +3,12 @@ package com.example.tallervideojuego.modelo.base;
 
 import android.content.ContentValues;
 
+import org.json.JSONException;
+import org.json.JSONObject;
+
 import java.util.Calendar;
 import java.util.Date;
+import java.util.UUID;
 
 /** Entidad
 // Clase generica de objetos posibles de almacenar en la base de Datos
@@ -15,28 +19,53 @@ import java.util.Date;
 // */
 public  class Entidad {
 
-    private int id;
+    protected int id;
     protected ContentValues contenido;
     public static String Tabla;
 
     public  Entidad() {
         contenido = new ContentValues();
+        contenido.put("global_ID", UUID.randomUUID().toString());
     }
 
     protected void update(String accion,String tabla){
-       Registro cambios = new Registro("Cambios");
+        Registro cambios = new Registro("Cambios");
         Date currentTime = Calendar.getInstance().getTime();
 
-        Cambios nuevo = new Cambios(tabla,getId(),accion,currentTime.toString());
+       CharSequence date = android.text.format.DateFormat.format("yyyy-MM-dd HH:mm:ss", currentTime);
+
+
+
+        Cambios nuevo = new Cambios(tabla,contenido.getAsString("global_ID"),accion,date.toString());
+        nuevo.setContenido(this.getJson());
         cambios.add(nuevo);
     }
 
     public Entidad(int id) {
-        this.id = id;
         contenido = new ContentValues();
+        this.id = id;
+
+
     }
     public ContentValues getContent() {
         return contenido;
+    }
+
+
+
+    public String getJson() {
+        try {
+            JSONObject res = new JSONObject();
+            res.put("id",id);
+            for (String dato:contenido.keySet()) {
+                res.put(dato,contenido.get(dato));
+            }
+            return res.toString();
+        } catch (JSONException e) {
+            e.printStackTrace();
+            return "";
+        }
+
     }
 
     public void setContenido(ContentValues contenido) {

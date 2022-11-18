@@ -10,6 +10,7 @@ import org.junit.Test;
 import java.io.IOException;
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.Calendar;
 
 /**
  * Example local unit test, which will execute on the development machine (host).
@@ -19,8 +20,9 @@ import java.util.Arrays;
 public class ExampleUnitTest {
     @Test
     public void testExample() {
-        assertEquals(0, 0);
+        assertEquals(0, android.text.format.DateFormat.format("yyyy-MM-dd HH:mm:ss", Calendar.getInstance().getTime()));
     }
+
 
     @Test
     public void log() throws IOException {

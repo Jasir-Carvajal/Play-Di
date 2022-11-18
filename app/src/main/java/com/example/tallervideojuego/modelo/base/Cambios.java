@@ -11,13 +11,14 @@ public class Cambios{
 
     }
 
-    public Cambios(String tabla, Integer id_Relacionado, String accion, String fecha){
+    public Cambios(String tabla, String id_Relacionado, String accion, String fecha){
         super();
         contenido = new ContentValues();
         setTablaRelacioanda(tabla);
         setIdRelacionado(id_Relacionado);
         setAccion(accion);
         setFecha(fecha);
+        setSync(0);
     }
 
     private void setFecha(String fecha) {
@@ -28,14 +29,20 @@ public class Cambios{
         contenido.put("accion",accion);
     }
 
-    private void setIdRelacionado(Integer id_relacionado) {
+    private void setIdRelacionado(String id_relacionado) {
         contenido.put("id_relacionado",id_relacionado);
+    }
+    public void setContenido(String contenido) {
+        this.contenido.put("contenido",contenido);
     }
 
     private void setTablaRelacioanda(String tabla) {
         contenido.put("tabla",tabla);
     }
 
+    public void getContenido() {
+        this.contenido.getAsString("contenido");
+    }
 
     private String getFecha() {
         return contenido.getAsString("fecha");
@@ -58,7 +65,7 @@ public class Cambios{
         return contenido;
     }
 
-    public void setContenido(ContentValues contenido) {
+    public void setContent(ContentValues contenido) {
         this.contenido = contenido;
     }
 
@@ -66,8 +73,16 @@ public class Cambios{
         return id;
     }
 
-    public static void setTabla(String tabla) {
+    public void setTabla(String tabla) {
         Tabla = tabla;
+    }
+
+    public void setSync(Integer sync) {
+        this.contenido.put("sync",sync);
+    }
+
+    public  Integer getSync() {
+        return contenido.getAsInteger("sync");
     }
 
     public void setId(int id) {

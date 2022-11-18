@@ -4,17 +4,15 @@ import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 
 import java.util.ArrayList;
-import java.util.Calendar;
-import java.util.Date;
 
 public class Carta extends Entidad {
 
     public static String Tabla = "Cartas";
     private RegistroCat_Car registroCat_car;
 
-    public Carta(String titulo, String reto, String castigo, int[] idCategorias) {
+    public Carta(String titulo, String reto, String castigo) {
         super();
-        registroCat_car = new RegistroCat_Car();
+
         setTitulo(titulo);
         setReto(reto);
         setCastigo(castigo);
@@ -22,10 +20,12 @@ public class Carta extends Entidad {
     }
     public Carta(){
         super();
+
     }
 
     public Carta(int id, String titulo, String reto, String castigo) {
         super(id);
+
         setTitulo(titulo);
         setReto(reto);
         setCastigo(castigo);
@@ -62,27 +62,51 @@ public class Carta extends Entidad {
         contenido.put("castigo", castigo);
     }
 
-    public void setRegistroCat_car(RegistroCat_Car registroCat_car) {
 
-        this.registroCat_car = registroCat_car;
-    }
 
     /** añade realcion entre la actual carta y una categoria */
     public void addCategoria(Categoria categoria){
-
+        registroCat_car = new RegistroCat_Car();
         registroCat_car.addRelacion(categoria.getId(),getId());
     }
 
     public void removeCategoria(Categoria categoria){
-
+        registroCat_car = new RegistroCat_Car();
         registroCat_car.deleteRelacion(categoria,this);
     }
 
     /** Obtine las categorias con las que esta relacionada */
     public ArrayList<Categoria> getCategoriasDeCartas(){
-
+        registroCat_car = new RegistroCat_Car();
         return  registroCat_car.search_categorias(getId());
     }
+
+    @Override
+    public String getJson() {
+        registroCat_car = new RegistroCat_Car();
+            String res ="{ \"id\": \" " + getId() + "\", " +
+                    "\"global_ID\":\"" + contenido.getAsString("global_ID") + "\" , " +
+                    "\"titulo\":\"" + getTitulo() + "\" , " +
+                    "\"reto\" : \"" + getReto() + "\" , " +
+                    "\"castigo\":\"" + getCastigo() + "\", ";
+
+        res+="\"Categorias\":[";
+        ArrayList<Categoria> listaCategorias = registroCat_car.search_categorias(getId());
+
+        if (listaCategorias.size
+                ()>0){
+
+            for (Categoria categoria:listaCategorias) {
+                res+=categoria.getJson()+",";
+            }
+            res = res.substring(0, res.length() - 1);
+        }
+
+        res+="]}";
+
+        return res;
+    }
+
 
     @Override
     public String toString() {
