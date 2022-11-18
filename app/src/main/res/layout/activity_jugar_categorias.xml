@@ -4,7 +4,7 @@
     xmlns:tools="http://schemas.android.com/tools"
     android:layout_width="match_parent"
     android:layout_height="match_parent"
-    tools:context=".vista.MenuCategorias_act">
+    tools:context=".vista.JugarCategorias_act">
 
     <LinearLayout
         android:layout_width="match_parent"
@@ -12,54 +12,34 @@
         android:background="@drawable/fondo3"
         android:orientation="vertical">
 
-        <RelativeLayout
+        <LinearLayout
             android:layout_width="match_parent"
-            android:layout_height="wrap_content"
+            android:layout_height="match_parent"
             android:layout_marginLeft="30dp"
             android:layout_marginRight="30dp"
-            android:layout_marginBottom="20dp">
+            android:orientation="vertical">
 
             <TextView
-                android:id="@+id/textView9"
+                android:id="@+id/textView11"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
                 android:layout_marginTop="20dp"
                 android:fontFamily="@font/fira_bold"
-                android:text="AGREGAR CATEGORÍA"
+                android:text="ELEGIR CATEGORÍA"
                 android:textAlignment="center"
-                android:textColor="@color/ligth_yellow"
                 android:textSize="30sp" />
 
             <ImageView
-                android:id="@+id/imageView14"
+                android:id="@+id/imageView13"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_below="@id/textView9"
                 app:srcCompat="@drawable/linea2" />
 
             <ListView
-                android:id="@+id/listAdapterCat"
-                android:layout_width="match_parent"
-                android:layout_height="400dp"
-                android:layout_below="@id/imageView14"
-                android:layout_marginTop="50dp">
-
-            </ListView>
-
-            <Button
-                android:id="@+id/btnAdd"
+                android:id="@+id/listaAdapterCat"
                 android:layout_width="match_parent"
                 android:layout_height="wrap_content"
-                android:layout_alignParentBottom="true"
-                android:background="@drawable/btns"
-                android:backgroundTint="@color/purple_200"
-                android:fontFamily="@font/fira_bold"
-                android:text="añadir nuevo"
-                android:textSize="20sp" />
-
-        </RelativeLayout>
-
-
+                android:layout_marginTop="50dp" />
+        </LinearLayout>
     </LinearLayout>
-
 </androidx.constraintlayout.widget.ConstraintLayout>

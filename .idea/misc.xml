@@ -14,14 +14,17 @@
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/activity_editar_carta.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/activity_editar_categoria.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/activity_jugar.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/activity_jugar_categorias.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/activity_login.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/activity_main.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/activity_menu.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/activity_menu_categorias.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/activity_registrar.xml" value="0.36666666666666664" />
-        <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/adapter_cards.xml" value="0.33" />
+        <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/adapter_cards.xml" value="0.25" />
+        <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/item_cards.xml" value="0.365625" />
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/item_cat.xml" value="0.33" />
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/item_jugador.xml" value="0.36666666666666664" />
+        <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/item_jugar_categoria.xml" value="0.365625" />
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/loading_dialog.xml" value="0.36666666666666664" />
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/style_dropdown_spinner.xml" value="0.20833333333333334" />
         <entry key="..\:/AndroidStudioProjects/TallerVideojuego/app/src/main/res/layout/style_spinner.xml" value="0.3" />

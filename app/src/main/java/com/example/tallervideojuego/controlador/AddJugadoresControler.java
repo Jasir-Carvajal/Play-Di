@@ -11,8 +11,8 @@ import android.widget.Toast;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
-import com.example.tallervideojuego.controlador.bace.Controlador;
-import com.example.tallervideojuego.modelo.AdapterJugadores;
+import com.example.tallervideojuego.controlador.base.Controlador;
+import com.example.tallervideojuego.modelo.Adapters.AdapterJugadores;
 import com.example.tallervideojuego.modelo.entidades.Jugador;
 import com.example.tallervideojuego.vista.Jugar_act;
 
@@ -29,7 +29,7 @@ public class AddJugadoresControler extends Controlador {
 
     private AppCompatActivity act;
 
-    private Button btnAgregar, btnRegresar, btnJugar;
+    private Button btnAgregar, btnJugar;
     private EditText txtJugador;
     private ListView listJ;
 
@@ -40,11 +40,6 @@ public class AddJugadoresControler extends Controlador {
     private AdapterJugadores adapterJugadores;
     private int alto;
 
-    public int size(float porcentaje){
-
-        return Math.round(porcentaje*alto);
-
-    }
 
     /**
      * Constructor de la clase
@@ -59,7 +54,6 @@ public class AddJugadoresControler extends Controlador {
         alto = displayMetrics.heightPixels;
 
         btnAgregar = this.act.findViewById(R.id.btnAgregar);
-        btnRegresar = this.act.findViewById(R.id.btnRegresar);
         btnJugar = this.act.findViewById(R.id.btnJugar);
 
         txtJugador = this.act.findViewById(R.id.txtJugador);
@@ -67,7 +61,7 @@ public class AddJugadoresControler extends Controlador {
         id = act.getIntent().getIntExtra("id",0);
 
         listJ = this.act.findViewById(R.id.listJ);
-        if (alto>2800 ) listJ.getLayoutParams().height = size(0.50F);
+        if (alto>2800 ) listJ.getLayoutParams().height = size(0.70F);
         if (alto>1900 && alto<2800) listJ.getLayoutParams().height = size(0.40F);
         if ( alto<1900) listJ.getLayoutParams().height = size(0.35F);
 
@@ -80,7 +74,6 @@ public class AddJugadoresControler extends Controlador {
      * Este método funciona para asignar los View.OnClickListener a los botones o elementos necesarios
      */
     public void setFunctions(){
-        btnRegresar.setOnClickListener(toReturn());
         btnAgregar.setOnClickListener(add());
         btnJugar.setOnClickListener(play());
     }
@@ -140,18 +133,6 @@ public class AddJugadoresControler extends Controlador {
         };
     }
 
-    /**
-     * MÉTODO para la funcion de regresar (regresa a la pantalla anterior)
-     * @return Retorna el View.OnClickListener
-     */
-    public View.OnClickListener toReturn(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                regresar();
-            }
-        };
-    }
 
     /**
      * MÉTODO para la funcion de eliminar un jugador
@@ -204,6 +185,13 @@ public class AddJugadoresControler extends Controlador {
      */
     public void limpiar(){
         txtJugador.setText("");
+    }
+
+
+    public int size(float porcentaje){
+
+        return Math.round(porcentaje*alto);
+
     }
 
 

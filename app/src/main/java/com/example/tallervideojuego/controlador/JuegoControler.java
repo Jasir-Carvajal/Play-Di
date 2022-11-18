@@ -1,17 +1,14 @@
 package com.example.tallervideojuego.controlador;
 
-import android.content.res.Resources;
-import android.graphics.drawable.Drawable;
 import android.view.View;
 import android.widget.ImageButton;
 import android.widget.LinearLayout;
 import android.widget.TextView;
-import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
-import com.example.tallervideojuego.controlador.bace.Controlador;
+import com.example.tallervideojuego.controlador.base.Controlador;
 import com.example.tallervideojuego.modelo.RandomPlayer;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Carta;
@@ -35,7 +32,7 @@ public class JuegoControler extends Controlador {
      */
 
     private AppCompatActivity act;
-    private LinearLayout lytJugar;
+    private LinearLayout lytJugar, lytPlayer, lytReto, lytCastigo;
     private ImageButton btnContinuar, btnRegresar;
     private TextView txtJugador, txtReto, txtCastigo;
 
@@ -73,6 +70,9 @@ public class JuegoControler extends Controlador {
         this.act = act;
 
         lytJugar = this.act.findViewById(R.id.lytJugar);
+        lytPlayer = this.act.findViewById(R.id.lytPlayer);
+        lytReto = this.act.findViewById(R.id.lytReto);
+        lytCastigo = this.act.findViewById(R.id.lytCastigo);
 
         btnContinuar = this.act.findViewById(R.id.btnContinuar);
         btnRegresar = this.act.findViewById(R.id.btnRegresar);
@@ -249,12 +249,24 @@ public class JuegoControler extends Controlador {
         switch (fondoRandom){
             case 0:
                 lytJugar.setBackgroundResource(R.drawable.fondo1);
+                lytReto.setBackgroundTintList(act.getResources().getColorStateList(R.color.orange));
+                lytCastigo.setBackgroundTintList(act.getResources().getColorStateList(R.color.orange));
+                btnContinuar.setBackgroundTintList(act.getResources().getColorStateList(R.color.green));
+                btnRegresar.setBackgroundTintList(act.getResources().getColorStateList(R.color.green));
                 break;
             case 1:
                 lytJugar.setBackgroundResource(R.drawable.fondo2);
+                lytReto.setBackgroundTintList(act.getResources().getColorStateList(R.color.green));
+                lytCastigo.setBackgroundTintList(act.getResources().getColorStateList(R.color.green));
+                btnContinuar.setBackgroundTintList(act.getResources().getColorStateList(R.color.purple_500));
+                btnRegresar.setBackgroundTintList(act.getResources().getColorStateList(R.color.purple_500));
                 break;
             case 2:
                 lytJugar.setBackgroundResource(R.drawable.fondo3);
+                lytReto.setBackgroundTintList(act.getResources().getColorStateList(R.color.purple_500));
+                lytCastigo.setBackgroundTintList(act.getResources().getColorStateList(R.color.purple_500));
+                btnContinuar.setBackgroundTintList(act.getResources().getColorStateList(R.color.orange));
+                btnRegresar.setBackgroundTintList(act.getResources().getColorStateList(R.color.orange));
                 break;
         }
     }

@@ -1,6 +1,7 @@
 package com.example.tallervideojuego.controlador;
 
 import android.content.Intent;
+import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.AdapterView;
 import android.widget.ArrayAdapter;
@@ -11,7 +12,8 @@ import android.widget.Spinner;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
-import com.example.tallervideojuego.controlador.bace.Controlador;
+import com.example.tallervideojuego.controlador.base.Controlador;
+import com.example.tallervideojuego.modelo.Adapters.AdapterBancoPreguntas;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Carta;
@@ -33,7 +35,7 @@ public class BancoPreguntasControler extends Controlador{
 
     private AppCompatActivity act;
 
-    private Button btnAplicar, btnAgregar, btnRegresar;
+    private Button btnAgregarRetos;
 
     private Spinner spinnerCat;
     private AdapterBancoPreguntas adapterBancoPreguntas;
@@ -42,15 +44,13 @@ public class BancoPreguntasControler extends Controlador{
     private Registro registroCartas;
     private RegistroCat_Car registroRelacion;
 
-
-
-
-
     private ArrayAdapter<CharSequence> adapter;
     private ArrayList<String> catItems = new ArrayList<>();
 
     private ListView listaE;
     private String itemSelected;
+
+    private int alto;
 
 
     /**
@@ -61,9 +61,7 @@ public class BancoPreguntasControler extends Controlador{
         super(act);
         this.act = act;
 
-        btnAplicar = this.act.findViewById(R.id.btnAplicar);
-        btnAgregar = this.act.findViewById(R.id.btnAgregar);
-        btnRegresar = this.act.findViewById(R.id.btnRegresar);
+        btnAgregarRetos = this.act.findViewById(R.id.btnAgregarRetos);
         listaE = this.act.findViewById(R.id.lista_categorias);
 
 
@@ -106,6 +104,14 @@ public class BancoPreguntasControler extends Controlador{
 
 
         update(registroCartas.getListaEntidades());
+
+        DisplayMetrics displayMetrics = new DisplayMetrics();
+        act.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
+        alto = displayMetrics.heightPixels;
+
+        if (alto>2800 ) listaE.getLayoutParams().height = size(0.70F);
+        if (alto>1900 && alto<2800) listaE.getLayoutParams().height = size(0.45F);
+        if ( alto<1900) listaE.getLayoutParams().height = size(0.35F);
     }
 
 
@@ -113,9 +119,7 @@ public class BancoPreguntasControler extends Controlador{
      * Este método funciona para asignar los View.OnClickListener a los botones o elementos necesarios
      */
     public void setFunctions(){
-        btnAgregar.setOnClickListener(add());
-        btnAplicar.setOnClickListener(apply());
-        btnRegresar.setOnClickListener(onReturn());
+        btnAgregarRetos.setOnClickListener(add());
     }
 
     /**
@@ -163,19 +167,6 @@ public class BancoPreguntasControler extends Controlador{
         };
     }
 
-    /**
-     * MÉTODO para la funcion de regresar (regresa a la pantalla anterior)
-     * @return Retorna el View.OnClickListener
-     */
-    public View.OnClickListener onReturn(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                Intent intent = new Intent(act, MenuCategorias_act.class);
-                act.startActivity(intent);
-            }
-        };
-    }
 
     /**
      * Este método actualiza el adapter se llama cada vez que se hace un cambio a  la lista de retos
@@ -204,23 +195,18 @@ public class BancoPreguntasControler extends Controlador{
      * MÉTODO para la funcion de aplicar el filtro de categoria
      * @return Retorna el View.OnClickListener
      */
-    public View.OnClickListener apply(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-               // Si en el spinner se tiene seleccionado "TODAS" se muestran todos los retos
-               if(itemSelected.equalsIgnoreCase("TODAS")) {
-                   update(registroCartas.getEntidades());
+    public void apply(){
+        // Si en el spinner se tiene seleccionado "TODAS" se muestran todos los retos
+        if(itemSelected.equalsIgnoreCase("TODAS")) {
+            update(registroCartas.getEntidades());
 
-               //Si no se muestran los retos relacionados a la categoria seleccionada
-               } else {
-                   Categoria categoria = (Categoria) registroCategorias.search("titulo", itemSelected);
-                   categoria.setRegistroCat_car(registroRelacion);
-                   ArrayList<Entidad> cartas = categoria.getCartasDeCategoria();
-                   update(cartas);
-               }
-            }
-        };
+        //Si no se muestran los retos relacionados a la categoria seleccionada
+        } else {
+            Categoria categoria = (Categoria) registroCategorias.search("titulo", itemSelected);
+            categoria.setRegistroCat_car(registroRelacion);
+            ArrayList<Entidad> cartas = categoria.getCartasDeCategoria();
+            update(cartas);
+        }
     }
 
     /**
@@ -238,6 +224,12 @@ public class BancoPreguntasControler extends Controlador{
         }
 
         return  listArray;
+    }
+
+    public int size(float porcentaje){
+
+        return Math.round(porcentaje*alto);
+
     }
 
 

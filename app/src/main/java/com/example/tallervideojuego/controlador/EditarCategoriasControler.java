@@ -1,6 +1,5 @@
 package com.example.tallervideojuego.controlador;
 
-import android.content.Intent;
 import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
@@ -8,14 +7,11 @@ import android.widget.EditText;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
-import com.example.tallervideojuego.controlador.bace.Controlador;
+import com.example.tallervideojuego.controlador.base.Controlador;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
-import com.example.tallervideojuego.vista.MenuCategorias_act;
-
-import java.util.ArrayList;
 
 public class EditarCategoriasControler extends Controlador {
 
@@ -24,7 +20,7 @@ public class EditarCategoriasControler extends Controlador {
      */
 
     private EditText txtTitulo;
-    private Button btnRegresar, btnGuardar,btnEliminar;
+    private Button btnGuardar, btnCancelar;
     private Registro registro;
     private RegistroCat_Car registroRelacion;
     private Categoria cat;
@@ -44,9 +40,8 @@ public class EditarCategoriasControler extends Controlador {
 
         txtTitulo = this.act.findViewById(R.id.txtTitulo);
 
-        btnRegresar = this.act.findViewById(R.id.btnRegresar);
         btnGuardar = this.act.findViewById(R.id.btnGuardar);
-        btnEliminar = this.act.findViewById(R.id.btnEliminar);
+        btnCancelar = this.act.findViewById(R.id.btnCancelar);
 
 
         setFunctions();
@@ -78,16 +73,15 @@ public class EditarCategoriasControler extends Controlador {
      * Este método funciona para asignar los View.OnClickListener a los botones o elementos necesarios
      */
     public void setFunctions(){
-        btnRegresar.setOnClickListener(toReturn());
         btnGuardar.setOnClickListener(saveTitle());
-        btnEliminar.setOnClickListener(eliminar());
+        btnCancelar.setOnClickListener(cancel());
     }
 
     /**
      * MÉTODO para la funcion de regresar (regresa a la pantalla anterior)
      * @return Retorna el View.OnClickListener
      */
-    public View.OnClickListener toReturn(){
+    public View.OnClickListener cancel(){
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
@@ -117,8 +111,8 @@ public class EditarCategoriasControler extends Controlador {
                             cat.setTitulo(txtTitulo.getText().toString().trim());
 
                             registro.update(cat);
-                            Intent intent = new Intent(act, MenuCategorias_act.class);
-                            act.startActivity(intent);
+//                            Intent intent = new Intent(act, MenuCategorias_act.class);
+//                            act.startActivity(intent);
                             regresar();
                         } else message("Este nombre ya existe");
 
@@ -129,8 +123,8 @@ public class EditarCategoriasControler extends Controlador {
                         Entidad old = registro.search("titulo",cat.getTitulo());
                         if (old == null){
                             registro.add(cat);
-                            Intent intent = new Intent(act, MenuCategorias_act.class);
-                            act.startActivity(intent);
+//                            Intent intent = new Intent(act, MenuCategorias_act.class);
+//                            act.startActivity(intent);
                             regresar();
                         } else message("Este nombre ya existe");
 
@@ -144,34 +138,34 @@ public class EditarCategoriasControler extends Controlador {
     }
 
 
-    /**
-     * MÉTODO para la funcion de eliminar la categoria
-     * @return Retorna el View.OnClickListener
-     */
-    public View.OnClickListener eliminar(){
-        return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
-                if (isNew){
-                    registro.delete(cat);
-                    Intent intent = new Intent(act, MenuCategorias_act.class);
-                    act.startActivity(intent);
-                }else {
-                    cat.setRegistroCat_car(registroRelacion);
-                    ArrayList<Entidad> cartasRelacionadas = cat.getCartasDeCategoria();
-
-                    if(cartasRelacionadas.isEmpty()){
-                        registro.delete(cat);
-                        regresar();
-                        //Intent intent = new Intent(act, Menu_act.class);
-                        //act.startActivity(intent);
-                    } else {
-                        message("Esta categoría esta asignada, no se puede eliminar");
-                    }
-                }
-
-            }
-        };
-    }
+//    /**
+//     * MÉTODO para la funcion de eliminar la categoria
+//     * @return Retorna el View.OnClickListener
+//     */
+//    public View.OnClickListener eliminar(){
+//        return new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//                if (isNew){
+//                    registro.delete(cat);
+//                    Intent intent = new Intent(act, MenuCategorias_act.class);
+//                    act.startActivity(intent);
+//                }else {
+//                    cat.setRegistroCat_car(registroRelacion);
+//                    ArrayList<Entidad> cartasRelacionadas = cat.getCartasDeCategoria();
+//
+//                    if(cartasRelacionadas.isEmpty()){
+//                        registro.delete(cat);
+//                        regresar();
+//                        //Intent intent = new Intent(act, Menu_act.class);
+//                        //act.startActivity(intent);
+//                    } else {
+//                        message("Esta categoría esta asignada, no se puede eliminar");
+//                    }
+//                }
+//
+//            }
+//        };
+//    }
 
 }

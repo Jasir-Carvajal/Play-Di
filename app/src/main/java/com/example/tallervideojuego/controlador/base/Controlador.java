@@ -1,4 +1,4 @@
-package com.example.tallervideojuego.controlador.bace;
+package com.example.tallervideojuego.controlador.base;
 
 import android.util.TypedValue;
 import android.widget.Toast;
