@@ -113,6 +113,7 @@ public class EditarCategoriasControler extends Controlador {
                             registro.update(cat);
 //                            Intent intent = new Intent(act, MenuCategorias_act.class);
 //                            act.startActivity(intent);
+
                             regresar();
                         } else message("Este nombre ya existe");
 
@@ -125,6 +126,7 @@ public class EditarCategoriasControler extends Controlador {
                             registro.add(cat);
 //                            Intent intent = new Intent(act, MenuCategorias_act.class);
 //                            act.startActivity(intent);
+
                             regresar();
                         } else message("Este nombre ya existe");
 

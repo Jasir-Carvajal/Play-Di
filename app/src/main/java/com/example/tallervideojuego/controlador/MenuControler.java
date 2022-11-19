@@ -8,6 +8,7 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.base.Controlador;
+import com.example.tallervideojuego.modelo.Api.Api;
 import com.example.tallervideojuego.vista.BancoPreguntas_act;
 import com.example.tallervideojuego.vista.JugarCategorias_act;
 import com.example.tallervideojuego.vista.Login_act;
@@ -25,7 +26,8 @@ public class MenuControler extends Controlador {
      */
     public MenuControler(AppCompatActivity act) {
         super(act);
-
+        Api api =  new Api();
+        api.sincronizar();
         this.act=act;
 
         btnJugar = this.act.findViewById(R.id.btnJugar);
@@ -77,6 +79,7 @@ public class MenuControler extends Controlador {
             public void onClick(View view) {
                 Intent intent = new Intent(act, Login_act.class);
                 act.startActivity(intent);
+                Api.setToken("");
                 regresar();
             }
         };

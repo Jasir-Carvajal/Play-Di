@@ -17,6 +17,8 @@ public class Login_act extends Vista {
         DataBase.setName("PlaydiDB");
         setContentView(R.layout.activity_login);
 
+
+
         controlador = new LoginControler(this);
 
     }

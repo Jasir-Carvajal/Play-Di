@@ -7,6 +7,7 @@ import com.google.common.util.concurrent.ListenableFuture;
 import com.google.common.util.concurrent.ListeningExecutorService;
 import com.google.common.util.concurrent.MoreExecutors;
 
+import org.json.JSONArray;
 import org.json.JSONException;
 import org.json.JSONObject;
 
@@ -27,12 +28,12 @@ public class Api {
     private final static OkHttpClient client = new OkHttpClient();
     private static ExecutorService executor = Executors.newSingleThreadExecutor();
     private static ListeningExecutorService lExecService = MoreExecutors.listeningDecorator(executor);
-
-    private static String token = "30|oVFV7b84rf3J5aTIwD2ycocYWTXpChxRdNolw5vY";
+    private SyncDB syncDB;
+    private static String token = "4|tyJYYd2QOu8BBeGZwFpqq1i8Mdrsyt5TRtmZA6uc";
 
 
     public  Api(){
-
+        syncDB = new SyncDB();
     }
 
     public static void isToken(String token, FutureCallback<String> callback) {
@@ -167,20 +168,22 @@ public class Api {
 
     }
 
-    public void send_Cambios() {
+    public void sincronizar() {
 
         ListenableFuture<JSONObject> asyncTask = lExecService.submit(() -> {
             JSONObject res_ = null;
-            SyncDB syncDB = new SyncDB();
-            System.out.println("\n+++++++++\n");
-            System.out.println(syncDB.makeJson());
-            System.out.println("\n+++++++++\n");
+
+
             String auth_token = "Bearer "+Api.token;
-
-            RequestBody formBody = new FormBody.Builder()
-                    .add("cambios", syncDB.makeJson())
-                    .build();
-
+            String json = syncDB.makeJson();
+            RequestBody formBody;
+            if (json.length()>0){
+                 formBody = new FormBody.Builder()
+                        .add("cambios", json)
+                        .build();
+            }else {
+                 formBody = new FormBody.Builder().build();
+            }
             Request request = new Request.Builder()
                     .url("http://playdi.ml/api/cambios")
                     .header("Accept", "application/json")
@@ -194,15 +197,21 @@ public class Api {
                 Call call = client.newCall(request);
                 Response response = call.execute();
                 try {
+
                     res_ = new JSONObject(response.body().string());
 
                 } catch (JSONException e) {
+                    System.out.println(response.body().string());
+
                     e.printStackTrace();
                 } catch (IOException e) {
+                    System.out.println(response.body().string());
+
                     e.printStackTrace();
                 }
             } catch (IOException e) {
                 e.printStackTrace();
+                System.out.println(json);
             }
 
             return res_;
@@ -211,9 +220,28 @@ public class Api {
         FutureCallback callback = new FutureCallback<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
-                System.out.println("\n+++++++++\n");
-                System.out.println(result.toString());
-                System.out.println("\n+++++++++\n");
+                try {
+
+                    switch (result.getInt("type")){
+                        case 0:
+                            JSONArray cartas = result.getJSONArray("cartas");
+                            JSONArray categorias = result.getJSONArray("categorias");
+                            JSONArray cambios = result.getJSONArray("cambios");
+                            syncDB.sync(cartas,categorias,cambios);
+
+
+                            break;
+                        case 1:
+
+                            return;
+                        case 2:
+                            return;
+                        default:
+                            break;
+                    }
+                }catch (JSONException e){
+                    e.printStackTrace();
+                }
             }
 
             @Override
