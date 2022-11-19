@@ -249,17 +249,17 @@ public class JuegoControler extends Controlador {
         switch (fondoRandom){
             case 0:
                 lytJugar.setBackgroundResource(R.drawable.fondo1);
-                lytReto.setBackgroundTintList(act.getResources().getColorStateList(R.color.orange));
-                lytCastigo.setBackgroundTintList(act.getResources().getColorStateList(R.color.orange));
-                btnContinuar.setBackgroundTintList(act.getResources().getColorStateList(R.color.green));
-                btnRegresar.setBackgroundTintList(act.getResources().getColorStateList(R.color.green));
+                lytReto.setBackgroundTintList(act.getResources().getColorStateList(R.color.green));
+                lytCastigo.setBackgroundTintList(act.getResources().getColorStateList(R.color.green));
+                btnContinuar.setBackgroundTintList(act.getResources().getColorStateList(R.color.orange));
+                btnRegresar.setBackgroundTintList(act.getResources().getColorStateList(R.color.orange));
                 break;
             case 1:
                 lytJugar.setBackgroundResource(R.drawable.fondo2);
-                lytReto.setBackgroundTintList(act.getResources().getColorStateList(R.color.green));
-                lytCastigo.setBackgroundTintList(act.getResources().getColorStateList(R.color.green));
-                btnContinuar.setBackgroundTintList(act.getResources().getColorStateList(R.color.purple_500));
-                btnRegresar.setBackgroundTintList(act.getResources().getColorStateList(R.color.purple_500));
+                lytReto.setBackgroundTintList(act.getResources().getColorStateList(R.color.purple_500));
+                lytCastigo.setBackgroundTintList(act.getResources().getColorStateList(R.color.purple_500));
+                btnContinuar.setBackgroundTintList(act.getResources().getColorStateList(R.color.green));
+                btnRegresar.setBackgroundTintList(act.getResources().getColorStateList(R.color.green));
                 break;
             case 2:
                 lytJugar.setBackgroundResource(R.drawable.fondo3);

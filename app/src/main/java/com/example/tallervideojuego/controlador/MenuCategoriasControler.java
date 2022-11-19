@@ -175,6 +175,9 @@ public final class MenuCategoriasControler extends Controlador{
      * @param lista_usable lista de retos actualizada
      */
     private void update(ArrayList<Entidad> lista_usable) {
+
+        lista_usable.remove(lista_usable.size()-1);
+
         adapterMenuCategorias = new AdapterMenuCategorias(act, lista_usable, this);
         listAdapterCat.setAdapter(adapterMenuCategorias);
     }
@@ -186,103 +189,7 @@ public final class MenuCategoriasControler extends Controlador{
     }
 
 
-    //    private void addButtons() {
-    //
-    //        ArrayList<Entidad> lista = registroCategorias.getEntidades();
-    //        System.out.println(lista.size());
-    //
-    //        personalizados = new LinearLayout[lista.size()];
-    //
-    //
-    //        ContextThemeWrapper contextCat = new ContextThemeWrapper(act, R.style.btn_cat);
-    //        ContextThemeWrapper contextEdit = new ContextThemeWrapper(act, R.style.edit_btn);
-    //        ContextThemeWrapper contextLyt = new ContextThemeWrapper(act, R.style.lyt_personalizados);
-    //
-    //        LinearLayout.LayoutParams params_lyt =  new LinearLayout.LayoutParams(ViewGroup.LayoutParams.MATCH_PARENT, LinearLayout.LayoutParams.MATCH_PARENT);
-    //        params_lyt.leftMargin = dp(40);//
-    //        params_lyt.topMargin = dp(10);
-    //        params_lyt.rightMargin = dp(40);//
-    //
-    //        LinearLayout.LayoutParams params_btn_cat = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
-    //        params_btn_cat.width=0;
-    //        params_btn_cat.weight= (float) 0.65;
-    //        params_btn_cat.topMargin =dp(8);
-    //        params_btn_cat.bottomMargin = dp(8);
-    //
-    //
-    //        LinearLayout.LayoutParams params_btn_edit = new LinearLayout.LayoutParams(0, LinearLayout.LayoutParams.WRAP_CONTENT);
-    //        params_btn_edit.width=0;
-    //        params_btn_edit.weight= (float) 0.35;
-    //        //params_btn_edit.height = 120;
-    //        params_btn_edit.topMargin = dp(8);
-    //        params_btn_edit.rightMargin = dp(8);
-    //        params_btn_edit.bottomMargin = dp(8);
-    //
-    //
-    //
-    //        Categoria random = (Categoria) registroCategorias.search("titulo","Random");
-    //        int indexOfRandom = lista.indexOf(random);
-    //
-    //        personalizados[indexOfRandom] = new LinearLayout(contextLyt);
-    //        Button btn_random = new Button(contextCat);
-    //
-    //
-    //
-    //        //aplica parametros de layaout anteriormente obtenidos
-    //        btn_random.setLayoutParams(params_btn_cat);
-    //
-    //        personalizados[indexOfRandom].setLayoutParams(params_lyt);
-    //
-    //        //quita sombra
-    //        btn_random.setStateListAnimator(null);
-    //
-    //        //coloca titulos
-    //        btn_random.setText(random.getTitulo());
-    //
-    //        btn_random.setTypeface(ResourcesCompat.getFont(act.getApplicationContext(), R.font.fira_bold));
-    //        btn_random.setOnClickListener(onPlay(random.getId()));
-    //
-    //        //añade a la vista
-    //        personalizados[indexOfRandom] .addView(btn_random,0);
-    //        container.addView(personalizados[indexOfRandom] );
-    //
-    //        for (Entidad entidad:lista) {
-    //            if (lista.indexOf(entidad)!=indexOfRandom){
-    //            //obtiene los parametros de layaout de los botones ya definodos
-    //            Categoria cat = (Categoria)entidad;
-    //            personalizados[lista.indexOf(entidad)] = new LinearLayout(contextLyt);
-    //            Button btn_cat = new Button(contextCat);
-    //            Button btn_editar = new Button(contextEdit);
-    //
-    //            btn_editar.setBackgroundResource(R.drawable.btns);
-    //            //aplica parametros de layaout anteriormente obtenidos
-    //            btn_cat.setLayoutParams(params_btn_cat);
-    //            btn_editar.setLayoutParams(params_btn_edit);
-    //            personalizados[lista.indexOf(entidad)] .setLayoutParams(params_lyt);
-    //
-    //            //quita sombra
-    //            btn_cat.setStateListAnimator(null);
-    //            btn_editar.setStateListAnimator(null);
-    //            //coloca titulos
-    //            btn_cat.setText(cat.getTitulo());
-    //            btn_editar.setText("Editar");
-    //
-    //            btn_cat.setTypeface(ResourcesCompat.getFont(act.getApplicationContext(), R.font.fira_bold));
-    //            btn_editar.setTypeface(ResourcesCompat.getFont(act.getApplicationContext(), R.font.fira_bold));
-    //
-    //            btn_cat.setOnClickListener(onPlay(cat.getId()));
-    //            btn_editar.setOnClickListener(onEdit(cat.getId()));
-    //
-    //            //añade a la vista
-    //            personalizados[lista.indexOf(entidad)] .addView(btn_cat,0);
-    //            personalizados[lista.indexOf(entidad)] .addView(btn_editar,1);
-    //            container.addView(personalizados[lista.indexOf(entidad)] );
-    //            }
-    //        }
-    //
-    //        //Toast.makeText(act, "Prueba btns", Toast.LENGTH_SHORT).show();
 
-    //    }
 
 
 

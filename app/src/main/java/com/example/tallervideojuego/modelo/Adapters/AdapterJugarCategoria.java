@@ -76,6 +76,12 @@ public class AdapterJugarCategoria extends BaseAdapter {
             categoria.setOnClickListener(play(lista.get(i)));
             categoria.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
             categoria.setText(((Categoria) lista.get(i)).getTitulo());
+
+            if(((Categoria) lista.get(i)).getTitulo().equalsIgnoreCase("Random")){
+                categoria.setBackgroundTintList(context.getResources().getColorStateList(R.color.orange));
+            } else {
+                categoria.setBackgroundTintList(context.getResources().getColorStateList(R.color.purple_500));
+            }
 //        categoria.setBackgroundResource(R.color.orange);
 
 

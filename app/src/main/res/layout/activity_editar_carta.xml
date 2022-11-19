@@ -22,19 +22,31 @@
                 android:layout_height="wrap_content"
                 android:orientation="vertical">
 
+                <TextView
+                    android:id="@+id/textView14"
+                    android:layout_width="match_parent"
+                    android:layout_height="wrap_content"
+                    android:layout_marginTop="15dp"
+                    android:fontFamily="@font/fira_bold"
+                    android:text="EDITAR RETOS"
+                    android:textAlignment="center"
+                    android:textColor="@color/ligth_yellow"
+                    android:textSize="30sp" />
+
                 <ImageView
                     android:id="@+id/imageView5"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
-                    android:layout_marginTop="20dp"
-                    app:srcCompat="@drawable/logo" />
+                    android:layout_marginLeft="30dp"
+                    android:layout_marginRight="30dp"
+                    app:srcCompat="@drawable/linea2" />
 
                 <LinearLayout
                     android:id="@+id/MenuLayout"
                     android:layout_width="match_parent"
                     android:layout_height="wrap_content"
                     android:layout_marginLeft="30dp"
-                    android:layout_marginTop="20dp"
+                    android:layout_marginTop="40dp"
                     android:layout_marginRight="30dp"
                     android:background="@drawable/btns"
                     android:backgroundTint="@color/purple_200"
