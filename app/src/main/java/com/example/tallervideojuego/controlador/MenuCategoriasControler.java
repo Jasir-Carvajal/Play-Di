@@ -156,12 +156,12 @@ public final class MenuCategoriasControler extends Controlador{
 
                 Categoria cat = (Categoria) entidad;
 
-                cat.setRegistroCat_car(registroRelacion);
+//                cat.setRegistroCat_car(registroRelacion);
                 ArrayList<Entidad> cartasRelacionadas = cat.getCartasDeCategoria();
 
                 if(cartasRelacionadas.isEmpty()){
                     registroCategorias.delete(cat);
-                    update(registroCategorias.getEntidades());
+                    updateDelete(registroCategorias.getEntidades());
                 } else {
                     message("Esta categoría esta asignada, no se puede eliminar");
                 }
@@ -177,6 +177,17 @@ public final class MenuCategoriasControler extends Controlador{
     private void update(ArrayList<Entidad> lista_usable) {
 
         lista_usable.remove(lista_usable.size()-1);
+
+        adapterMenuCategorias = new AdapterMenuCategorias(act, lista_usable, this);
+        listAdapterCat.setAdapter(adapterMenuCategorias);
+    }
+
+    /**
+     * Este método actualiza el adapter se llama cada vez que se hace un cambio a  la lista de retos
+     * @param lista_usable lista de retos actualizada
+     */
+    private void updateDelete(ArrayList<Entidad> lista_usable) {
+
 
         adapterMenuCategorias = new AdapterMenuCategorias(act, lista_usable, this);
         listAdapterCat.setAdapter(adapterMenuCategorias);
