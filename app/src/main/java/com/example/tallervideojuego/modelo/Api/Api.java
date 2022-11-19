@@ -29,7 +29,7 @@ public class Api {
     private static ExecutorService executor = Executors.newSingleThreadExecutor();
     private static ListeningExecutorService lExecService = MoreExecutors.listeningDecorator(executor);
     private SyncDB syncDB;
-    private static String token = "4|tyJYYd2QOu8BBeGZwFpqq1i8Mdrsyt5TRtmZA6uc";
+    private static String token = "";
 
 
     public  Api(){

@@ -1,6 +1,7 @@
 package com.example.tallervideojuego.controlador;
 
 import android.content.Intent;
+import android.content.SharedPreferences;
 import android.view.View;
 import android.widget.Button;
 
@@ -79,7 +80,13 @@ public class MenuControler extends Controlador {
             public void onClick(View view) {
                 Intent intent = new Intent(act, Login_act.class);
                 act.startActivity(intent);
-                Api.setToken("");
+
+                SharedPreferences sharedPref = act.getSharedPreferences("playdi", act.MODE_PRIVATE);
+                SharedPreferences.Editor editor = sharedPref.edit();
+                editor.putString("token", "");
+                editor.apply();
+
+                Api.setToken("00");
                 regresar();
             }
         };
