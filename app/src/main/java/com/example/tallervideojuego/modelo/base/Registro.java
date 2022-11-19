@@ -118,6 +118,13 @@ public class Registro {
 
     }
 
+    public void drop(){
+        for (Entidad entidad:listaEntidades) {
+            this.sqliteDB.delete(tabla,"id="+entidad.getId(),null);
+        }
+        listaEntidades = new ArrayList<Entidad>();
+    }
+
     public void update(Entidad entidad){
         sqliteDB = DB.getWritableDatabase();
         entidad.update("update",tabla);

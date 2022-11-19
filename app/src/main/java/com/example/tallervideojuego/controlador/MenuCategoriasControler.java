@@ -3,29 +3,22 @@ package com.example.tallervideojuego.controlador;
 
 import android.content.Intent;
 import android.util.DisplayMetrics;
-import android.view.ContextThemeWrapper;
 import android.view.View;
-import android.view.ViewGroup;
 import android.widget.Button;
-import android.widget.LinearLayout;
 import android.widget.ListView;
 import android.widget.Toast;
 
 import androidx.appcompat.app.AppCompatActivity;
-import androidx.core.content.res.ResourcesCompat;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.base.Controlador;
-import com.example.tallervideojuego.modelo.Adapters.AdapterBancoPreguntas;
 import com.example.tallervideojuego.modelo.Adapters.AdapterMenuCategorias;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 import com.example.tallervideojuego.vista.AddJugadores_act;
-import com.example.tallervideojuego.vista.BancoPreguntas_act;
 import com.example.tallervideojuego.vista.EditarCategoria_act;
-import com.example.tallervideojuego.vista.MenuCategorias_act;
 
 import java.util.ArrayList;
 
@@ -175,8 +168,13 @@ public final class MenuCategoriasControler extends Controlador{
      * @param lista_usable lista de retos actualizada
      */
     private void update(ArrayList<Entidad> lista_usable) {
+        for (Entidad entidad:lista_usable) {
+            if (entidad.getContent().getAsString("titulo").equals("Random")) {
 
-        lista_usable.remove(lista_usable.size()-1);
+                lista_usable.remove(entidad);
+            }
+        }
+        //lista_usable.remove(lista_usable.size()-1);
 
         adapterMenuCategorias = new AdapterMenuCategorias(act, lista_usable, this);
         listAdapterCat.setAdapter(adapterMenuCategorias);
