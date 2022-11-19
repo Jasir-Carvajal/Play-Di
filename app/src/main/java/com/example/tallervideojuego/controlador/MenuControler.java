@@ -10,6 +10,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.base.Controlador;
 import com.example.tallervideojuego.modelo.Api.Api;
+import com.example.tallervideojuego.modelo.Api.SyncDB;
 import com.example.tallervideojuego.vista.BancoPreguntas_act;
 import com.example.tallervideojuego.vista.JugarCategorias_act;
 import com.example.tallervideojuego.vista.Login_act;
@@ -80,12 +81,13 @@ public class MenuControler extends Controlador {
             public void onClick(View view) {
                 Intent intent = new Intent(act, Login_act.class);
                 act.startActivity(intent);
+                SyncDB syncDB = new SyncDB();
+                syncDB.delet();
 
                 SharedPreferences sharedPref = act.getSharedPreferences("playdi", act.MODE_PRIVATE);
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("token", "");
                 editor.apply();
-
                 Api.setToken("00");
                 regresar();
             }

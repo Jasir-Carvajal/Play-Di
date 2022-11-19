@@ -12,7 +12,7 @@ public class Categoria extends Entidad {
 
     public Categoria(int id, String titulo) {
         super(id);
-        registroCat_car  = new RegistroCat_Car();
+
         setTitulo(titulo);
     }
     public Categoria( String titulo) {
@@ -39,17 +39,17 @@ public class Categoria extends Entidad {
 
     /** Añade una relacion entre la categoria actual y una carta*/
     public void addCarta(Carta carta){
-
+        registroCat_car  = new RegistroCat_Car();
         registroCat_car.addRelacion(getId(),carta.getId());
     }
     /** Busca las cartas relacionadas con la categoria actual*/
     public ArrayList<Entidad> getCartasDeCategoria(){
-
+        registroCat_car  = new RegistroCat_Car();
         return  registroCat_car.search_cartas(getId());
     }
 
     public void removeCarta(Carta carta){
-
+        registroCat_car  = new RegistroCat_Car();
         registroCat_car.deleteRelacion(this,carta);
     }
 

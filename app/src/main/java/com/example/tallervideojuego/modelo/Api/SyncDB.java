@@ -26,6 +26,20 @@ public class SyncDB  {
         lista = cambios.getEntidades();
     }
 
+    public void delet(){
+        for (Entidad entidad:rRel.getEntidades()) {
+            rRel.delete(entidad);
+        }
+        for (Entidad entidad:rCarta.getEntidades()) {
+            rCarta.delete(entidad);
+        }
+        for (Entidad entidad:rCat.getEntidades()) {
+            if (!entidad.getContent().getAsString("titulo").equals("Random")) rCat.delete(entidad);
+        }
+        for (Entidad entidad:cambios.getEntidades()) {
+            cambios.delete(entidad);
+        }
+    }
     private void deletAll(){
         for (Entidad entidad:rRel.getEntidades()) {
             rRel.delete(entidad);
