@@ -229,42 +229,7 @@ public final class MenuCategoriasControler extends Controlador{
 
     }
 
-//    public View.OnClickListener dialogAceptar(Categoria categoria, Registro registroCartas){
-//        return new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//
-//                //Primero obtengo las cartas que están relacionadas a la categoría que quiero eliminar
-//                ArrayList<Entidad> cartasRelacionadas = categoria.getCartasDeCategoria();
-//
-//                //Luego recorro el arreglo de cartas
-//                for (Entidad entidad: cartasRelacionadas) {
-//
-//                    //Transformo la entidad en carta
-//                    Carta carta = (Carta) entidad;
-//
-//                    //Elimino la relación de la carta y la categoría
-//                    categoria.removeCarta(carta);
-//
-//                    //Obtengo las categorias relacionadas a la carta
-//                    ArrayList<Categoria> categoriasRelacionadas = carta.getCategoriasDeCartas();
-//
-////                    System.out.println("Las categorias son ="+categoriasRelacionadas);
-//
-//                    //Si esa carta no tiene ninguna otra relación con otra categoría se elimina
-//                    if (categoriasRelacionadas.isEmpty()){
-//                        registroCartas.delete(carta);
-//                    }
-//                }
-//
-//                //Se elimina la categoria
-//                registroCategorias.delete(categoria);
-//
-//                updateDelete(registroCategorias.getEntidades());
-//
-//            }
-//        };
-//    }
+
 
 
 
