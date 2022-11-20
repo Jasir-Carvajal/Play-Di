@@ -22,7 +22,7 @@
                 android:layout_height="wrap_content"
                 android:layout_marginTop="15dp"
                 android:fontFamily="@font/fira_bold"
-                android:text="EDITAR RETOS"
+                android:text="EDITAR CATEGORÍA"
                 android:textAlignment="center"
                 android:textSize="30sp" />
 

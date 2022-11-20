@@ -14,9 +14,11 @@ import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.base.Controlador;
 import com.example.tallervideojuego.modelo.Adapters.AdapterMenuCategorias;
 import com.example.tallervideojuego.modelo.Api.Api;
+import com.example.tallervideojuego.modelo.CustomDialog;
 import com.example.tallervideojuego.modelo.LoadingDialog;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
+import com.example.tallervideojuego.modelo.entidades.Carta;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 import com.example.tallervideojuego.vista.AddJugadores_act;
@@ -40,6 +42,8 @@ public final class MenuCategoriasControler extends Controlador{
 
     private AdapterMenuCategorias adapterMenuCategorias;
 
+    private MenuCategoriasControler menuCategoriasControler;
+
     private int alto;
 
     /**
@@ -50,6 +54,8 @@ public final class MenuCategoriasControler extends Controlador{
         super(act);
 
         this.act=act;
+
+        menuCategoriasControler = this;
 
         registroCategorias = new Registro(Categoria.class);
         registroRelacion = new RegistroCat_Car();
@@ -157,7 +163,10 @@ public final class MenuCategoriasControler extends Controlador{
                     registroCategorias.delete(cat);
                     updateDelete(registroCategorias.getEntidades());
                 } else {
-                    message("Esta categoría esta asignada, no se puede eliminar");
+//                    message("Esta categoría esta asignada, no se puede eliminar");
+                    CustomDialog customDialog = new CustomDialog(act, cat, menuCategoriasControler,registroCategorias);
+                    customDialog.starLoadingDialog();
+//                    updateDelete(customDialog.getRegistroCategorias().getEntidades());
                 }
 
             }
@@ -168,7 +177,7 @@ public final class MenuCategoriasControler extends Controlador{
      * Este método actualiza el adapter se llama cada vez que se hace un cambio a  la lista de retos
      * @param lista_usable lista de retos actualizada
      */
-    private void update(ArrayList<Entidad> lista_usable) {
+    public void update(ArrayList<Entidad> lista_usable) {
         ArrayList<Entidad> lista_ = new ArrayList<>();
         for (Entidad entidad:lista_usable) {
             if (!entidad.getContent().getAsString("titulo").equals("Random")) {
@@ -185,7 +194,7 @@ public final class MenuCategoriasControler extends Controlador{
      * Este método actualiza el adapter se llama cada vez que se hace un cambio a  la lista de retos
      * @param lista_usable lista de retos actualizada
      */
-    private void updateDelete(ArrayList<Entidad> lista_usable) {
+    public void updateDelete(ArrayList<Entidad> lista_usable) {
 
         LoadingDialog loadingDialog = new LoadingDialog(act);
         loadingDialog.starLoadingDialog();
@@ -219,6 +228,43 @@ public final class MenuCategoriasControler extends Controlador{
         return Math.round(porcentaje*alto);
 
     }
+
+//    public View.OnClickListener dialogAceptar(Categoria categoria, Registro registroCartas){
+//        return new View.OnClickListener() {
+//            @Override
+//            public void onClick(View view) {
+//
+//                //Primero obtengo las cartas que están relacionadas a la categoría que quiero eliminar
+//                ArrayList<Entidad> cartasRelacionadas = categoria.getCartasDeCategoria();
+//
+//                //Luego recorro el arreglo de cartas
+//                for (Entidad entidad: cartasRelacionadas) {
+//
+//                    //Transformo la entidad en carta
+//                    Carta carta = (Carta) entidad;
+//
+//                    //Elimino la relación de la carta y la categoría
+//                    categoria.removeCarta(carta);
+//
+//                    //Obtengo las categorias relacionadas a la carta
+//                    ArrayList<Categoria> categoriasRelacionadas = carta.getCategoriasDeCartas();
+//
+////                    System.out.println("Las categorias son ="+categoriasRelacionadas);
+//
+//                    //Si esa carta no tiene ninguna otra relación con otra categoría se elimina
+//                    if (categoriasRelacionadas.isEmpty()){
+//                        registroCartas.delete(carta);
+//                    }
+//                }
+//
+//                //Se elimina la categoria
+//                registroCategorias.delete(categoria);
+//
+//                updateDelete(registroCategorias.getEntidades());
+//
+//            }
+//        };
+//    }
 
 
 
