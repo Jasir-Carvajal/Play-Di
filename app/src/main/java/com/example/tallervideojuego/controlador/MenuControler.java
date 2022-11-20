@@ -28,8 +28,6 @@ public class MenuControler extends Controlador {
      */
     public MenuControler(AppCompatActivity act) {
         super(act);
-        Api api =  new Api();
-        api.sincronizar();
         this.act=act;
 
         btnJugar = this.act.findViewById(R.id.btnJugar);

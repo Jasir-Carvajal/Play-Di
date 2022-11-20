@@ -4,14 +4,18 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.EditText;
 
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.base.Controlador;
+import com.example.tallervideojuego.modelo.Api.Api;
+import com.example.tallervideojuego.modelo.LoadingDialog;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
+import com.google.common.util.concurrent.FutureCallback;
 
 public class EditarCategoriasControler extends Controlador {
 
@@ -25,14 +29,14 @@ public class EditarCategoriasControler extends Controlador {
     private RegistroCat_Car registroRelacion;
     private Categoria cat;
     private boolean isNew;
-
+    private LoadingDialog loadingDialog;
     /**
      * Constructor de la clase
      * @param act La referencia del activity donde se inicializa el controlador
      */
     public EditarCategoriasControler(AppCompatActivity act) {
         super(act);
-
+        loadingDialog = new LoadingDialog(act);
         registro = new Registro(Categoria.class);
         registroRelacion = new RegistroCat_Car();
 
@@ -114,7 +118,22 @@ public class EditarCategoriasControler extends Controlador {
 //                            Intent intent = new Intent(act, MenuCategorias_act.class);
 //                            act.startActivity(intent);
 
-                            regresar();
+                            loadingDialog.starLoadingDialog();
+                            Api api = new Api();
+                            api.sincronizar(new FutureCallback<String>() {
+                                @Override
+                                @WorkerThread
+                                public void onSuccess(String result) {
+                                    loadingDialog.dismissDialog();
+                                    regresar();
+                                }
+
+                                @Override
+                                public void onFailure(Throwable t) {
+
+                                }
+                            });
+
                         } else message("Este nombre ya existe");
 
                     }else {
@@ -127,7 +146,22 @@ public class EditarCategoriasControler extends Controlador {
 //                            Intent intent = new Intent(act, MenuCategorias_act.class);
 //                            act.startActivity(intent);
 
-                            regresar();
+                            loadingDialog.starLoadingDialog();
+                            Api api = new Api();
+                            api.sincronizar(new FutureCallback<String>() {
+                                @Override
+                                @WorkerThread
+                                public void onSuccess(String result) {
+                                    loadingDialog.dismissDialog();
+                                    regresar();
+                                }
+
+                                @Override
+                                public void onFailure(Throwable t) {
+
+                                }
+                            });
+
                         } else message("Este nombre ya existe");
 
                     }

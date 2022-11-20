@@ -19,7 +19,6 @@ public class LoadingDialog {
         LayoutInflater inflater = act.getLayoutInflater();
         builder.setView(inflater.inflate(R.layout.loading_dialog, null));
         builder.setCancelable(false);
-
         alertDialog = builder.create();
     }
 

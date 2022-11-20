@@ -54,14 +54,8 @@ public class Api {
 
                 try {
                     JSONObject res_ = new JSONObject(response.body().string());
-
-                    System.out.println(res_.toString());
                     res = res_.getString("res");
                 } catch (JSONException e) {
-                    e.printStackTrace();
-                    res = "false";
-                } catch (IOException e) {
-                    e.printStackTrace();
                     res = "false";
                 }
 
@@ -103,7 +97,6 @@ public class Api {
 
                 try {
                     JSONObject res_ = new JSONObject(response.body().string());
-                    System.out.println(res_.toString());
                     Api.token = res_.getString("token");
                     res = res_.getString("token");
                 } catch (JSONException e) {
@@ -168,7 +161,7 @@ public class Api {
 
     }
 
-    public void sincronizar() {
+    public void sincronizar( FutureCallback<String> call_) {
 
         ListenableFuture<JSONObject> asyncTask = lExecService.submit(() -> {
             JSONObject res_ = null;
@@ -183,6 +176,96 @@ public class Api {
                         .build();
             }else {
                  formBody = new FormBody.Builder().build();
+            }
+            Request request = new Request.Builder()
+                    .url("http://playdi.ml/api/cambios")
+                    .header("Accept", "application/json")
+                    .header("Authorization", auth_token)
+                    .addHeader("User-Agent", "OkHttp Headers.java")
+                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .post(formBody)
+                    .build();
+
+            try {
+                Call call = client.newCall(request);
+                Response response = call.execute();
+
+                try {
+
+                    res_ = new JSONObject(response.body().string());
+
+                } catch (JSONException e) {
+                    System.out.println(response.body().string());
+
+                    e.printStackTrace();
+                } catch (IOException e) {
+                    System.out.println(response.body().string());
+
+                    e.printStackTrace();
+                }
+            } catch (IOException e) {
+                e.printStackTrace();
+                System.out.println(json);
+            }
+
+            return res_;
+
+        });
+
+        FutureCallback callback = new FutureCallback<JSONObject>() {
+            @Override
+            public void onSuccess(JSONObject result) {
+
+                try {
+                    System.out.println(result.getInt("type"));
+                    switch (result.getInt("type")){
+                        case 0:
+                            JSONArray cartas = result.getJSONArray("cartas");
+                            JSONArray categorias = result.getJSONArray("categorias");
+                            JSONArray cambios = result.getJSONArray("cambios");
+
+                            syncDB.sync(cartas,categorias,cambios);
+                            break;
+                        case 1:
+
+                            break;
+                        case 2:
+                            break;
+                        default:
+                            break;
+                    }
+                }catch (JSONException e){
+                    System.out.println(result.toString());
+                    e.printStackTrace();
+                }
+
+                call_.onSuccess("loged");
+            }
+
+            @Override
+            public void onFailure(Throwable t) {
+
+                call_.onFailure(t);
+            }
+        };
+        Futures.addCallback(asyncTask, callback, lExecService);
+    }
+
+    public void sincronizar() {
+
+        ListenableFuture<JSONObject> asyncTask = lExecService.submit(() -> {
+            JSONObject res_ = null;
+
+
+            String auth_token = "Bearer "+Api.token;
+            String json = syncDB.makeJson();
+            RequestBody formBody;
+            if (json.length()>0){
+                formBody = new FormBody.Builder()
+                        .add("cambios", json)
+                        .build();
+            }else {
+                formBody = new FormBody.Builder().build();
             }
             Request request = new Request.Builder()
                     .url("http://playdi.ml/api/cambios")
@@ -221,7 +304,6 @@ public class Api {
             @Override
             public void onSuccess(JSONObject result) {
                 try {
-
                     switch (result.getInt("type")){
                         case 0:
                             JSONArray cartas = result.getJSONArray("cartas");
@@ -242,6 +324,7 @@ public class Api {
                 }catch (JSONException e){
                     e.printStackTrace();
                 }
+
             }
 
             @Override

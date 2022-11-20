@@ -33,15 +33,9 @@ public class SyncDB  {
         cambios.drop();
     }
     private void deletAll(){
-        for (Entidad entidad:rRel.getEntidades()) {
-            rRel.delete(entidad);
-        }
-        for (Entidad entidad:rCarta.getEntidades()) {
-            rCarta.delete(entidad);
-        }
-        for (Entidad entidad:rCat.getEntidades()) {
-            if (!entidad.getContent().getAsString("titulo").equals("Random")) rCat.delete(entidad);
-        }
+        rRel.drop();
+        rCarta.drop();
+        rCat.drop();
     }
 
     public void sync(JSONArray cartas, JSONArray categorias, JSONArray cambios) throws JSONException {
@@ -72,6 +66,7 @@ public class SyncDB  {
             JSONObject obj =  cambios.getJSONObject(i);
 
             Cambios cambio_ = new Cambios(obj.getString("tabla"),"x","sync",obj.getString("fecha"));
+            cambio_.setContenido("\"defaulttt\"");
             this.cambios.add(cambio_);
         }
 
@@ -89,7 +84,7 @@ public class SyncDB  {
                       id_relacionado= cambio.getContent().getAsString("global_ID");
 
 
-
+              System.out.println(fecha+"\n\n");
               cambioJSoon = "{ \"tabla\":\""+tabla+"\", \"fecha\":\""+fecha+"\",\"accion\":\""+accion+"\",  \"id_relacionado\":\""+id_relacionado+"\",\"contenido\":"+contenido+" }";
 
           }else {
@@ -124,6 +119,7 @@ public class SyncDB  {
 
 
         json+="}";
+        System.out.println("aaa\n"+json);
         return json;
     }
 }

@@ -9,18 +9,21 @@ import android.widget.Button;
 import android.widget.ListView;
 import android.widget.Spinner;
 
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.base.Controlador;
 import com.example.tallervideojuego.modelo.Adapters.AdapterBancoPreguntas;
+import com.example.tallervideojuego.modelo.Api.Api;
+import com.example.tallervideojuego.modelo.LoadingDialog;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Carta;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 import com.example.tallervideojuego.vista.EditarCarta_act;
-import com.example.tallervideojuego.vista.MenuCategorias_act;
+import com.google.common.util.concurrent.FutureCallback;
 
 import java.util.ArrayList;
 
@@ -162,6 +165,21 @@ public class BancoPreguntasControler extends Controlador{
                 }
 
                 //Se actualiza la lista del adapter
+                LoadingDialog loadingDialog = new LoadingDialog(act);
+                loadingDialog.starLoadingDialog();
+                Api api = new Api();
+                api.sincronizar(new FutureCallback<String>() {
+                    @Override
+                    @WorkerThread
+                    public void onSuccess(String result) {
+                        loadingDialog.dismissDialog();
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        loadingDialog.dismissDialog();
+                    }
+                });
                 update(registroCartas.getListaEntidades());
             }
         };

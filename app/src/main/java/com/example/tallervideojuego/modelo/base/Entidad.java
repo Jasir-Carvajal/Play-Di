@@ -31,8 +31,7 @@ public  class Entidad {
     protected void update(String accion,String tabla){
         Registro cambios = new Registro("Cambios");
         Date currentTime = Calendar.getInstance().getTime();
-
-       CharSequence date = android.text.format.DateFormat.format("yyyy-MM-dd HH:mm:ss", currentTime);
+        CharSequence date = android.text.format.DateFormat.format("yyyy-MM-dd HH:mm:ss", currentTime);
 
 
 

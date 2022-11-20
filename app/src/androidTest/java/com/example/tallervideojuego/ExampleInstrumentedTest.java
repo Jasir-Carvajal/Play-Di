@@ -47,6 +47,8 @@ public class ExampleInstrumentedTest {
         DataBase.setContext(appContext);
         DataBase.setName("PlaydiDB");
 
+        //LoadingDialog loadingDialog = new LoadingDialog();
+        //loadingDialog.starLoadingDialog();
         Api api = new Api();
         api.sincronizar();
         for (int i = 0; i < 8; i++) {

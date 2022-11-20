@@ -6,19 +6,22 @@ import android.util.DisplayMetrics;
 import android.view.View;
 import android.widget.Button;
 import android.widget.ListView;
-import android.widget.Toast;
 
+import androidx.annotation.WorkerThread;
 import androidx.appcompat.app.AppCompatActivity;
 
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.base.Controlador;
 import com.example.tallervideojuego.modelo.Adapters.AdapterMenuCategorias;
+import com.example.tallervideojuego.modelo.Api.Api;
+import com.example.tallervideojuego.modelo.LoadingDialog;
 import com.example.tallervideojuego.modelo.base.Entidad;
 import com.example.tallervideojuego.modelo.base.Registro;
 import com.example.tallervideojuego.modelo.entidades.Categoria;
 import com.example.tallervideojuego.modelo.registro.RegistroCat_Car;
 import com.example.tallervideojuego.vista.AddJugadores_act;
 import com.example.tallervideojuego.vista.EditarCategoria_act;
+import com.google.common.util.concurrent.FutureCallback;
 
 import java.util.ArrayList;
 
@@ -55,8 +58,6 @@ public final class MenuCategoriasControler extends Controlador{
         listAdapterCat = this.act.findViewById(R.id.listAdapterCat);
 
 
-        Registro cambios = new Registro("Cambios");
-        Toast.makeText(act, "Cambios:" +cambios.getEntidades().size(), Toast.LENGTH_SHORT).show();
 
         setFunctions();
 
@@ -168,15 +169,15 @@ public final class MenuCategoriasControler extends Controlador{
      * @param lista_usable lista de retos actualizada
      */
     private void update(ArrayList<Entidad> lista_usable) {
+        ArrayList<Entidad> lista_ = new ArrayList<>();
         for (Entidad entidad:lista_usable) {
-            if (entidad.getContent().getAsString("titulo").equals("Random")) {
-
-                lista_usable.remove(entidad);
+            if (!entidad.getContent().getAsString("titulo").equals("Random")) {
+                 lista_.add(entidad);
             }
         }
         //lista_usable.remove(lista_usable.size()-1);
 
-        adapterMenuCategorias = new AdapterMenuCategorias(act, lista_usable, this);
+        adapterMenuCategorias = new AdapterMenuCategorias(act, lista_, this);
         listAdapterCat.setAdapter(adapterMenuCategorias);
     }
 
@@ -186,8 +187,30 @@ public final class MenuCategoriasControler extends Controlador{
      */
     private void updateDelete(ArrayList<Entidad> lista_usable) {
 
+        LoadingDialog loadingDialog = new LoadingDialog(act);
+        loadingDialog.starLoadingDialog();
+        Api api = new Api();
+        api.sincronizar(new FutureCallback<String>() {
+            @Override
+            @WorkerThread
+            public void onSuccess(String result) {
+                loadingDialog.dismissDialog();
+            }
 
-        adapterMenuCategorias = new AdapterMenuCategorias(act, lista_usable, this);
+            @Override
+            public void onFailure(Throwable t) {
+                loadingDialog.dismissDialog();
+            }
+        });
+
+        ArrayList<Entidad> lista_ = new ArrayList<>();
+        for (Entidad entidad:lista_usable) {
+            if (!entidad.getContent().getAsString("titulo").equals("Random")) {
+                lista_.add(entidad);
+            }
+        }
+
+        adapterMenuCategorias = new AdapterMenuCategorias(act, lista_, this);
         listAdapterCat.setAdapter(adapterMenuCategorias);
     }
 

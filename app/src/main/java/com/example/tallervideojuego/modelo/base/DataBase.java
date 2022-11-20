@@ -7,6 +7,9 @@ import android.database.sqlite.SQLiteOpenHelper;
 
 import androidx.annotation.Nullable;
 
+import java.util.Calendar;
+import java.util.Date;
+
 /**Creacion de la base de datos*/
 public class DataBase  extends SQLiteOpenHelper{
 
@@ -20,6 +23,8 @@ public class DataBase  extends SQLiteOpenHelper{
 
     @Override
     public void onCreate(SQLiteDatabase baseDeDatos) {
+        Date currentTime = Calendar.getInstance().getTime();
+        CharSequence date = android.text.format.DateFormat.format("yyyy-MM-dd HH:mm:ss", currentTime);
         //Verificar que se permitan primari keys
         baseDeDatos.execSQL("PRAGMA foreign_keys = ON;");
         //crear tabla para objeto Carta
@@ -33,6 +38,7 @@ public class DataBase  extends SQLiteOpenHelper{
 
         //crear categoria randoma
         baseDeDatos.execSQL("INSERT INTO Categorias (global_ID, titulo) VALUES('b4a47df8-0e9e-44i1-a2f9-9af5b9fb5689', 'Random');");
+        baseDeDatos.execSQL("INSERT INTO Cambios (tabla, id_Relacionado,accion,fecha,contenido,sync) VALUES('Categorias', 'b4a47df8-0e9e-44i1-a2f9-9af5b9fb5689','add','2011-11-11 0:00:00','-',0);");
         //crear tabla para relacion entre carta y categoria
     }
 

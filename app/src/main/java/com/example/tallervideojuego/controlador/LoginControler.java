@@ -6,6 +6,7 @@ import android.util.Patterns;
 import android.view.View;
 import android.widget.Button;
 import android.widget.TextView;
+import android.widget.Toast;
 
 import androidx.annotation.NonNull;
 import androidx.annotation.WorkerThread;
@@ -14,6 +15,7 @@ import androidx.appcompat.app.AppCompatActivity;
 import com.example.tallervideojuego.R;
 import com.example.tallervideojuego.controlador.base.Controlador;
 import com.example.tallervideojuego.modelo.Api.Api;
+import com.example.tallervideojuego.modelo.Api.SyncDB;
 import com.example.tallervideojuego.modelo.LoadingDialog;
 import com.example.tallervideojuego.vista.Menu_act;
 import com.example.tallervideojuego.vista.Registrar_act;
@@ -52,35 +54,62 @@ public class LoginControler extends Controlador {
 
         api = new Api();
         //api.sendCambios();
-        loadingDialog = new LoadingDialog(this.act);
+
 
         setFunctions();
 
         SharedPreferences sharedPref = act.getSharedPreferences("playdi", act.MODE_PRIVATE);
         String token = sharedPref.getString("token", "");
-
+        loadingDialog = new LoadingDialog(this.act);
         loadingDialog.starLoadingDialog();
         System.out.println("token: "+token);
         Api.isToken(token, new FutureCallback<String>() {
             @Override
-            @WorkerThread
             public void onSuccess(String result) {
-                loadingDialog.dismissDialog();
-                System.out.println(result+"\n\n\n");
                 if(result.equals("200")){
                     Api.setToken(token);
-                    Intent intent = new Intent(act, Menu_act.class);
-                    act.startActivity(intent);
-                    regresar();
+                    Api api = new Api();
+                    api.sincronizar(new FutureCallback<String>() {
+                        @Override
+                        public void onSuccess(String result) {
+                            onSync();
+                        }
+
+                        @Override
+                        public void onFailure(Throwable t) {
+                            onSyncFail();
+                        }
+                    });
+                }else {
+                    loadingDialog.dismissDialog();
+                    new SyncDB().delet();
                 }
             }
             @Override
             public void onFailure(Throwable t) {
-
+                onSyncFail();
             }
         });
 
 
+    }
+    @WorkerThread
+    public void onSyncFail(){
+        act.runOnUiThread(() -> {
+            loadingDialog.dismissDialog();
+            Toast.makeText(act, "Algo salio muy mal", Toast.LENGTH_SHORT).show();
+
+        });
+    }
+
+    @WorkerThread
+    public void onSync(){
+        act.runOnUiThread(() -> {
+            loadingDialog.dismissDialog();
+            Intent intent = new Intent(act, Menu_act.class);
+            act.startActivity(intent);
+            regresar();
+        });
     }
 
     public void setFunctions(){
@@ -99,6 +128,7 @@ public class LoginControler extends Controlador {
 
             if (correo.isEmpty() || password.isEmpty()) {
                 message("Debe de llenar todos los campos");
+
             }else if(!isValidEmail()){
                 txtCorreo.setError("Correo invalido");
             } else {
@@ -113,7 +143,7 @@ public class LoginControler extends Controlador {
 
                         @Override
                         public void onFailure(@NonNull Throwable t) {
-
+                            onSyncFail();
                         }
                     });
 
@@ -124,10 +154,8 @@ public class LoginControler extends Controlador {
         };
     }
     //WorkerThread para poder hacer uso de act
-    @WorkerThread
     public void  onLoginSuccess(String retorno){
         //indica que se ejecutara dentro del hilo con acceso a la interface
-        act.runOnUiThread(() -> {
             if (retorno!= null && retorno.equalsIgnoreCase("false")){
                 loadingDialog.dismissDialog();
 
@@ -140,12 +168,21 @@ public class LoginControler extends Controlador {
                 editor.putString("token", retorno);
                 editor.apply();
 
-                loadingDialog.dismissDialog();
-                Intent intent = new Intent(act, Menu_act.class);
-                act.startActivity(intent);
-                regresar();
+
+                Api api = new Api();
+                api.sincronizar(new FutureCallback<String>() {
+                    @Override
+                    public void onSuccess(String result) {
+                        onSync();
+                    }
+
+                    @Override
+                    public void onFailure(Throwable t) {
+                        onSyncFail();
+                    }
+                });
+
             }
-        });
     }
 
 
