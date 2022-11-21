@@ -56,8 +56,10 @@ public class SyncDB  {
            carta.setCastigo(obj.getString("castigo"));
            rCarta.add(carta);
            JSONArray categoriasRelacioandas = obj.getJSONArray("categorias");
+           carta =  (Carta) rCarta.getEntidades().get(0);
             for (int j = 0; j < categoriasRelacioandas.length(); j++) {
-                Categoria categoria = (Categoria) rCat.search("titulo",categoriasRelacioandas.getJSONObject(i).getString("titulo"));
+                String titulo = categoriasRelacioandas.getJSONObject(j).getString("titulo");
+                Categoria categoria = (Categoria) rCat.search("titulo",titulo);
                 carta.addCategoria(categoria);
             }
         }
@@ -88,6 +90,7 @@ public class SyncDB  {
               cambioJSoon = "{ \"tabla\":\""+tabla+"\", \"fecha\":\""+fecha+"\",\"accion\":\""+accion+"\",  \"id_relacionado\":\""+id_relacionado+"\",\"contenido\":"+contenido+" }";
 
           }else {
+              System.out.println("------------nuevo-------");
               return "";
           }
 
@@ -119,7 +122,7 @@ public class SyncDB  {
 
 
         json+="}";
-        System.out.println("aaa\n"+json);
+        System.out.println("enviado\n"+json);
         return json;
     }
 }

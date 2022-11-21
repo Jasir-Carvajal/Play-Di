@@ -217,8 +217,7 @@ public class EditarCartaControler extends Controlador {
      */
     public View.OnClickListener save(){
         return new View.OnClickListener() {
-            @Override
-            public void onClick(View view) {
+            @Override public void onClick(View view) {
                 //Se comprueba que los campos de texto NO esten vacios
                 if(txtTitulo.getText().toString().trim().isEmpty()
                         || txtDescripcion.getText().toString().trim().isEmpty()

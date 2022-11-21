@@ -157,7 +157,7 @@ public class Api {
             Api.token = new JSONObject(res).getString("token");
             return res;
         });
-        Futures.addCallback(asyncTask,callback,lExecService);
+       Futures.addCallback(asyncTask,callback,lExecService);
 
     }
 
@@ -169,6 +169,7 @@ public class Api {
 
             String auth_token = "Bearer "+Api.token;
             String json = syncDB.makeJson();
+            System.out.println("++++++++++++++\n"+json);
             RequestBody formBody;
             if (json.length()>0){
                  formBody = new FormBody.Builder()
@@ -191,19 +192,20 @@ public class Api {
                 Response response = call.execute();
 
                 try {
-
                     res_ = new JSONObject(response.body().string());
+                    System.out.println("--------------"+res_.toString());
 
                 } catch (JSONException e) {
+                    System.out.println("--------------");
                     System.out.println(response.body().string());
-
                     e.printStackTrace();
                 } catch (IOException e) {
+                    System.out.println("===================");
                     System.out.println(response.body().string());
-
                     e.printStackTrace();
                 }
             } catch (IOException e) {
+                System.out.println("000000000000000000000000000");
                 e.printStackTrace();
                 System.out.println(json);
             }

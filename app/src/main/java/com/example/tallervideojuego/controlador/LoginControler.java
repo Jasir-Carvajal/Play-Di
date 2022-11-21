@@ -77,6 +77,7 @@ public class LoginControler extends Controlador {
 
                         @Override
                         public void onFailure(Throwable t) {
+                            t.printStackTrace();
                             onSyncFail();
                         }
                     });
@@ -87,6 +88,7 @@ public class LoginControler extends Controlador {
             }
             @Override
             public void onFailure(Throwable t) {
+                t.printStackTrace();
                 onSyncFail();
             }
         });
@@ -143,6 +145,7 @@ public class LoginControler extends Controlador {
 
                         @Override
                         public void onFailure(@NonNull Throwable t) {
+                            t.printStackTrace();
                             onSyncFail();
                         }
                     });
@@ -154,13 +157,17 @@ public class LoginControler extends Controlador {
         };
     }
     //WorkerThread para poder hacer uso de act
+    @WorkerThread
     public void  onLoginSuccess(String retorno){
+
         //indica que se ejecutara dentro del hilo con acceso a la interface
             if (retorno!= null && retorno.equalsIgnoreCase("false")){
-                loadingDialog.dismissDialog();
+                act.runOnUiThread(() -> {
+                    loadingDialog.dismissDialog();
 
-                txtCorreo.setError("Datos incorrectos");
-                txtPassword.setError("Datos incorrectos",null);
+                    txtCorreo.setError("Datos incorrectos");
+                    txtPassword.setError("Datos incorrectos", null);
+                });
             } else{
 
                 SharedPreferences sharedPref = act.getSharedPreferences("playdi", act.MODE_PRIVATE);
@@ -178,6 +185,7 @@ public class LoginControler extends Controlador {
 
                     @Override
                     public void onFailure(Throwable t) {
+                        t.printStackTrace();
                         onSyncFail();
                     }
                 });

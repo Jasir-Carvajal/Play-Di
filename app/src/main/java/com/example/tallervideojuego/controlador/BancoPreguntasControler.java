@@ -139,6 +139,7 @@ public class BancoPreguntasControler extends Controlador{
                 intent.putExtra("id",id);
                 act.startActivity(intent);
 
+
             }
         };
     }
@@ -152,8 +153,9 @@ public class BancoPreguntasControler extends Controlador{
         return new View.OnClickListener() {
             @Override
             public void onClick(View view) {
-                registroCartas.delete(entidad);
                 Carta carta = (Carta) entidad;
+                registroCartas.delete(entidad);
+
 
 
                 //Se obtiene la lista de categorias con las cuales la carta tiene una relacion
