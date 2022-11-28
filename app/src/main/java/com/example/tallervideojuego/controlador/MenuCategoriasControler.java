@@ -180,7 +180,7 @@ public final class MenuCategoriasControler extends Controlador{
     public void update(ArrayList<Entidad> lista_usable) {
         ArrayList<Entidad> lista_ = new ArrayList<>();
         for (Entidad entidad:lista_usable) {
-            if (!entidad.getContent().getAsString("titulo").equals("Random")) {
+            if (!entidad.getContent().getAsString("titulo").equals("Clásico")) {
                  lista_.add(entidad);
             }
         }
@@ -214,7 +214,7 @@ public final class MenuCategoriasControler extends Controlador{
 
         ArrayList<Entidad> lista_ = new ArrayList<>();
         for (Entidad entidad:lista_usable) {
-            if (!entidad.getContent().getAsString("titulo").equals("Random")) {
+            if (!entidad.getContent().getAsString("titulo").equals("Clásico")) {
                 lista_.add(entidad);
             }
         }

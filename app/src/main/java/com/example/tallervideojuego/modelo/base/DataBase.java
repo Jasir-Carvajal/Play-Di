@@ -37,7 +37,8 @@ public class DataBase  extends SQLiteOpenHelper{
         baseDeDatos.execSQL("Create Table IF NOT EXISTS Cambios(id INTEGER primary key AUTOINCREMENT UNIQUE ,tabla TEXT NOT NULL, id_Relacionado INTEGER NOT NULL, accion TEXT NOT NULL, fecha TEXT NOT NULL,contenido TEXT NOT NULL,sync INTEGER NOT NULL)");
 
         //crear categoria randoma
-        baseDeDatos.execSQL("INSERT INTO Categorias (global_ID, titulo) VALUES('b4a47df8-0e9e-44i1-a2f9-9af5b9fb5689', 'Random');");
+//        baseDeDatos.execSQL("INSERT INTO Categorias (global_ID, titulo) VALUES('b4a47df8-0e9e-44i1-a2f9-9af5b9fb5689', 'Random');");
+        baseDeDatos.execSQL("INSERT INTO Categorias (global_ID, titulo) VALUES('b4a47df8-0e9e-44i1-a2f9-9af5b9fb5689', 'Clásico');");
         baseDeDatos.execSQL("INSERT INTO Cambios (tabla, id_Relacionado,accion,fecha,contenido,sync) VALUES('Categorias', 'b4a47df8-0e9e-44i1-a2f9-9af5b9fb5689','add','2011-11-11 0:00:00','-',0);");
         //crear tabla para relacion entre carta y categoria
     }

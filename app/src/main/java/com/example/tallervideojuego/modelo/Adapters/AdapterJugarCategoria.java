@@ -77,7 +77,7 @@ public class AdapterJugarCategoria extends BaseAdapter {
             categoria.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
             categoria.setText(((Categoria) lista.get(i)).getTitulo());
 
-            if(((Categoria) lista.get(i)).getTitulo().equalsIgnoreCase("Random")){
+            if(((Categoria) lista.get(i)).getTitulo().equalsIgnoreCase("Clásico")){
                 categoria.setBackgroundTintList(context.getResources().getColorStateList(R.color.orange));
             } else {
                 categoria.setBackgroundTintList(context.getResources().getColorStateList(R.color.purple_500));
