@@ -94,10 +94,9 @@ public class Api {
                     .build();
 
             Request request = new Request.Builder()
-                    .url("https://api.m3o.com/v1/joke/Random")
+                    .url("http://playdi.ml/api/login")
                     .header("Accept", "application/json")
                     .addHeader("User-Agent", "OkHttp Headers.java")
-                    .addHeader("Authorization", "Bearer ")
                     .post(formBody)
                     .build();
 
