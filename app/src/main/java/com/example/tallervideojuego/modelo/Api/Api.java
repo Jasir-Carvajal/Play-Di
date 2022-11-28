@@ -36,6 +36,10 @@ public class Api {
         syncDB = new SyncDB();
     }
 
+    /**
+     * Valida si un token de acceso a la base de datos es valido
+     *
+     * */
     public static void isToken(String token, FutureCallback<String> callback) {
         ListenableFuture<String> asyncTask = lExecService.submit(() -> {
             String res;
@@ -69,12 +73,18 @@ public class Api {
         Futures.addCallback(asyncTask,callback,lExecService);
 
     }
+    /**
+     * Guarda un token para el uso de la appi con el cual se acreditara en la api
+     * */
 
     public static void setToken(String token) {
         Api.token=token;
     }
 
 
+    /**
+     * Inicio de secion clasico, se envian los datos de login a la Api esperando su respuesta
+     * */
     public void login(String email, String password, FutureCallback<String> callback)  {
         ListenableFuture<String> asyncTask = lExecService.submit(() -> {
             String res;
@@ -84,10 +94,10 @@ public class Api {
                     .build();
 
             Request request = new Request.Builder()
-                    .url("http://playdi.ml/api/login")
+                    .url("https://api.m3o.com/v1/joke/Random")
                     .header("Accept", "application/json")
                     .addHeader("User-Agent", "OkHttp Headers.java")
-                    .addHeader("Content-Type", "application/x-www-form-urlencoded")
+                    .addHeader("Authorization", "Bearer ")
                     .post(formBody)
                     .build();
 
@@ -99,7 +109,7 @@ public class Api {
                     JSONObject res_ = new JSONObject(response.body().string());
                     Api.token = res_.getString("token");
                     res = res_.getString("token");
-                } catch (JSONException e) {
+                } catch (JSONException e) {//control de errores
                     e.printStackTrace();
                     res = "false";
                 } catch (IOException e) {
@@ -116,7 +126,9 @@ public class Api {
         Futures.addCallback(asyncTask,callback,lExecService);
     }
 
-
+    /**
+     * Registro de un nuevo usuario en la Api
+     * */
     public void register(String name,String email, String password, FutureCallback<String> callback){
 
         ListenableFuture<String> asyncTask = lExecService.submit(() -> {
@@ -160,9 +172,12 @@ public class Api {
        Futures.addCallback(asyncTask,callback,lExecService);
 
     }
-
+    /**
+     * sincroniza la base de datos local con la api, de manera que se sustitulle la antigua por la mas reciente ya sea la local o la de la api
+     * */
     public void sincronizar( FutureCallback<String> call_) {
 
+        //inicio de la comunicacion enviando lo que tengo y esperando reciibir que debo guardar o si la api guardo mi version
         ListenableFuture<JSONObject> asyncTask = lExecService.submit(() -> {
             JSONObject res_ = null;
 
@@ -214,6 +229,7 @@ public class Api {
 
         });
 
+        //callback de la primer peticion, recibe la respuesta de la Api y si debe de guardar datos enviados por la Api ejecuta el metodo syncDB y ejecuta el callbackk
         FutureCallback callback = new FutureCallback<JSONObject>() {
             @Override
             public void onSuccess(JSONObject result) {
@@ -228,10 +244,10 @@ public class Api {
 
                             syncDB.sync(cartas,categorias,cambios);
                             break;
-                        case 1:
+                        case 1://la base de datos local se guardo en la api
 
                             break;
-                        case 2:
+                        case 2://las dos bases de datos son iguales
                             break;
                         default:
                             break;
@@ -241,7 +257,7 @@ public class Api {
                     e.printStackTrace();
                 }
 
-                call_.onSuccess("loged");
+                call_.onSuccess("loged");//ejecuta el callback
             }
 
             @Override
@@ -253,6 +269,8 @@ public class Api {
         Futures.addCallback(asyncTask, callback, lExecService);
     }
 
+
+    //callback de la primer peticion, recibe la respuesta de la Api y si debe de guardar datos enviados por la Api ejecuta el metodo syncDB 
     public void sincronizar() {
 
         ListenableFuture<JSONObject> asyncTask = lExecService.submit(() -> {

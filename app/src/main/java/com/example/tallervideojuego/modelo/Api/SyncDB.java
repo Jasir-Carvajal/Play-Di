@@ -25,30 +25,39 @@ public class SyncDB  {
         cambios = new Registro("Cambios");
         lista = cambios.getEntidades();
     }
-
+    /**
+     * Borra todo en la Base de Datos
+     * */
     public void delet(){
         rRel.drop();
         rCarta.drop();
         rCat.drop();
         cambios.drop();
     }
+    /**
+     * Borra las tablas de relaciones cartas y categorias en la Base de Datos
+     * */
     private void deletAll(){
         rRel.drop();
         rCarta.drop();
         rCat.drop();
     }
 
+
+    /**
+     * Guarda los 3 JsonArrays como tablas en la base de datos
+     * */
     public void sync(JSONArray cartas, JSONArray categorias, JSONArray cambios) throws JSONException {
         this.deletAll();
 
-        for (int i = 0; i < categorias.length(); i++) {
+        for (int i = 0; i < categorias.length(); i++) {//guardo categprioas
             JSONObject obj =  categorias.getJSONObject(i);
             Categoria categoria = new Categoria();
             categoria.setTitulo(obj.getString("titulo"));
             rCat.add(categoria);
         }
 
-        for (int i = 0; i < cartas.length(); i++) {
+        for (int i = 0; i < cartas.length(); i++) {//guardo retos
            JSONObject obj =  cartas.getJSONObject(i);
            Carta carta = new Carta();
            carta.setReto(obj.getString("reto"));
@@ -57,14 +66,14 @@ public class SyncDB  {
            rCarta.add(carta);
            JSONArray categoriasRelacioandas = obj.getJSONArray("categorias");
            carta =  (Carta) rCarta.getEntidades().get(0);
-            for (int j = 0; j < categoriasRelacioandas.length(); j++) {
+            for (int j = 0; j < categoriasRelacioandas.length(); j++) {//añado la relacion entre cartas y categorias
                 String titulo = categoriasRelacioandas.getJSONObject(j).getString("titulo");
                 Categoria categoria = (Categoria) rCat.search("titulo",titulo);
                 carta.addCategoria(categoria);
             }
         }
 
-        for (int i = 0; i < cambios.length(); i++) {
+        for (int i = 0; i < cambios.length(); i++) {//actualizo la tabla de cambios
             JSONObject obj =  cambios.getJSONObject(i);
 
             Cambios cambio_ = new Cambios(obj.getString("tabla"),"x","sync",obj.getString("fecha"));
@@ -73,7 +82,9 @@ public class SyncDB  {
         }
 
     }
-
+    /**
+     * Devuelve un JSON que representa la base de datos local para envair a la api
+     * */
     public String makeJson()
     {
         String cambioJSoon;
