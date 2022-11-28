@@ -17,6 +17,11 @@ import com.google.android.material.textfield.TextInputEditText;
 import com.google.common.util.concurrent.FutureCallback;
 
 public class RegistrarControler extends Controlador {
+
+    /**
+     * La clase controlador para el activity registrar
+     */
+
     private AppCompatActivity act;
     private Button btnRegistrarse;
     private TextInputEditText txtNombre, txtCorreo, txtPassword;
@@ -48,6 +53,10 @@ public class RegistrarControler extends Controlador {
         btnRegistrarse.setOnClickListener(registrarse());
     }
 
+    /**
+     * MÉTODO para la funcion de registrarse
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener registrarse(){
         return new View.OnClickListener() {
             @Override

@@ -174,34 +174,5 @@ public class EditarCategoriasControler extends Controlador {
     }
 
 
-//    /**
-//     * MÉTODO para la funcion de eliminar la categoria
-//     * @return Retorna el View.OnClickListener
-//     */
-//    public View.OnClickListener eliminar(){
-//        return new View.OnClickListener() {
-//            @Override
-//            public void onClick(View view) {
-//                if (isNew){
-//                    registro.delete(cat);
-//                    Intent intent = new Intent(act, MenuCategorias_act.class);
-//                    act.startActivity(intent);
-//                }else {
-//                    cat.setRegistroCat_car(registroRelacion);
-//                    ArrayList<Entidad> cartasRelacionadas = cat.getCartasDeCategoria();
-//
-//                    if(cartasRelacionadas.isEmpty()){
-//                        registro.delete(cat);
-//                        regresar();
-//                        //Intent intent = new Intent(act, Menu_act.class);
-//                        //act.startActivity(intent);
-//                    } else {
-//                        message("Esta categoría esta asignada, no se puede eliminar");
-//                    }
-//                }
-//
-//            }
-//        };
-//    }
 
 }

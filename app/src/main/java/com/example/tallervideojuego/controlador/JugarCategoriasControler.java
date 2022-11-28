@@ -45,6 +45,9 @@ public class JugarCategoriasControler extends Controlador {
         registroCat_car = new RegistroCat_Car();
 
         adapterJugarCategoria = new AdapterJugarCategoria(this.act, registroCategorias.getListaEntidades(), this);
+
+
+
         listaAdapterCat.setAdapter(adapterJugarCategoria);
 
     }

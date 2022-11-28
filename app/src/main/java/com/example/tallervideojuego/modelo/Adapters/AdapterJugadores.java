@@ -62,7 +62,7 @@ public class AdapterJugadores extends BaseAdapter {
 
         jugador_nombre.setText(lista.get(i).getNombre());
 
-        jugador_nombre.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
+            jugador_nombre.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
         eliminar_jugador.setTypeface(ResourcesCompat.getFont(context, R.font.fira_bold));
 
         eliminar_jugador.setOnClickListener(delete(i));

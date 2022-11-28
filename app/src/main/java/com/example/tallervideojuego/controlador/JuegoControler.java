@@ -90,6 +90,7 @@ public class JuegoControler extends Controlador {
 
         fillJugadores();
 
+        //Se asignan los jugadores para enviar a random
         RandomPlayer.setJugadores(jugadores);
 
         setCategoria();
@@ -241,7 +242,7 @@ public class JuegoControler extends Controlador {
     }
 
     /**
-     * Este método controla la funcion de cambiar de fondo entre 3 tipos
+     * Este método controla la funcion de cambiar de fondo entre 3 tipos y las variantes de colores
      * @param fondoRandom El numero de fondo al que va a cambiar, entre los 3 tipos
      */
     public void cambiarFondo(int fondoRandom){
@@ -271,7 +272,9 @@ public class JuegoControler extends Controlador {
         }
     }
 
-
+    /**
+     * Este método llena el array con los datos del arraylist
+     * */
     public void fillJugadores(){
         jugadores = new Jugador[listaJugadores.size()];
 

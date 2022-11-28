@@ -26,6 +26,11 @@ import java.util.Objects;
 
 public class LoginControler extends Controlador {
 
+    /**
+     * La clase controlador para el activity login
+     */
+
+
     private final AppCompatActivity act;
     private final Button btnLogin, btnRegistrarse;
     private final  TextInputEditText txtCorreo, txtPassword;
@@ -119,6 +124,10 @@ public class LoginControler extends Controlador {
         btnRegistrarse.setOnClickListener(registrar());
     }
 
+    /**
+     * MÉTODO para la funcion de login
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener login(){
         return view -> {
 //                Intent intent = new Intent(act, Menu_act.class);
@@ -194,14 +203,20 @@ public class LoginControler extends Controlador {
     }
 
 
-
+    /**
+     * MÉTODO para la ir a la pantalla de registar
+     * @return Retorna el View.OnClickListener
+     */
     public View.OnClickListener registrar(){
         return view -> {
             Intent intent = new Intent(act, Registrar_act.class);
             act.startActivity(intent);
         };
     }
-
+    /**
+     * MÉTODO para comprobar si se esta ingresando un
+     * @return Retorna el View.OnClickListener
+     */
     public boolean  isValidEmail() {
         String correo = Objects.requireNonNull(txtCorreo.getText()).toString().trim();
 

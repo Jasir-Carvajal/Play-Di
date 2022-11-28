@@ -18,6 +18,10 @@ import com.example.tallervideojuego.vista.MenuCategorias_act;
 
 public class MenuControler extends Controlador {
 
+    /**
+     * La clase controlador para el activity del menu principal
+     */
+
     private AppCompatActivity act;
     private Button btnJugar, btnEditarCategorias, btnEditarRetos, btnLogOut;
 
@@ -45,6 +49,11 @@ public class MenuControler extends Controlador {
         btnLogOut.setOnClickListener(LogOut());
     }
 
+    /**
+     * MÉTODO para ir a la pantalla de jugar
+     * @return Retorna el View.OnClickListener
+     */
+
     public View.OnClickListener onPlay(){
         return new View.OnClickListener() {
             @Override
@@ -55,6 +64,12 @@ public class MenuControler extends Controlador {
         };
     }
 
+    /**
+     * MÉTODO para ir a la pantalla de categorias
+     * @return Retorna el View.OnClickListener
+     */
+
+
     public View.OnClickListener onCategorias(){
         return new View.OnClickListener() {
             @Override
@@ -64,6 +79,12 @@ public class MenuControler extends Controlador {
             }
         };
     }
+
+    /**
+     * MÉTODO para ir a la pantalla de retos
+     * @return Retorna el View.OnClickListener
+     */
+
     public View.OnClickListener onRetos(){
         return new View.OnClickListener() {
             @Override
@@ -73,6 +94,12 @@ public class MenuControler extends Controlador {
             }
         };
     }
+
+    /**
+     * MÉTODO para ir la función de logout
+     * @return Retorna el View.OnClickListener
+     */
+
     public View.OnClickListener LogOut(){
         return new View.OnClickListener() {
             @Override
