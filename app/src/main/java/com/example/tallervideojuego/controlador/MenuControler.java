@@ -113,7 +113,7 @@ public class MenuControler extends Controlador {
                 SharedPreferences.Editor editor = sharedPref.edit();
                 editor.putString("token", "");
                 editor.apply();
-                Api.setToken("00");
+                Api.setToken("");
                 regresar();
             }
         };

@@ -71,6 +71,7 @@ public class LoginControler extends Controlador {
         Api.isToken(token, new FutureCallback<String>() {
             @Override
             public void onSuccess(String result) {
+
                 if(result.equals("200")){
                     Api.setToken(token);
                     Api api = new Api();
@@ -87,12 +88,19 @@ public class LoginControler extends Controlador {
                         }
                     });
                 }else {
+
                     loadingDialog.dismissDialog();
-                    new SyncDB().delet();
+
+                    if (result.equals("01")&&token.length()>0){
+                        onSync();
+                    }else{
+                        new SyncDB().delet();
+                    }
                 }
             }
             @Override
             public void onFailure(Throwable t) {
+
                 t.printStackTrace();
                 onSyncFail();
             }
@@ -112,6 +120,7 @@ public class LoginControler extends Controlador {
     @WorkerThread
     public void onSync(){
         act.runOnUiThread(() -> {
+
             loadingDialog.dismissDialog();
             Intent intent = new Intent(act, Menu_act.class);
             act.startActivity(intent);

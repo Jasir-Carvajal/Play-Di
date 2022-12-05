@@ -45,7 +45,7 @@ public class Api {
             String res;
 
             Request request = new Request.Builder()
-                    .url("http://playdi.ml/api/validate/")
+                    .url("https://playdi.ml/api/validate/")
                     .header("Accept", "application/json")
                     .addHeader("User-Agent", "OkHttp Headers.java")
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
@@ -60,12 +60,11 @@ public class Api {
                     JSONObject res_ = new JSONObject(response.body().string());
                     res = res_.getString("res");
                 } catch (JSONException e) {
-                    res = "false";
+                    res = "02";
                 }
 
             }catch (IOException e) {
-                e.printStackTrace();
-                res = "false";
+                res = "01";
             }
 
             return res;
@@ -94,7 +93,7 @@ public class Api {
                     .build();
 
             Request request = new Request.Builder()
-                    .url("http://playdi.ml/api/login")
+                    .url("https://playdi.ml/api/login")
                     .header("Accept", "application/json")
                     .addHeader("User-Agent", "OkHttp Headers.java")
                     .post(formBody)
@@ -139,7 +138,7 @@ public class Api {
                     .build();
 
             Request request = new Request.Builder()
-                    .url("http://playdi.ml/api/register")
+                    .url("https://playdi.ml/api/register")
                     .header("Accept", "application/json")
                     .addHeader("User-Agent", "OkHttp Headers.java")
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
@@ -183,7 +182,7 @@ public class Api {
 
             String auth_token = "Bearer "+Api.token;
             String json = syncDB.makeJson();
-            System.out.println("++++++++++++++\n"+json);
+
             RequestBody formBody;
             if (json.length()>0){
                  formBody = new FormBody.Builder()
@@ -193,7 +192,7 @@ public class Api {
                  formBody = new FormBody.Builder().build();
             }
             Request request = new Request.Builder()
-                    .url("http://playdi.ml/api/cambios")
+                    .url("https://playdi.ml/api/cambios")
                     .header("Accept", "application/json")
                     .header("Authorization", auth_token)
                     .addHeader("User-Agent", "OkHttp Headers.java")
@@ -202,8 +201,10 @@ public class Api {
                     .build();
 
             try {
+
                 Call call = client.newCall(request);
                 Response response = call.execute();
+
 
                 try {
                     res_ = new JSONObject(response.body().string());
@@ -219,9 +220,7 @@ public class Api {
                     e.printStackTrace();
                 }
             } catch (IOException e) {
-                System.out.println("000000000000000000000000000");
-                e.printStackTrace();
-                System.out.println(json);
+                res_ = null;
             }
 
             return res_;
@@ -234,7 +233,9 @@ public class Api {
             public void onSuccess(JSONObject result) {
 
                 try {
-                    System.out.println(result.getInt("type"));
+                    if (result == null){
+                        call_.onSuccess("01");
+                        return;}//ejecuta el callback
                     switch (result.getInt("type")){
                         case 0:
                             JSONArray cartas = result.getJSONArray("cartas");
@@ -251,11 +252,10 @@ public class Api {
                         default:
                             break;
                     }
-                }catch (JSONException e){
-                    System.out.println(result.toString());
-                    e.printStackTrace();
-                }
 
+                }catch (JSONException e){
+                    call_.onSuccess("01");//ejecuta el callback
+                }
                 call_.onSuccess("loged");//ejecuta el callback
             }
 
@@ -266,6 +266,8 @@ public class Api {
             }
         };
         Futures.addCallback(asyncTask, callback, lExecService);
+
+
     }
 
 
@@ -287,7 +289,7 @@ public class Api {
                 formBody = new FormBody.Builder().build();
             }
             Request request = new Request.Builder()
-                    .url("http://playdi.ml/api/cambios")
+                    .url("https://playdi.ml/api/cambios")
                     .header("Accept", "application/json")
                     .header("Authorization", auth_token)
                     .addHeader("User-Agent", "OkHttp Headers.java")
