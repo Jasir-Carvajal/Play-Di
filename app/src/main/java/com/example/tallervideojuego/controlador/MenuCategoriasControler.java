@@ -73,7 +73,7 @@ public final class MenuCategoriasControler extends Controlador{
         act.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         alto = displayMetrics.heightPixels;
 
-        if (alto>2800 ) listAdapterCat.getLayoutParams().height = size(1F);
+        if (alto>2800 ) listAdapterCat.getLayoutParams().height = size(.7F);
         if (alto>1900 && alto<2800) listAdapterCat.getLayoutParams().height = size(0.65F);
         if ( alto<1900) listAdapterCat.getLayoutParams().height = size(0.35F);
 

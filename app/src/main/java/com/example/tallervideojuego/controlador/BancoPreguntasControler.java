@@ -112,7 +112,7 @@ public class BancoPreguntasControler extends Controlador{
         act.getWindowManager().getDefaultDisplay().getMetrics(displayMetrics);
         alto = displayMetrics.heightPixels;
 
-        if (alto>2800 ) listaE.getLayoutParams().height = size(0.70F);
+        if (alto>2800 ) listaE.getLayoutParams().height = size(0.55F);
         if (alto>1900 && alto<2800) listaE.getLayoutParams().height = size(0.45F);
         if ( alto<1900) listaE.getLayoutParams().height = size(0.35F);
     }
