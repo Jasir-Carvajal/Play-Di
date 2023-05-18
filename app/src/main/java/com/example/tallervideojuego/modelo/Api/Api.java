@@ -45,7 +45,7 @@ public class Api {
             String res;
 
             Request request = new Request.Builder()
-                    .url("https://playdi.ml/api/validate/")
+                    .url("https://playdi.jeanpidev.com/api/validate/")
                     .header("Accept", "application/json")
                     .addHeader("User-Agent", "OkHttp Headers.java")
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
@@ -93,7 +93,7 @@ public class Api {
                     .build();
 
             Request request = new Request.Builder()
-                    .url("https://playdi.ml/api/login")
+                    .url("https://playdi.jeanpidev.com/api/login")
                     .header("Accept", "application/json")
                     .addHeader("User-Agent", "OkHttp Headers.java")
                     .post(formBody)
@@ -138,7 +138,7 @@ public class Api {
                     .build();
 
             Request request = new Request.Builder()
-                    .url("https://playdi.ml/api/register")
+                    .url("https://playdi.jeanpidev.com/api/register")
                     .header("Accept", "application/json")
                     .addHeader("User-Agent", "OkHttp Headers.java")
                     .addHeader("Content-Type", "application/x-www-form-urlencoded")
@@ -192,7 +192,7 @@ public class Api {
                  formBody = new FormBody.Builder().build();
             }
             Request request = new Request.Builder()
-                    .url("https://playdi.ml/api/cambios")
+                    .url("https://playdi.jeanpidev.com/api/cambios")
                     .header("Accept", "application/json")
                     .header("Authorization", auth_token)
                     .addHeader("User-Agent", "OkHttp Headers.java")
@@ -289,7 +289,7 @@ public class Api {
                 formBody = new FormBody.Builder().build();
             }
             Request request = new Request.Builder()
-                    .url("https://playdi.ml/api/cambios")
+                    .url("https://playdi.jeanpidev.com/api/cambios")
                     .header("Accept", "application/json")
                     .header("Authorization", auth_token)
                     .addHeader("User-Agent", "OkHttp Headers.java")
